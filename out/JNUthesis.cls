@@ -44,11 +44,9 @@
 \newif\ifJNUT@phd \JNUT@phdfalse
 \newif\ifJNUT@master \JNUT@masterfalse
 \newif\ifJNUT@bachelor \JNUT@bachelorfalse
-\newif\ifJNUT@bachelorrelated \JNUT@bachelorrelatedfalse
 \DeclareOption{phd}{\JNUT@phdtrue}
 \DeclareOption{master}{\JNUT@mastertrue}
 \DeclareOption{bachelor}{\JNUT@bachelortrue}
-\DeclareOption{bachelorrelated}{\JNUT@bachelorrelatedtrue}
 \newif\ifJNUT@dvips \JNUT@dvipsfalse
 \DeclareOption{dvips}{\JNUT@dvipstrue}
 \DeclareOption{dvipdfm}{\JNUT@dvipsfalse}
@@ -107,6 +105,7 @@
                citecolor=darkblue,%
               plainpages=false,%
             pdfstartview=FitH}
+\RequirePackage{xstring}
 \AtEndOfPackage{\makeatletter\input{JNUthesis.cfg}\makeatother}
 %% Define page layout.
 \RequirePackage{geometry}
@@ -172,9 +171,12 @@
 \newcommand\major[1]{\def\JNUT@value@major{#1}}
 \newcommand\footdateyear[1]{\def\JNUT@value@footdateyear{#1}}
 \newcommand\footdatemonth[1]{\def\JNUT@value@footdatemonth{#1}}
-\renewcommand\maketitle{%
+\newcommand\JNUTmaketitle[1]{%
   \thispagestyle{empty}
-  \pdfbookmark[0]{封面页}{cover}
+  \IfEqCase{#1}{%
+    {normal}{\pdfbookmark[0]{封面页}{cover}}%
+    {related}{\pdfbookmark[0]{相关资料封面页}{cover-related}}%
+  }[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
 
   \begin{onehalfspace}
     \begingroup
@@ -201,16 +203,19 @@
         \textbf{\songti\xiaochuhao\JNUT@label@thesis}\\
       \endgroup
 
-      \ifJNUT@bachelorrelated
-        \vskip 5mm
-        \begingroup
-          \renewcommand{\CJKglue}{\hskip 1.058334mm}
-          \textbf{\songti\zihao{1}\JNUT@label@related}
-        \endgroup
-        \vskip 10mm
-      \else
-        \vskip 20mm
-      \fi
+      \IfEqCase{#1}{%
+        {related}{%
+          \vskip 5mm%
+          \begingroup%
+            \renewcommand{\CJKglue}{\hskip 1.058334mm}%
+            \textbf{\songti\zihao{1}\JNUT@label@related}%
+          \endgroup%
+          \vskip 10mm%
+        }%
+        {normal}{%
+          \vskip 20mm%
+        }%
+      }[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
 
       \begingroup
         \zihao{2}
@@ -250,6 +255,12 @@
     \thispagestyle{empty}
     \cleardoublepage
   \fi
+}
+\renewcommand\maketitle[1][default]{%
+  \IfEqCase{#1}{%
+    {default}{\JNUTmaketitle{normal}}%
+    {related}{\JNUTmaketitle{related}}%
+  }[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
 }
 \fancypagestyle{abstract}{%
   \fancyhf{}
