@@ -39,7 +39,7 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{JNUthesis}
-  [2014/05/30 v0.1 JNUthesis%
+  [2015/05/17 v1.1 JNUthesis%
    document class]
 \newif\ifJNUT@phd \JNUT@phdfalse
 \newif\ifJNUT@master \JNUT@masterfalse
@@ -176,6 +176,8 @@
   \IfEqCase{#1}{%
     {normal}{\pdfbookmark[0]{封面页}{cover}}%
     {related}{%
+      %% XXX: 江大有没有要求相关资料跟正文不能在一个文件？如果有的话就没必要
+      %% 搞这么一段了。。。
       \pdfbookmark[0]{相关资料封面页}{cover-related}%
       \clearpage%
       \if@twoside%
