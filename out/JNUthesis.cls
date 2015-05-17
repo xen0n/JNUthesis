@@ -39,16 +39,14 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{JNUthesis}
-  [2014/05/30 v0.1 JNUthesis%
+  [2015/05/17 v1.1 JNUthesis%
    document class]
 \newif\ifJNUT@phd \JNUT@phdfalse
 \newif\ifJNUT@master \JNUT@masterfalse
 \newif\ifJNUT@bachelor \JNUT@bachelorfalse
-\newif\ifJNUT@bachelorrelated \JNUT@bachelorrelatedfalse
 \DeclareOption{phd}{\JNUT@phdtrue}
 \DeclareOption{master}{\JNUT@mastertrue}
 \DeclareOption{bachelor}{\JNUT@bachelortrue}
-\DeclareOption{bachelorrelated}{\JNUT@bachelorrelatedtrue}
 \newif\ifJNUT@dvips \JNUT@dvipsfalse
 \DeclareOption{dvips}{\JNUT@dvipstrue}
 \DeclareOption{dvipdfm}{\JNUT@dvipsfalse}
@@ -107,6 +105,7 @@
                citecolor=darkblue,%
               plainpages=false,%
             pdfstartview=FitH}
+\RequirePackage{xstring}
 \AtEndOfPackage{\makeatletter\input{JNUthesis.cfg}\makeatother}
 %% Define page layout.
 \RequirePackage{geometry}
@@ -172,12 +171,25 @@
 \newcommand\major[1]{\def\JNUT@value@major{#1}}
 \newcommand\footdateyear[1]{\def\JNUT@value@footdateyear{#1}}
 \newcommand\footdatemonth[1]{\def\JNUT@value@footdatemonth{#1}}
-\renewcommand\maketitle{%
+\def\JNUT@maketitle[#1]{%
   \thispagestyle{empty}
-  \pdfbookmark[0]{封面页}{cover}
+  \IfEqCase{#1}{%
+    {normal}{\pdfbookmark[0]{封面页}{cover}}%
+    {related}{%
+      %% XXX: 江大有没有要求相关资料跟正文不能在一个文件？如果有的话就没必要
+      %% 搞这么一段了。。。
+      \pdfbookmark[0]{相关资料封面页}{cover-related}%
+      \clearpage%
+      \if@twoside%
+        \thispagestyle{empty}%
+        \cleardoublepage%
+      \fi%
+    }%
+  }[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
 
   \begin{onehalfspace}
     \begingroup
+      \songti
       \zihao{-4}
       %% 27em 是估计的值, 原模板此处是首行缩进 10 字符然后居中...
       %% 尼玛这什么排版技巧, wtf
@@ -201,16 +213,19 @@
         \textbf{\songti\xiaochuhao\JNUT@label@thesis}\\
       \endgroup
 
-      \ifJNUT@bachelorrelated
-        \vskip 5mm
-        \begingroup
-          \renewcommand{\CJKglue}{\hskip 1.058334mm}
-          \textbf{\songti\zihao{1}\JNUT@label@related}
-        \endgroup
-        \vskip 10mm
-      \else
-        \vskip 20mm
-      \fi
+      \IfEqCase{#1}{%
+        {related}{%
+          \vskip 5mm%
+          \begingroup%
+            \renewcommand{\CJKglue}{\hskip 1.058334mm}%
+            \textbf{\songti\zihao{1}\JNUT@label@related}%
+          \endgroup%
+          \vskip 10mm%
+        }%
+        {normal}{%
+          \vskip 20mm%
+        }%
+      }[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
 
       \begingroup
         \zihao{2}
@@ -236,8 +251,8 @@
       \begin{tabular}{lc}
         \songti\JNUT@label@studentnum & \JNUTinfounderline[220pt]{\heiti\JNUT@value@studentnum}\\
         \songti\JNUT@label@author & \JNUTinfounderline[220pt]{\heiti\JNUT@value@author}\\
-        \songti\JNUT@label@advisor & \JNUTinfounderline[220pt]{\heiti\JNUT@value@advisor \JNUT@value@advisorpos}\\
-                                   & \JNUTinfounderline[220pt]{\heiti\JNUT@value@advisorsecond \JNUT@value@advisorsecondpos}\\
+        \songti\JNUT@label@advisor & \JNUTinfounderline[220pt]{\heiti\JNUT@value@advisor~\JNUT@value@advisorpos}\\
+                                   & \JNUTinfounderline[220pt]{\heiti\JNUT@value@advisorsecond~\JNUT@value@advisorsecondpos}\\
       \end{tabular}%\\
 
     \vskip 10mm
@@ -250,6 +265,12 @@
     \thispagestyle{empty}
     \cleardoublepage
   \fi
+}
+\renewcommand\maketitle[1][default]{%
+  \IfEqCase{#1}{%
+    {default}{\JNUT@maketitle[normal]}%
+    {related}{\JNUT@maketitle[related]}%
+  }[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
 }
 \fancypagestyle{abstract}{%
   \fancyhf{}

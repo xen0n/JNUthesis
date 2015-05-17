@@ -1,0 +1,446 @@
+% !Mode:: "Tex:UTF-8"
+%% Thesis Template of Jiangnan University
+%%   for using JNUthesis package with LaTeX2e
+%%
+%% Created by Wang Xuerui <http://github.com/xen0n>
+
+
+%\documentclass[dvipdfm, twoside, bachelor]{JNUthesis}
+\documentclass[pdftex, twoside, bachelor]{JNUthesis}
+% 可选参数：
+%   nobackinfo 取消封二页导师签名信息
+%   oneside/twoside 单面/双面打印
+%   phd/master 博士/硕士论文
+%   bachelor 学士学位论文
+% 下面三个选一个：
+% dvipdfm 使用 dvipdfm(x) 生成最终的 PDF 文档 (缺省设置，不建议修改）
+% dvips 使用 dvips 生成最终的 PS 文档
+% pdftex 使用 pdfLaTeX 生成最终的 PDF 文档
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 导言区
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 小节标题靠左对齐
+\CTEXsetup[format+={\flushleft}]{section}
+
+% 设置链接颜色
+\hypersetup{
+% pdf 属性
+    pdftitle={LaTeX Thesis Template of Jiangnan University}, %
+    pdfauthor={Wang Xuerui},
+	CJKbookmarks=true
+	%unicode=true
+}
+
+% 表格
+\usepackage{longtable, multirow}
+% 英文使用 Times 字体
+\usepackage{times}
+% 源代码
+\usepackage{fancyvrb}
+% 自定义列表样式
+\usepackage{enumitem}
+
+\usepackage[T1]{fontenc}
+
+% 操蛋的江大格式要求不让用等宽字体, 去他妹的。
+\renewcommand{\ttdefault}{ptm}
+
+
+\begin{document}
+%\begin{CJK*}{UTF8}{song}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 封面部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 中文封面内容字符串
+\titlelinefirst{第一行标题}
+\titlelinesecond{第二行标题}
+\author{作者}
+\studentnum{1234567890}
+\grade{2011}
+\advisor{导师}
+\advisorpos{职称~1}
+\advisorsecond{第二导师（可选）}
+\advisorsecondpos{职称~2}
+\school{某某}
+\major{某某某某}
+\footdateyear{二〇一五}
+% \footdatemonth{六} -- 默认值
+
+% 制作封面命令
+\maketitle
+
+% 制作英文封面命令
+%\makeenglishtitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 前言部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frontmatter
+\begin{spacing}{1.25}
+% 中文摘要
+\begin{abstract}
+
+本文是江南大学学位论文的~\LaTeX{}~模板。目前不支持研究生学位论文格式。
+
+除了介绍~\LaTeX{}~文档类~\texttt{jnuthesis}~的用法外，本文还是一
+个简要的学位论文写作指南。
+
+\keywords{江南大学; 学位论文; \LaTeX{}~模板}
+
+\end{abstract}
+\pagestyle{abstract}
+
+% 英文摘要
+\begin{englishabstract}
+
+This paper is a thesis template of Jiangnan University. Besides that
+the usage of the \LaTeX{} document class \texttt{jnuthesis}, a brief
+guideline for writing the thesis is also included.
+
+\englishkeywords{Jiangnan University (JNU), Thesis, \LaTeX{} Template}
+
+\end{englishabstract}
+\pagestyle{englishabstract}
+
+% 生成目录命令
+% pagestyle 是没用的, 已经在宏包里设置好了
+% 不过如果目录占两页或者更多的话我们可不想让后边的页页眉变成 Abstract...
+\clearpage
+\pagestyle{plain}
+\tableofcontents
+
+% 以下两个目录可根据具体情况注释掉
+% 生成表格目录命令
+%\listoftables
+% 生成插图目录命令
+%\listoffigures
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 正文部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+
+% 不会再用到 plain 风格了, 直接重写掉
+% http://tex.stackexchange.com/a/19741
+\makeatletter
+  \let\ps@plain\ps@main
+\makeatother
+\pagestyle{main}
+
+
+\chapter{基本使用帮助}
+\label{C:intro}
+
+jnuthesis~宏包是针对江南大学对学位论文格式的规定制作的~\LaTeX{}~宏包，
+其目的是简化学位论文的撰写，使得论文作者可以将精力集中到论文的内容上而不是
+浪费在版面设置上。同时宏包在符合学位论文撰写要求的基础上尽可能地进行美化，
+其中还参考了出版界的一些排版规范。
+
+下面是~TODO~列表：
+
+\begin{itemize}
+
+\item （高优先级）增加研究生论文格式；
+
+\item （低优先级）恢复对~Windows~环境的支持。
+
+\end{itemize}
+
+\section{系统要求}
+
+\texttt{jnuthesis}~宏包可以在目前大多数的~\TeX{}~系统中使用，例如~C\TeX{}、
+ ~MiK\TeX{}、~te\TeX{}、~fp\TeX{}。
+
+\texttt{jnuthesis}~宏包通过~\texttt{ctex}~宏包来获得中文支持
+。~\texttt{ctex}~ 宏包提供了一个统一的中文~\LaTeX{}~文档框架，底层支持~CCT~
+和~CJK~两种中文~\LaTeX{}~系统。最新的~\texttt{ctex}~宏包可以从~
+\url{http://www.ctex.org}~网站下载。
+
+此外，~\texttt{jnuthesis}~宏包还使用了宏包~amsmath、~amsthm、~amsfonts、
+ ~amssymb、~bm~、~geometry~、~enumitem~和~hyperref。目前大多数的~\TeX{}~系统
+中都包含有这些宏包。即使您系统中的宏包不全，您也可以到~CTAN~下载到这些宏包。
+
+最新的~C\TeX{}~套装（2.4.1~以上版本）中包含了以上列出的各种宏包，用户无需额
+外的设置即可使用。
+
+\section{下载与安装}
+
+jnuthesis~宏包的最新版本可以从~\url{https://github.com/xen0n/JNUthesis}~
+网站下载。
+
+对此宏包最简单的使用方法是直接修改~template.tex~和~template.bib~文件。如果您
+仅仅想安装宏包，可以将宏包文件放置到~\TeX{}~系统的~localtexmf/tex/latex/jnuthesis~目录下，
+然后刷新~\TeX{}~系统的文件名数据库。
+
+关于安装过程的问题可以参考~C\TeX{}-FAQ~以及其他~\LaTeX{}~教材。
+
+\section{本模板打包的文件}
+
+关键文件：
+
+\begin{description}
+\item[jnuthesis.cls] 文档类文件，是~jnuthesis~宏包的主要文件，用户在文件头
+  ~\\documentclass~声明文档类为~jnuthesis~即可使用此文档类格式化文档。
+  一般不建议用户手工修改该文件。
+
+\item[jnuthesis.cfg] 配合文档类的控制文件，里面主要是一些字符串的定义。
+  用户可以编辑修改该文件。
+
+\item[template.tex] 随宏包包含的一个模板文件，该模板文件指示了该如何使用
+  宏包提供的文档类。用户可以使用该文件作为毕业论文源文件的很好的开端。
+
+\item[template.bib] 随宏包包含的模板文件相关的~BibTeX~文献数据库，当用户
+  使用~BibTeX~时可以以其为一个很好的开端；当用户使用自定义的参考文献时，
+  可以在模板文件中注释掉对其的引用并忽略该文件的存在。
+\end{description}
+
+辅助文件：
+
+\begin{description}
+\item[jnuthesis.bst] 默认的~BibTeX~样式文件，如果想修改样式，例如使用
+  ~IEEEtran.bst~作为~BibTeX~样式，只需要将~IEEEtran.bst~更名为
+  ~jnuthesis.bst~即可。
+
+\item[jnuthesis.pdf] 宏包帮助文档，其中有对宏包的说明以及对宏包源文件的
+  完全注释，适合高级用户修改文档类文件时参考。
+\end{description}
+
+\section{编译方法}
+
+下面以编译模板文件~template.tex~生成~template.pdf~为例，给出在不同情况下
+应该使用的编译命令流程。
+
+\subsection{Windows~平台下}
+
+本宏包在最初针对江南大学调整的过程中失去了~Windows~支持，希望看到本宏包支持~
+Windows~平台的小伙伴们请让我在项目~issues~系统中听到你们的声音。
+
+\subsection{Linux~平台下}
+
+因为当初制作宏包是在作者的毕业季，时间紧迫，目前只能支持简单的不使用~BibTeX~
+的构建流程。构建使用~pdf\LaTeX{}~工具，可参考项目目录中的~\texttt{out/test.sh}~
+文件。
+
+在编译过程中，您可能遇到~pdf\LaTeX{}~无法找到~TrueType~字体的问题，这时只要设置
+环境变量~\texttt{OSFONTDIR}~为存放中文字体（即~\texttt{simsun.ttc}、~
+\texttt{simhei.ttf}、~\texttt{simkai.ttf}~等文件）的目录即可。
+
+\section{问题反馈}
+
+用户在使用中遇到问题、需要增加某种功能或者提供一个~patch，都可以到本项目的
+~issue~列表中提出，issue~列表的地址在：
+
+\begin{center}
+\url{https://github.com/xen0n/JNUthesis/issues}
+\end{center}
+
+欢迎大家反馈自己的使用情况，使我们可以不断改进宏包，但是在提问前请最好检查
+自己使用的是否为最新版本，以及列表中类似问题是否已经被提出。总之，谢谢您的
+支持！
+
+\chapter{论文撰写}
+
+\section{文档类选项}
+
+jnuthesis~文档类提供有以下一些选项：
+
+\begin{description}
+
+\item[bachelor] 生成学士学位论文。
+
+\item[bachelorrelated] 使用学士学位论文相关资料封面。
+
+\item[oneside/twoside] 当选择~oneside~时，生成单面打印格式论文；当选择
+~twoside~时，生成双面打印格式论文。双面打印格式会将封面、摘要起始页、
+章起始页全部放在奇数页上。
+
+\item[dvipdfm/dvips/pdflatex] 兼容的编译命令选项，最好使用默认的~dvipdfm。
+如果您对默认的命令有意见，那么我们认为您充分了解这几个命令的不同，那么您
+足以自己修改图片格式和决定编译流程，所以使用其它选项时请不要完全使用本文
+中的帮助。
+
+\end{description}
+
+\section{封面和摘要页的字符串}
+
+\texttt{jnuthesis}~宏包的设置都保存在~\texttt{jnuthesis.cfg}~文件中。用户可
+以在~\texttt{.tex}~中通过宏包提供的命令修改设置。对于常用的设置修改，如培养
+单位名称、专业名称等，可以直接在~\texttt{jnuthesis.cfg}~文件中进行。各培养单
+位可以修改后提供本单位统一的~\texttt{jnuthesis.cfg}~文件供本单位用户使用。
+
+\section{内容撰写}
+
+请阅读文献《\href{http://mirror.ctan.org/info/lshort/english/lshort.pdf}{The Not So Short Introduction to \LaTeXe{}}》
+~\cite{Oetiker2008}，或者其有点儿老的中文翻译版《\href{http://mirror.ctan.org/info/lshort/chinese/lshort-zh-cn.pdf}{一份不太简短的~\LaTeXe{}~介绍}》\cite{lshort-cn}。
+
+\section{插图}
+
+请阅读文献《\href{ftp://ftp.tex.ac.uk/tex-archive/info/epslatex.pdf}{Using Imported Graphics in \LaTeX{} and pdf\LaTeX{}}》
+~\cite{Reckdahl2006}，或者其有点儿老的中文翻译版《\href{http://www.ctex.org/documents/latex/graphics/}{\LaTeXe{} 插图指南}》
+~\cite{Wang1997}。
+
+\section{数学公式}
+
+请阅读文献《The LaTeX Companion》第~8~章``\href{http://media.cism.it/attachments/ch8.pdf}{Higher Mathematics}''\cite{Goossens1997}。
+
+
+\section{参考文献}
+
+本节主要介绍参考文献的格式，在~jnuthesis~中控制参考文献的主要有两个
+地方：
+
+\begin{verbatim}
+\RequirePackage[sort&compress, numbers]{natbib}
+\end{verbatim}
+
+\noindent 和
+
+\begin{verbatim}
+\bibliographystyle{jnuthesis}
+\end{verbatim}
+
+\noindent 第一个条目是~\texttt{natbib}~宏包，其规定了参考文献的排序和展示等
+格式，第二个条目是~\texttt{jnuthesis.bst}~文件，规定了参考文献条目的展示格式
+。期望使用下面的参考文献格式时，必须使用~\texttt{BibTeX}~来处理参考文献。
+
+在~numeric mode~下（正如本文所用，将~\texttt{numbers}~作为~\texttt{natbib}~
+ 参数），参考文献的标准引用方式是使用方括号加文献序号的方式，例如~
+\cite{Al-Osh1987}，这时候使用默认的~
+
+\begin{verbatim}
+\cite{key}
+\end{verbatim}
+
+\noindent 命令即可。但也可以使用~author year~的方式引用，例如~
+\citet{Al-Osh1987}，这时候使用
+
+\begin{verbatim}
+\citet{key}
+\end{verbatim}
+
+\noindent 命令。
+
+
+\section{其它问题}
+
+请到本项目~GitHub issues~页面（网址：
+\url{https://github.com/xen0n/JNUthesis/issues}）或者水木清华论坛~\LaTeX{}~讨论区
+（网址：\url{http://www.newsmth.net/bbsdoc.php?board=TeX}）
+提问。
+
+\chapter{常见问题}
+\label{C:FAQ}
+
+
+\newtheoremstyle{question}% name
+  {}%      Space above, empty = `usual value'
+  {}%      Space below
+  {\rm}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {10pt}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+
+\newtheoremstyle{answer}% name
+  {}%      Space above, empty = `usual value'
+  {}%      Space below
+  {\rm}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {10pt}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+
+\theoremstyle{question}
+ \newtheorem{FAQ}{问题~}
+\theoremstyle{answer}
+ \newtheorem{ANS}{回答~}
+
+\section{表格}
+
+\begin{FAQ}
+页眉里论文题目和各章标题中的字母均为大写，不能实现大小写的区别，
+而我写的论文需要在页眉中出现的标题中区分英文字母的大小写比如：
+YBaCuO而不是YBACUO。
+\end{FAQ}
+
+\begin{ANS}
+在~\texttt{jnuthesis.cfg}~文件中加上
+\begin{verbatim}
+\renewcommand\title[2][\JNUT@value@title]{%
+  \def\JNUT@value@title{#2}
+  \def\JNUT@value@titlemark{#1}}
+\def\chaptermark#1{\markboth {{\ifnum \c@secnumdepth>\m@ne
+  \if@mainmatter\CTEXthechapter \quad\fi
+  \fi #1}}{}}%
+\def\sectionmark#1{\markright{{\ifnum \c@secnumdepth >\z@
+  \CTEXthesection \quad \fi #1}}}
+\end{verbatim}
+\end{ANS}
+
+
+\section{脚注}
+
+\begin{FAQ}
+如果在章节标题中加入注脚，则不仅会出现在本章首页的页脚，
+也会出现在目录的页脚，不知是否能够让其不要出现在目录的页脚中。
+\end{FAQ}
+
+\begin{ANS}
+可以使用如下的命令来定义章节的标题
+
+% FIXME: 这里也要强制汉语字体。。。
+\begin{verbatim}
+
+\chapter[出现在目录和页眉的标题]{出现在正文的标题\footnote{这个不会出现在目录中。}}
+
+\end{verbatim}
+section、~subsection 等命令也有类似的用法。
+\end{ANS}
+
+\chapter{总结与展望}
+\label{C:CONC}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 附件部分
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\backmatter
+
+% 参考文献
+% 使用 BibTeX，不使用 BibTeX 时注释掉下面一句。
+%\bibliography{template}
+
+% 不使用 BibTeX
+\begin{thebibliography}{2}
+
+\bibitem{deng:01a}
+{邓建松,~彭冉冉,~陈长松}.
+\newblock {\LaTeXe{}~科技排版指南}.
+\newblock 科学出版社,~书号:~7-03-009239-2/TP.1516, 北京, 2001.
+
+\bibitem{wang:00a}
+王磊.
+\newblock {\LaTeXe{}~插图指南}.
+\newblock 2000.
+\end{thebibliography}
+
+% 致谢
+\begin{thanks}
+
+首先感谢XXX
+
+\end{thanks}
+\clearpage
+
+% 相关资料封面页
+\maketitle[related]
+
+\end{spacing}
+\end{document}
