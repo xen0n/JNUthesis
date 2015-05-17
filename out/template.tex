@@ -105,6 +105,9 @@ guideline for writing the thesis is also included.
 
 % 生成目录命令
 % pagestyle 是没用的, 已经在宏包里设置好了
+% 不过如果目录占两页或者更多的话我们可不想让后边的页页眉变成 Abstract...
+\clearpage
+\pagestyle{plain}
 \tableofcontents
 
 % 以下两个目录可根据具体情况注释掉
