@@ -334,7 +334,7 @@ jnuthesis~文档类提供有以下一些选项：
 \newtheoremstyle{question}% name
   {}%      Space above, empty = `usual value'
   {}%      Space below
-  {\tt}% Body font
+  {\rm}% Body font
   {}%         Indent amount (empty = no indent, \parindent = para indent)
   {\bfseries}% Thm head font
   {.}%        Punctuation after thm head
@@ -389,6 +389,7 @@ YBaCuO而不是YBACUO。
 \begin{ANS}
 可以使用如下的命令来定义章节的标题
 
+% FIXME: 这里也要强制汉语字体。。。
 \begin{verbatim}
 
 \chapter[出现在目录和页眉的标题]{出现在正文的标题\footnote{这个不会出现在目录中。}}
@@ -415,12 +416,12 @@ section、~subsection 等命令也有类似的用法。
 
 \bibitem{deng:01a}
 {邓建松,~彭冉冉,~陈长松}.
-\newblock {\em \LaTeXe{}~科技排版指南}.
+\newblock {\LaTeXe{}~科技排版指南}.
 \newblock 科学出版社,~书号:~7-03-009239-2/TP.1516, 北京, 2001.
 
 \bibitem{wang:00a}
 王磊.
-\newblock {\em \LaTeXe{}~插图指南}.
+\newblock {\LaTeXe{}~插图指南}.
 \newblock 2000.
 \end{thebibliography}
 
