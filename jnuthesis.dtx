@@ -2628,10 +2628,9 @@ December\fi
 % 格，而章节的后继页面的页眉页脚将使用|fancy|风格的默认定义或用户通过
 % \cs{fancyhead}或\cs{fancyfoot}命令定义的样式。
 %
-% 首先，我们需要修改|plain|风格的页眉页脚，将其页脚默认的页码去掉。
+% 首先，我们需要修改|plain|风格的页眉页脚，将其默认的分割线去掉。
 %    \begin{macrocode}
 \fancypagestyle{plain}{%
-   \fancyhead{}                       % get rid of headers and footers
    \renewcommand{\headrulewidth}{0pt} % and the header line
    \renewcommand{\footrulewidth}{0pt} % and the footer line
 }
@@ -2641,44 +2640,31 @@ December\fi
 % \begin{itemize}
 %    \item 令偶数页的页眉如下：
 %      \begin{itemize}
-%      \item 左上角显示当前页页码
-%      \item 右上角显示当前章（chapter）的编号和标题；
-%      \item 若当前不为于|mainmatter|中，则右上角只显示当前章的标题。
+%      \item 若当前不位于|mainmatter|中，则显示当前节（section）的标题；
+%      \item 若当前位于|mainmatter|中，则显示“江南大学XX学位论文”。
 %      \end{itemize}
 %    \item 令奇数页的页眉如下：
 %      \begin{itemize}
-%      \item 左上角显示当前节（section）的编号和标题
-%      \item 右上角显示当前页页码；
-%      \item 若当前页面尚未开始此章的第一节，即节编号和节标题为空；则左上角显示当前
-%      章（chapter）的编号和标题；若当前不为于|mainmatter|中，则左上角只显示当前章的
-%      标题。
+%      \item 无条件显示当前节（section）的编号和标题。
 %      \end{itemize}
 %    \item 无论奇偶页，页眉下都有一条分割线；
-%    \item 无论奇偶页，页脚都为空，页脚上都无分割线。
+%    \item 无论奇偶页，页脚都为页码，页脚上都无分割线。
 % \end{itemize}
 %
-% 设置|fancy|风格下的页脚，令页脚为空；令页脚分割线宽度为$0$：
+% 设置|fancy|风格下的页脚，令页脚分割线宽度为$0$：
 %    \begin{macrocode}
-\fancyfoot{}
 \renewcommand{\footrulewidth}{0pt}
 %    \end{macrocode}
 %
-% 设置|fancy|风格下的页眉，令偶数页左上角和奇数页右上角显示当前页码，令页眉的分
-% 割线宽度为$1$：
-%    \begin{macrocode}
-\fancyhead[LE,RO]{\thepage}
-\renewcommand{\headrulewidth}{1pt}
-%    \end{macrocode}
-%
-% 设置|fancy|风格的页眉，令偶数页右上角和奇数页左上角分别显示当前章信息和当前节
+% 设置|fancy|风格的页眉，令偶数页按如上要求显示，奇数页显示当前节
 % 信息；但若当前页面尚未开始本章的第一节（即\cs{rightmark}为空），则奇数页左上角也
 % 显示当前章信息（即\cs{leftmark}）。
 %    \begin{macrocode}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LO]{%
- \ifthenelse{\equal{\rightmark}{}}% if \rightmark is empty
+\fancyhead{}
+\fancyhead[C]{%
+\ifthenelse{\isodd{\value{page}}}%
             {\leftmark}%
-            {\rightmark}%
+            {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\rightmark\fi}%
 }
 %    \end{macrocode}
 %
@@ -2691,7 +2677,7 @@ December\fi
 % 在第一次调用|\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{chaptermark}。
 %    \begin{macrocode}
 \renewcommand{\chaptermark}[1]{\markboth{%
- \bfseries\if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
+ \if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
 }{}}
 %    \end{macrocode}
 %
@@ -2699,16 +2685,20 @@ December\fi
 % |\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{sectionmark}。
 %    \begin{macrocode}
 \renewcommand{\sectionmark}[1]{\markright{%
- \bfseries\if@mainmatter\thesection\hspace{1em}\fi{#1}%
+ \if@mainmatter\thesection\hspace{1em}\fi{#1}%
 }}
 %    \end{macrocode}
 %
 % 另一个麻烦的问题是：默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）
-% 也加上页眉页脚，但我们通常不希望如此。解决方法是修改{\LaTeX}内部的\cs{cleardoublepage}
-% 命令的定义如下：
+% 也加上页眉页脚，江南大学也如此要求，但我们不希望包含正文部分之前的空白页。
+% 解决方法是修改{\LaTeX}内部的\cs{cleardoublepage}与\cs{mainmatter}命令的定义如下：
 %    \begin{macrocode}
+\def\jnut@origcleardoublepage\cleardoublepage
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+\def\jnut@origmainmatter\mainmatter
+\def\mainmatter{\clearpage\jnut@origmainmatter\def\cleardoublepage\jnut@origcleardoublepage}
 %    \end{macrocode}
 %
 % \subsection{列表环境}
