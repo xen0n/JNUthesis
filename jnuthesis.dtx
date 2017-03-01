@@ -18,11 +18,11 @@
 %
 % \iffalse
 %<*driver>
-\ProvidesFile{njuthesis.dtx}
+\ProvidesFile{jnuthesis.dtx}
 %</driver>
 %<cls>\NeedsTeXFormat{LaTeX2e}[1995/12/01]
-%<cls>\ProvidesClass{njuthesis.cls}
-%<cfg>\ProvidesFile{njuthesis.cfg}
+%<cls>\ProvidesClass{jnuthesis.cls}
+%<cfg>\ProvidesFile{jnuthesis.cfg}
 %<*cls>
  [2016/02/24 v1.1.19 Document Class for the Degree Papers of Nanjing University]
 %</cls>
@@ -31,9 +31,9 @@
 \usepackage{dtx-style}
 \EnableCrossrefs
 \CodelineIndex
-\GetFileInfo{njuthesis.dtx}
+\GetFileInfo{jnuthesis.dtx}
 \begin{document}
-  \DocInput{njuthesis.dtx}
+  \DocInput{jnuthesis.dtx}
 \end{document}
 %</driver>
 % \fi
@@ -110,11 +110,11 @@
 % \DoNotIndex{\chaptertitlename,\geometry,\l@chapter,\l@part}
 %
 % \MakeShortVerb{\|}
-% \newcommand*{\njuthesis}{\texttt{NJU-Thesis}}
+% \newcommand*{\jnuthesis}{\texttt{JNU-Thesis}}
 % \newcommand*{\texlive}{{\TeX}\ Live\ 2012}
 %
 % \pagestyle{empty}
-% \title{\njuthesis：南京大学学位论文\\
+% \title{\jnuthesis：南京大学学位论文\\
 %        {\XeLaTeX}模板}
 % \author{{胡海星}\\
 %         {\texttt{starfish.hu@gmail.com}}\\
@@ -125,17 +125,17 @@
 %
 % \begin{abstract}
 %
-% \noindent\hspace{2em}文档类{\njuthesis}提供了一个南京大学学位论文的{\XeLaTeX}
+% \noindent\hspace{2em}文档类{\jnuthesis}提供了一个南京大学学位论文的{\XeLaTeX}
 % 模板。该文档类严格按照南京大学对学位论文的格式要求排版学位论文，底层通过
 % |xeCJK|宏包支持中文。
 %
-% 目前{\njuthesis}可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
+% 目前{\jnuthesis}可用于排版学士学位、硕士学位论文和博士学位论文。对于学士学位论文，
 % 采用和硕士学位论文一样的格式进行排版。
 %
-% 虽然{\njuthesis}主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
+% 虽然{\jnuthesis}主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
 % 国内其他大学的学位论文。
 %
-% 本文档是{\njuthesis}的说明文档，其中包含模板文件的设置说明以及其源代码的完全注释。
+% 本文档是{\jnuthesis}的说明文档，其中包含模板文件的设置说明以及其源代码的完全注释。
 % \end{abstract}
 % \clearpage
 % \newpage
@@ -176,7 +176,7 @@
 %                                修改了国家图书馆封面和英文封面的样式\newline
 %                                将生成国家图书馆封面的命令独立了出来\\
 %  v1.0.7 & 2013/08/26 & 胡海星 & 修改了国家图书馆封面和论文出版授权书的一些细节\newline
-%                                完善了|njuthesis|手册\\
+%                                完善了|jnuthesis|手册\\
 %  v1.0.8 & 2013/08/28 & 胡海星 & 修复了拼写错误和文件重命名导致的bug\\
 %  v1.1.0 & 2013/08/31 & 胡海星 & 重写了符合\std{GB/T 7714-2005}规范
 %                                的{\BibTeX}样式文件\\
@@ -226,23 +226,23 @@
 % \pagestyle{fancy}
 % \section{简介}
 %
-% 文档类{\njuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}模板。
+% 文档类{\jnuthesis}是为了帮助南京大学的同学撰写学位论文而编写的{\XeLaTeX}模板。
 % 该模板提供了一个南京大学学位论文的{\XeLaTeX}文档类，用于生成符合南京大学学位
 % 论文格式要求进行的学位论文。该宏包的底层通过|xeCJK|宏包支持中文。目前该宏包可
 % 用于排版硕士学位论文和博士学位论文；对于学士学位论文，由于作者未能找到南京大学
 % 对学士学位论文的格式要求，因此目前采用和硕士学位论文一样的格式进行排版。
 %
-% 虽然{\njuthesis}主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
+% 虽然{\jnuthesis}主要用于排版南京大学的学位论文，但亦可经过简单的设置或修改用于排版
 % 国内其他大学的学位论文。
 %
-% 本文档将尽量完整的介绍{\njuthesis}的使用方法，如有不清楚之处可以参考示例文档或
+% 本文档将尽量完整的介绍{\jnuthesis}的使用方法，如有不清楚之处可以参考示例文档或
 % 者与作者联系。由于作者水平有限，虽然现在的这个版本基本上满足了学位论文的撰写需
 % 求，但难免还存在不足之处，欢迎大家积极反馈意见。
 %
 % 本模板的编写过程中参考了以下代码和文档，这里一并向这些代码和文档的作者表示感谢：
 %
 % \begin{itemize}
-% \item 杨文博. \textsl{南京大学学位论文{\LaTeX}模板}. \url{https://code.google.com/p/njuthesis/}.
+% \item 杨文博. \textsl{南京大学学位论文{\LaTeX}模板}. \url{https://code.google.com/p/jnuthesis/}.
 % \item 薛瑞尼. \textsl{清华大学学位论文{\LaTeX}模板}.
 % \item 胡卫谊. \textsl{武汉理工大学学位论文{\LaTeX}模板}.
 % \item 吴凯. \textsl{GBT7714-2005NLang.bst}. v1.0 beta 2. 2006.
@@ -256,7 +256,7 @@
 %
 % \section{遵循的要求和标准}
 %
-% {\njuthesis}所遵循的南京大学研究生院的要求如下：
+% {\jnuthesis}所遵循的南京大学研究生院的要求如下：
 % \begin{itemize}
 % \item \textsl{南京大学硕士答辩流程及相关材料下载}，\\
 % \url{http://gs.nju.edu.cn/content/xw/ss3.htm}
@@ -266,7 +266,7 @@
 % \url{http://grawww.nju.edu.cn/content/xw/lwgf.doc}
 % \end{itemize}
 %
-% {\njuthesis}所遵循的中华人民共和国国家标准如下：
+% {\jnuthesis}所遵循的中华人民共和国国家标准如下：
 % \begin{itemize}
 % \item \std{GB/T 7714-2005}\textsl{文后参考文献著录规则}
 % \item \std{GB/T 7713.1-2006}\textsl{学位论文编写规则}
@@ -279,7 +279,7 @@
 % \item \std{CY/T 35-2001}\textsl{科技文献的章节编号方法}
 % \end{itemize}
 %
-% 上述要求和标准的电子版可在{\njuthesis}项目主页的源码库中找到。
+% 上述要求和标准的电子版可在{\jnuthesis}项目主页的源码库中找到。
 %
 % \begin{note}
 % 如南京大学研究生院对学位论文的格式要求和国家标准之间有冲突，以国家标准的要求为准。
@@ -289,7 +289,7 @@
 %
 % \subsection{下载}
 %
-% 可在{\njuthesis}项目主页上下载最新版本，亦可在代码库主页上反馈bug和意见建议：
+% 可在{\jnuthesis}项目主页上下载最新版本，亦可在代码库主页上反馈bug和意见建议：
 % \begin{itemize}
 % \item 项目主页：\url{http://haixing-hu.github.io/nju-thesis/}
 % \item 代码库主页：\url{https://github.com/Haixing-Hu/nju-thesis}
@@ -303,14 +303,14 @@
 %     \toprule
 %     \textbf{文件（夹）}        & \textbf{功能描述}\\
 %     \midrule
-%     |njuthesis.ins|             & 模板驱动文件 \\
-%     |njuthesis.dtx|             & 模板文档代码的混合文件\\
-%     |njuthesis.cls|             & 模板类文件\\
-%     |njuthesis.cfg|             & 模板配置文件\\
+%     |jnuthesis.ins|             & 模板驱动文件 \\
+%     |jnuthesis.dtx|             & 模板文档代码的混合文件\\
+%     |jnuthesis.cls|             & 模板类文件\\
+%     |jnuthesis.cfg|             & 模板配置文件\\
 %     |gbt7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
 %     |dtx-style.sty|             & 用户手册样式文件\\
-%     |njulogo.eps|               & 南京大学校徽图片\\
-%     |njuname.eps|               & 南京大学校名图片\\
+%     |jnulogo.eps|               & 南京大学校徽图片\\
+%     |jnuname.eps|               & 南京大学校名图片\\
 %     \hline
 %     |sample.tex|                & 示例文档，亦可作为学位论文的基本模板 \\
 %     |sample.bib|                & 示例文档的参考文献数据库 \\
@@ -320,19 +320,19 @@
 %     |get_texmf_dir.sh|          & 获取本地|textmf|目录路径的脚本\\
 %     \hline
 %     |README.md|                 & 说明文件 \\
-%     |njuthesis.pdf|             & 用户手册（本文档）\\
+%     |jnuthesis.pdf|             & 用户手册（本文档）\\
 %     \bottomrule
 %   \end{tabular*}
-%   \caption{{\njuthesis}的主要文件及其功能}\label{table:component}
+%   \caption{{\jnuthesis}的主要文件及其功能}\label{table:component}
 % \end{table}
 %
-% 表\ref{table:component}列出了{\njuthesis}的主要文件及其功能。其中|njuthesis.cls|,
-% |njuthesis.cfg|和|dtx-sty.sty|可以由|njuthesis.ins|和|njuthesis.dtx|生成，但为
+% 表\ref{table:component}列出了{\jnuthesis}的主要文件及其功能。其中|jnuthesis.cls|,
+% |jnuthesis.cfg|和|dtx-sty.sty|可以由|jnuthesis.ins|和|jnuthesis.dtx|生成，但为
 % 了降低新手用户的使用难度，故将其一起发布。
 %
 % \subsection{准备工作}
 %
-% 表\ref{table:dependence}列出了{\njuthesis}模板用到的宏包。这些包在常见的{\TeX}系
+% 表\ref{table:dependence}列出了{\jnuthesis}模板用到的宏包。这些包在常见的{\TeX}系
 % 统中都有（推荐使用{\texlive}），如果没有请到\url{www.ctan.org}下载。
 %
 % \begin{table}
@@ -348,7 +348,7 @@
 %     |url|      & |etoolbox| &  &  &  & \\
 %   \hline
 %   \end{tabular*}
-%   \caption{{\njuthesis}用到的宏包}\label{table:dependence}
+%   \caption{{\jnuthesis}用到的宏包}\label{table:dependence}
 % \end{table}
 %
 % \subsection{推荐的{\TeX}系统}
@@ -370,11 +370,11 @@
 % 默认的发行包中已经包含了所有文件，可以直接使用。如果对如何由|*.dtx|生成模板文件以及模板文
 % 档不感兴趣，请跳过本小节。
 %
-% 模板解压缩后生成文件夹|njuthesis-VERSION|，其中|VERSION|为版本号。该文件夹中包括：
+% 模板解压缩后生成文件夹|jnuthesis-VERSION|，其中|VERSION|为版本号。该文件夹中包括：
 % \begin{itemize}
-% \item 模板源文件：|njuthesis.ins|和|njuthesis.dtx|
+% \item 模板源文件：|jnuthesis.ins|和|jnuthesis.dtx|
 % \item 参考文献样式：|gbt7714-2005.bst|
-% \item 南京大学校徽和校名图片：|njulogo.eps|和|njuname.eps|
+% \item 南京大学校徽和校名图片：|jnulogo.eps|和|jnuname.eps|
 % \item 示例文档：|sample.tex|、|sample.bib|和|figure|目录
 % \end{itemize}
 %
@@ -382,10 +382,10 @@
 % 在Linux或Mac系统中生成模板所需执行的|shell|命令：
 %
 % \begin{shell}
-% $ cd njuthesis-VERSION
+% $ cd jnuthesis-VERSION
 % # 清理以前执行make生成的旧文件
 % $ make clean
-% # 生成 njuthesis.cls 和 njuthesis.cfg
+% # 生成 jnuthesis.cls 和 jnuthesis.cfg
 % $ make cls
 % # 生成文档类手册
 % $ make doc
@@ -399,26 +399,26 @@
 % 板安装到本机的{\TeX}系统中所需执行的|shell|命令：
 %
 % \begin{shell}
-% $ cd njuthesis-VERSION
-% # 建立njuthesis文档类目录
-% $ mkdir -p ${TEXMFLOCAL}/tex/latex/njuthesis
-% # 复制njuthesis文档类文件
-% $ cp njuthesis.cls ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njuthesis.cfg ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njulogo.eps  ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njuname.eps  ${TEXMFLOCAL}/tex/latex/njuthesis/
-% # 复制njuthesis文档类的源码，此过程可选
-% $ cp njuthesis.ins ${TEXMFLOCAL}/tex/latex/njuthesis/
-% $ cp njuthesis.dtx ${TEXMFLOCAL}/tex/latex/njuthesis/
+% $ cd jnuthesis-VERSION
+% # 建立jnuthesis文档类目录
+% $ mkdir -p ${TEXMFLOCAL}/tex/latex/jnuthesis
+% # 复制jnuthesis文档类文件
+% $ cp jnuthesis.cls ${TEXMFLOCAL}/tex/latex/jnuthesis/
+% $ cp jnuthesis.cfg ${TEXMFLOCAL}/tex/latex/jnuthesis/
+% $ cp jnulogo.eps  ${TEXMFLOCAL}/tex/latex/jnuthesis/
+% $ cp jnuname.eps  ${TEXMFLOCAL}/tex/latex/jnuthesis/
+% # 复制jnuthesis文档类的源码，此过程可选
+% $ cp jnuthesis.ins ${TEXMFLOCAL}/tex/latex/jnuthesis/
+% $ cp jnuthesis.dtx ${TEXMFLOCAL}/tex/latex/jnuthesis/
 % # 创建本地的BibTeX样式文件目录
 % $ mkdir -p ${TEXMFLOCAL}/bibtex/bst
 % # 复制GB/T 7714-2005参考文献样式
 % $ cp gbt7714-2005.bst ${TEXMFLOCAL}/bibtex/bst/
-% # 建立njuthesis文档类手册目录
-% $ mkdir -p ${TETEXMFLOCALXMF}/doc/latex/njuthesis
-% # 复制njuthesis文档类手册和示例文档
-% $ cp njuthesis.pdf ${TEXMFLOCAL}/doc/latex/njuthesis/
-% $ cp sample.pdf ${TEXMFLOCAL}/doc/latex/njuthesis/
+% # 建立jnuthesis文档类手册目录
+% $ mkdir -p ${TETEXMFLOCALXMF}/doc/latex/jnuthesis
+% # 复制jnuthesis文档类手册和示例文档
+% $ cp jnuthesis.pdf ${TEXMFLOCAL}/doc/latex/jnuthesis/
+% $ cp sample.pdf ${TEXMFLOCAL}/doc/latex/jnuthesis/
 % # 刷新tex文件名数据库
 % $ texhash
 % \end{shell}
@@ -444,9 +444,9 @@
 % 本手册假定用户已经能处理一般的{\LaTeX}文档，并对{\BibTeX}有一定了解。如果你从来没有接
 % 触过{\TeX}和{\LaTeX}，建议先学习相关的基础知识。
 %
-% \subsection{\njuthesis{} 示例文件}
+% \subsection{\jnuthesis{} 示例文件}
 %
-% 模板核心文件只有三个：|njuthesis.cls|，|njuthesis.cfg|和 |gbt7714-2005.bst|，但
+% 模板核心文件只有三个：|jnuthesis.cls|，|jnuthesis.cfg|和 |gbt7714-2005.bst|，但
 % 是如果没有示例文档用户会发现很难下手。所以推荐新用户从模板自带的示例文档入手，
 % 里面包括了文档写作用到的所有命令及其使用方法，只需要用自己的内容进行相应替换就
 % 可以。对于不清楚的命令可以查阅本手册。具体内容可以参考模板附带的|sample.tex|和
@@ -462,7 +462,7 @@
 %   用Adobe提供的OTF中文字体，一般来说OTF字体的显示效果要优于ttf字体。
 %   默认选项是|adobefonts|。
 % \begin{example}
-% \documentclass[winfonts]{njuthesis}
+% \documentclass[winfonts]{jnuthesis}
 % \end{example}
 %   表\ref{table:fontnames}中列出了默认配置下使用不同字体选项时所采用的实际字体
 %   名称。系统中必须正确安装了相应的字体才能正常编译文档。\\
@@ -494,14 +494,14 @@
 %   项，则不在封面背面打印导师签名信息。此选项默认不被设置，一般情况下也无需设置
 %   该选项。
 % \begin{example}
-% \documentclass[winfonts,nobackinfo]{njuthesis}
+% \documentclass[winfonts,nobackinfo]{jnuthesis}
 % \end{example}
 %
 % \item[phd, master, bachelor] 用于设置申请的学位级别。当选择|phd|时，生成南京大学博
 % 士学位论文，包含国家图书馆格式的封面，但不包括书脊，书脊需要单独制作；选择|master|时，
 % 生成南京大学硕士学位论文；选择|bachelor|时，生成南京大学学士学位论文。
 % \begin{example}
-% \documentclass[winfonts,phd]{njuthesis}
+% \documentclass[winfonts,phd]{jnuthesis}
 % \end{example}
 % \begin{note}
 % 这三个选项必须设置一个且只能设置一个。
@@ -1220,7 +1220,7 @@
 % \DescribeEnv{itemize}
 % \DescribeEnv{enumerate}
 % \DescribeEnv{description}
-% 为了适合中文习惯，{\njuthesis}文档类使用|paralist|宏包重新定义了|itemize|、
+% 为了适合中文习惯，{\jnuthesis}文档类使用|paralist|宏包重新定义了|itemize|、
 % |enumerate|和|description|这三个常用的列表环境。一方面满足了多余空间的清楚，另
 % 一方面可以自己指定标签的样式和符号。
 %
@@ -1228,7 +1228,7 @@
 %
 % \subsection{数学环境}
 %
-% {\njuthesis}宏包预定义了一些数学定理环境，如表\ref{table:math-env}所示。
+% {\jnuthesis}宏包预定义了一些数学定理环境，如表\ref{table:math-env}所示。
 %
 % \begin{table}
 % \noindent\centering
@@ -1276,14 +1276,14 @@
 %
 % \subsection{自定义以及其它}
 %
-% 文档类的配置文件|njuthesis.cfg|中定义了很多固定词汇，一般无须修改。如果有特殊需求，
+% 文档类的配置文件|jnuthesis.cfg|中定义了很多固定词汇，一般无须修改。如果有特殊需求，
 % 推荐在导言区使用\cs{renewcommand}。当然，导言区里可以直接使用中文。
 %
 % \section{实现细节}
 %
 % \subsection{定义选项}
 %
-% {\njuthesis}宏包的默认选项为|adobefonts|。
+% {\jnuthesis}宏包的默认选项为|adobefonts|。
 %    \begin{macrocode}
 %<*cls>
 \newif\ifnjut@adobefonts\njut@adobefontstrue
@@ -1817,8 +1817,8 @@ in\\
 %
 % 定义学位颁发机构的校徽和校名图片文件名：
 %    \begin{macrocode}
-\newcommand*{\njut@cap@institute@logo}{njulogo.eps}
-\newcommand*{\njut@cap@institute@name}{njuname.eps}
+\newcommand*{\njut@cap@institute@logo}{jnulogo.eps}
+\newcommand*{\njut@cap@institute@name}{jnuname.eps}
 %    \end{macrocode}
 %
 % \subsection{字段默认值定义}
@@ -1852,7 +1852,7 @@ in\\
        \ifnjut@bachelor
           \newcommand*{\njut@value@degree}{\njut@cap@bachelor}
        \else
-          \ClassError{njuthesis}{No degree was selected.}{}
+          \ClassError{jnuthesis}{No degree was selected.}{}
        \fi
     \fi
 \fi
@@ -1888,7 +1888,7 @@ in\\
        \ifnjut@bachelor
           \newcommand*{\njut@value@en@degree}{\njut@cap@en@bachelor}
        \else
-          \ClassError{njuthesis}{No degree was selected.}{}
+          \ClassError{jnuthesis}{No degree was selected.}{}
        \fi
     \fi
 \fi
@@ -1950,17 +1950,17 @@ December\fi
 % 定义Linux下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用文鼎宋体、楷体；
 % 文泉黑体；以及华文仿宋体(需要单独安装)。
 %    \begin{macrocode}
-\newcommand*{\njut@zhfn@songti@linux}{AR PL SungtiL GB}
-\newcommand*{\njut@zhfn@heiti@linux}{WenQuanYi Zen Hei Mono}
-\newcommand*{\njut@zhfn@kaishu@linux}{AR PL KaitiM GB}
-\newcommand*{\njut@zhfn@fangsong@linux}{STFangSong}
+\newcommand*{\njut@zhfn@songti@linux}{SimSun}
+\newcommand*{\njut@zhfn@heiti@linux}{SimHei}
+	\newcommand*{\njut@zhfn@kaishu@linux}{KaiTi}
+\newcommand*{\njut@zhfn@fangsong@linux}{FangSong}
 %    \end{macrocode}
 %
 % 定义Linux下英文字体的名称。默认采用的字体若未安装请自行安装。
 %    \begin{macrocode}
-\newcommand*{\njut@enfn@main@linux}{Times}
-\newcommand*{\njut@enfn@sans@linux}{Helvetica}
-\newcommand*{\njut@enfn@mono@linux}{Courier}
+\newcommand*{\njut@enfn@main@linux}{Times New Roman}
+\newcommand*{\njut@enfn@sans@linux}{Arial}
+\newcommand*{\njut@enfn@mono@linux}{Courier New}
 %    \end{macrocode}
 %
 % 定义Mac下宋体、黑体、楷书和仿宋体四种中文字体的名称。默认采用华文字体。
@@ -1997,9 +1997,9 @@ December\fi
 %
 % 定义英文字体的名称。默认采用Mac自带的字体。
 %    \begin{macrocode}
-\newcommand*{\njut@enfn@main@adobe}{Times}
-\newcommand*{\njut@enfn@sans@adobe}{Helvetica}
-\newcommand*{\njut@enfn@mono@adobe}{Courier}
+\newcommand*{\njut@enfn@main@adobe}{Times New Roman}
+\newcommand*{\njut@enfn@sans@adobe}{Arial}
+\newcommand*{\njut@enfn@mono@adobe}{Courier New}
 %</cfg>
 %    \end{macrocode}
 %
@@ -2008,7 +2008,7 @@ December\fi
 % 在进行其他配置之前先载入预定义的字符串常量配置。
 %    \begin{macrocode}
 %<*cls>
-\input{njuthesis.cfg}
+\input{jnuthesis.cfg}
 %    \end{macrocode}
 %
 % \subsection{字体设置}
@@ -2051,7 +2051,7 @@ December\fi
           \newcommand*{\njut@enfn@sans}{\njut@enfn@sans@mac}
           \newcommand*{\njut@enfn@mono}{\njut@enfn@mono@mac}
        \else
-         \ClassError{njuthesis}{No fonts was selected.}{}
+         \ClassError{jnuthesis}{No fonts was selected.}{}
        \fi
     \fi
   \fi
@@ -2265,7 +2265,7 @@ December\fi
     \or \fontsize\njut@fs@sfour\njut@fs@sfourskip%
     \or \fontsize\njut@fs@sfive\njut@fs@sfiveskip%
     \or \fontsize\njut@fs@ssix\njut@fs@ssixskip%
-    \else \ClassError{njuthesis}{%
+    \else \ClassError{jnuthesis}{%
             Undefined Chinese font size in command \protect\zihao}{%
             The old font size is used if you continue.}%
     \fi%
@@ -2281,7 +2281,7 @@ December\fi
     \or \fontsize\njut@fs@six\njut@fs@sixskip%
     \or \fontsize\njut@fs@seven\njut@fs@sevenskip%
     \or \fontsize\njut@fs@eight\njut@fs@eightskip%
-    \else \ClassError{njuthesis}{%
+    \else \ClassError{jnuthesis}{%
             Undefined Chinese font size in command \protect\zihao}{%
             The old font size is used if you continue.}%
     \fi%
@@ -3570,10 +3570,10 @@ December\fi
 %
 % \subsection{其他自定义命令和环境}
 %
-% \begin{macro}{\njuthesis}
-% 定义{\njuthesis}文档类的logo。
+% \begin{macro}{\jnuthesis}
+% 定义{\jnuthesis}文档类的logo。
 %    \begin{macrocode}
-\newcommand{\njuthesis}{\texttt{NJU-Thesis}}
+\newcommand{\jnuthesis}{\texttt{JNU-Thesis}}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3668,7 +3668,7 @@ December\fi
         pdfsubject={\njut@cap@cover@apply},
         pdfkeywords={\njut@value@abstract@keywords},
         pdfcreator={\njut@value@author},
-        pdfproducer={XeLaTeX with the NJU-Thesis document class}}
+        pdfproducer={XeLaTeX with the JNU-Thesis document class}}
 }
 %    \end{macrocode}
 % \end{macro}
