@@ -1749,25 +1749,13 @@ in\\
 % 定义江南大学学位论文中文摘要页的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@abstract}{中文摘要}
-\newcommand*{\jnut@cap@abstract@chaptername}%
-            {江南大学研究生毕业论文中文摘要首页用纸}
-\newcommand*{\jnut@cap@abstract@title}{毕业论文题目}
-\newcommand*{\jnut@cap@abstract@major}{专业}
-\newcommand*{\jnut@cap@abstract@author}{级{\jnut@value@degree}生姓名}
-\newcommand*{\jnut@cap@abstract@supervisor}{指导教师（姓名、职称）}
-\newcommand*{\jnut@cap@abstract@abstractname}{摘\hspace{2em}要}
+\newcommand*{\jnut@cap@abstract@abstractname}{摘　要}
 \newcommand*{\jnut@cap@abstract@keywordsname}{关键词}
 %    \end{macrocode}
 %
 % 定义江南大学学位论文英文摘要页的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@abstract@en}{英文摘要}
-\newcommand*{\jnut@cap@abstract@en@chaptername}%
-            {江南大学研究生毕业论文英文摘要首页用纸}
-\newcommand*{\jnut@cap@abstract@en@title}{THESIS}
-\newcommand*{\jnut@cap@abstract@en@major}{SPECIALIZATION}
-\newcommand*{\jnut@cap@abstract@en@author}{POSTGRADUATE}
-\newcommand*{\jnut@cap@abstract@en@supervisor}{MENTOR}
 \newcommand*{\jnut@cap@abstract@en@abstractname}{Abstract}
 \newcommand*{\jnut@cap@abstract@en@keywordsname}{keywords}
 %    \end{macrocode}
@@ -3314,25 +3302,7 @@ December\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@abstract}{abstract}
   \begin{center}
-    {\bf\kaishu\zihao{-2}%
-     \jnutunderline{\jnut@cap@abstract@chaptername}}
-  \end{center}
-  \vspace{3mm}
-  {\kaishu\zihao{4}%
-  \noindent\jnut@cap@abstract@title{：}%
-  \jnutunderline[318pt]{\jnut@value@abstract@titlea}\\
-  \noindent\jnutunderline[\textwidth]{\jnut@value@abstract@titleb}\\
-  \noindent\jnutunderline[178pt]{\jnut@value@major}%
-  \jnut@cap@abstract@major%
-  \jnutunderline[50pt]{\jnut@value@grade}%
-  \jnut@cap@abstract@author{：}%
-  \jnutunderline[61pt]{\jnut@value@author}\\
-  \noindent\jnut@cap@abstract@supervisor{：}%
-  \jnutunderline[248pt]{\jnut@value@supervisor}\\
-  }
-  \vspace{5mm}
-  \begin{center}
-    {\heiti\zihao{-3}\jnut@cap@abstract@abstractname}
+    {\bf\heiti\zihao{3}\jnut@cap@abstract@abstractname}
   \end{center}%
   \normalsize\par%
 }{%
@@ -3379,23 +3349,7 @@ December\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@abstract@en}{englishabstract}
   \begin{center}
-    {\bf\kaishu\zihao{-2}%
-     \jnutunderline{\jnut@cap@abstract@en@chaptername}}
-  \end{center}
-  {\zihao{4}%
-   \jnut@cap@abstract@en@title{:}~%
-   \jnutunderline[360pt]{\jnut@value@abstract@en@titlea}\\
-   \jnutunderline[\textwidth]{\jnut@value@abstract@en@titleb}\\
-   \jnut@cap@abstract@en@major{:}~%
-   \jnutunderline[298pt]{\jnut@value@en@major}\\
-   \jnut@cap@abstract@en@author{:}~%
-   \jnutunderline[299pt]{\jnut@value@en@author}\\
-   \jnut@cap@abstract@en@supervisor{:}~%
-   \jnutunderline[348pt]{\jnut@value@en@supervisor}\\
-  }
-  \vspace{5mm}
-  \begin{center}
-    {\bf\zihao{-3}\jnut@cap@abstract@en@abstractname}
+    {\bf\zihao{3}\jnut@cap@abstract@en@abstractname}
   \end{center}%
   \normalsize\par%
 }{%
