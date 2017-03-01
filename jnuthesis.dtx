@@ -1120,9 +1120,9 @@
 % \end{preface}
 % \end{example}
 %
-% \myentry{目次}
+% \myentry{目录}
 % \DescribeMacro{\tableofcontents}
-% 命令\cs{tableofcontents}用于生成论文目次。此命令必须被用在{\TeX}文档的
+% 命令\cs{tableofcontents}用于生成论文目录。此命令必须被用在{\TeX}文档的
 % \env{preface}环境之后和\cs{mainmatter}命令之前。
 %
 % \begin{example}
@@ -2744,16 +2744,16 @@ December\fi
                  {\endlist}
 %    \end{macrocode}
 %
-% \subsection{目次}
+% \subsection{目录}
 %
-% 前置部分的封面在后面详细介绍，首先看目次。其具体要求为：目次页由论文的章、节、条、项、
-% 附录等的序号、名称和页码组成，另页排在序之后。目次页标注学位论文的前三级目录。
-% 标题统一用“目次”，黑体3字号字居中，段前、段后间距为1行; 各章（一级目录）名称用
+% 前置部分的封面在后面详细介绍，首先看目录。其具体要求为：目录页由论文的章、节、条、项、
+% 附录等的序号、名称和页码组成，另页排在序之后。目录页标注学位论文的前三级目录。
+% 标题统一用“目录”，黑体3字号字居中，段前、段后间距为1行; 各章（一级目录）名称用
 % 黑体5号字，段前间距为0.5行，段后间距为0行; 其它（二、三级目录）用宋体5号字，
 % 段前、段后间距为0行。
 %
 % \begin{macro}{\nchapter}
-% 用于产生没有编号但在目次中列出的章。
+% 用于产生没有编号但在目录中列出的章。
 %    \begin{macrocode}
 \newcommand\nchapter[1]{%
   \if@mainmatter%
@@ -2768,7 +2768,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\@dottedtocline}
-% 改变缺省的目次中的点线为中文习惯。
+% 改变缺省的目录中的点线为中文习惯。
 %    \begin{macrocode}
 \def\@dottedtocline#1#2#3#4#5{%
   \ifnum #1>\c@tocdepth \else
@@ -2789,7 +2789,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\l@part}
-% 改变缺省的目次中的点线为中文习惯。
+% 改变缺省的目录中的点线为中文习惯。
 %    \begin{macrocode}
 \renewcommand*{\l@part}[2]{%
   \ifnum \c@tocdepth >-2\relax
@@ -2812,7 +2812,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\l@chapter}
-% 改变缺省的目次中的点线为中文习惯。
+% 改变缺省的目录中的点线为中文习惯。
 %    \begin{macrocode}
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
@@ -2835,7 +2835,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\tableofcontents}
-% 修改\cs{tableofcontents}命令用于生成目次页，并将目次页本身也被加入目次中。
+% 修改\cs{tableofcontents}命令用于生成目录页，并将目录页本身也被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\tableofcontents}{%
     \if@twocolumn
@@ -2852,7 +2852,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\listoftables}
-% 修改\cs{listoftables}命令，使得附表清单被加入目次中。
+% 修改\cs{listoftables}命令，使得附表清单被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\listoftables}{%
     \if@twocolumn
@@ -2869,7 +2869,7 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\listoffigures}
-% 修改\cs{listoffigures}命令，使得插图清单被加入目次中。
+% 修改\cs{listoffigures}命令，使得插图清单被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\listoffigures}{%
     \if@twocolumn
@@ -2888,7 +2888,7 @@ December\fi
 % \subsection{参考文献}
 %
 % \begin{environment}{thebibliography}
-% 修改|thebibliography|环境用于在目次中加入参考文献页。
+% 修改|thebibliography|环境用于在目录中加入参考文献页。
 %    \begin{macrocode}
 \renewenvironment{thebibliography}[1]
      {\nchapter{\bibname}%
@@ -3847,7 +3847,7 @@ December\fi
 \predate{\begin{center}\large}
 \postdate{\par\end{center}}
 
-% 修改\cs{tableofcontents}命令用于生成目次页。
+% 修改\cs{tableofcontents}命令用于生成目录页。
 \renewcommand{\tableofcontents}{%
     \if@twocolumn
       \@restonecoltrue\onecolumn
@@ -3918,7 +3918,7 @@ December\fi
 % 增加环境命令： \env{name} 表示名为 name 的环境
 %% \newcommand{\env}[1]{\texttt{#1}}
 
-% 修改\tableofcontents命令用于生成目次页，将目次页本身也被加入目次中。
+% 修改\tableofcontents命令用于生成目录页，将目录页本身也被加入目录中。
 \makeatletter
 \renewcommand*{\tableofcontents}{%
     \if@twocolumn
