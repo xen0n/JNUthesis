@@ -2585,11 +2585,11 @@ December\fi
 % 格，而章节的后继页面的页眉页脚将使用|fancy|风格的默认定义或用户通过
 % \cs{fancyhead}或\cs{fancyfoot}命令定义的样式。
 %
-% 首先，我们需要修改|plain|风格的页眉页脚，将其默认的分割线去掉。
+% 首先，我们需要修改|plain|风格的页眉页脚，将页脚默认的分割线去掉。
 %    \begin{macrocode}
 \fancypagestyle{plain}{%
-   \renewcommand{\headrulewidth}{0pt} % and the header line
-   \renewcommand{\footrulewidth}{0pt} % and the footer line
+   \renewcommand{\headrulewidth}{0.5pt}
+   \renewcommand{\footrulewidth}{0pt}
 }
 %    \end{macrocode}
 %
@@ -2608,6 +2608,11 @@ December\fi
 %    \item 无论奇偶页，页脚都为页码，页脚上都无分割线。
 % \end{itemize}
 %
+% 设置|fancy|风格下的页眉，令页眉分割线宽度为$0.5$：
+%    \begin{macrocode}
+\renewcommand{\headrulewidth}{0.5pt}
+%    \end{macrocode}
+%
 % 设置|fancy|风格下的页脚，令页脚分割线宽度为$0$：
 %    \begin{macrocode}
 \renewcommand{\footrulewidth}{0pt}
@@ -2617,11 +2622,12 @@ December\fi
 % 信息；但若当前页面尚未开始本章的第一节（即\cs{rightmark}为空），则奇数页左上角也
 % 显示当前章信息（即\cs{leftmark}）。
 %    \begin{macrocode}
+%% TODO: 下面的 mainmatter 判定有坑
 \fancyhead{}
 \fancyhead[C]{%
 \ifthenelse{\isodd{\value{page}}}%
             {\leftmark}%
-            {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\rightmark\fi}%
+            {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\leftmark\fi}%
 }
 %    \end{macrocode}
 %
@@ -2636,14 +2642,6 @@ December\fi
 \renewcommand{\chaptermark}[1]{\markboth{%
  \if@mainmatter\chaptertitlename\hspace{1em}\fi{#1}%
 }{}}
-%    \end{macrocode}
-%
-% 重新定义|sectionmark|，让其显示当前节信息。注意下面的重定义必须放在第一次调用
-% |\pagestyle{fancy}|之后，因为第一次调用该命令会设置\cs{sectionmark}。
-%    \begin{macrocode}
-\renewcommand{\sectionmark}[1]{\markright{%
- \if@mainmatter\thesection\hspace{1em}\fi{#1}%
-}}
 %    \end{macrocode}
 %
 % 另一个麻烦的问题是：默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）
