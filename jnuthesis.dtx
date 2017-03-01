@@ -1479,14 +1479,15 @@
 % \begin{note}
 %   因为我们将使用黑体作为粗体，使用楷体作为斜体，因此载入|xeCJK|宏包时不需要开启
 %   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
-%   非常难看。
+%   非常难看。然而江南大学的格式要求在很多地方使用了粗体宋体，我们只得将|AutoFakeBold|
+%   打开。
 % \end{note}
 % \begin{note}
 % 由于TeX Live升级到2014版后，直接用|xeCJK|的|CJKnumber|选项会出现bug，我们需单独导入
 % |CJKnumb|宏包；但|xeCJK|的|CJKnumber|选项依然需要，否则在Tex Live 2012下编译会报错。
 % \end{note}
 %    \begin{macrocode}
-\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\RequirePackage[CJKnumber,CJKchecksingle,AutoFakeBold=true]{xeCJK}
 \RequirePackage{CJKnumb}
 %    \end{macrocode}
 %
