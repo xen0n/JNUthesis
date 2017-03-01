@@ -2648,14 +2648,13 @@ December\fi
 %
 % 另一个麻烦的问题是：默认的|fancy|风格会在每一章最后的空白页（由于是双面打印）
 % 也加上页眉页脚，江南大学也如此要求，但我们不希望包含正文部分之前的空白页。
-% 解决方法是修改{\LaTeX}内部的\cs{cleardoublepage}与\cs{mainmatter}命令的定义如下：
+% 解决方法是修改{\LaTeX}内部的\cs{cleardoublepage}命令的定义如下：
 %    \begin{macrocode}
-\def\jnut@origcleardoublepage\cleardoublepage
+\let\jnut@origcleardoublepage\cleardoublepage
 \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
-\def\jnut@origmainmatter\mainmatter
-\def\mainmatter{\clearpage\jnut@origmainmatter\def\cleardoublepage\jnut@origcleardoublepage}
+\newcommand{\setnonempty}{\let\cleardoublepage\jnut@origcleardoublepage}
 %    \end{macrocode}
 %
 % \subsection{列表环境}
