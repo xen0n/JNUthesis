@@ -1708,14 +1708,17 @@
 % 定义江南大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@cover}{中文封面}
-\newcommand*{\jnut@cap@cover@thesis}{研究生毕业论文}
-\newcommand*{\jnut@cap@cover@apply}{申请{\jnut@value@degree}学位}
-\newcommand*{\jnut@cap@cover@title}{论文题目}
-\newcommand*{\jnut@cap@cover@author}{作者姓名}
-\newcommand*{\jnut@cap@cover@supervisor}{指导教师}
-\newcommand*{\jnut@cap@cover@major}{学科、专业方向}
-\newcommand*{\jnut@cap@cover@researchfield}{研究方向}
+\newcommand*{\jnut@cap@cover@thesis}{{\jnut@value@degree}学位论文}
+\newcommand*{\jnut@cap@cover@apply}{}
+\newcommand*{\jnut@cap@cover@title}{题　　　　目}
+\newcommand*{\jnut@cap@cover@entitle}{英文并列题目}
+\newcommand*{\jnut@cap@cover@author}{研 　究 　生}
+\newcommand*{\jnut@cap@cover@supervisor}{导　　　　师}
+\newcommand*{\jnut@cap@cover@major}{专　　　　业}
+\newcommand*{\jnut@cap@cover@researchfield}{研 究 方 向}
 \newcommand*{\jnut@cap@cover@department}{院系}
+\newcommand*{\jnut@cap@cover@directormembers}{指导小组成员}
+\newcommand*{\jnut@cap@cover@degreedate}{学位授予日期}
 \newcommand*{\jnut@cap@cover@institute}{江南大学}
 %    \end{macrocode}
 %
@@ -1869,6 +1872,8 @@ in\\
 \newcommand*{\jnut@value@major}{(作者专业)}
 \newcommand*{\jnut@value@researchfield}{(作者研究方向)}
 \newcommand*{\jnut@value@department}{(作者所属院系)}
+\newcommand*{\jnut@value@directormembers}{(指导小组成员)}
+\newcommand*{\jnut@value@degreedate}{(学位授予日期)}
 \newcommand*{\jnut@value@institute}{江南大学}
 \newcommand*{\jnut@value@submitdate}{xxxx年xx月xx日}
 \newcommand*{\jnut@value@defenddate}{xxxx年xx月xx日}
@@ -1892,7 +1897,8 @@ in\\
        \fi
     \fi
 \fi
-\newcommand*{\jnut@value@en@title}{(English Title of Thesis)}
+\newcommand*{\jnut@value@en@titlea}{(English Title of Thesis)}
+\newcommand*{\jnut@value@en@titleb}{(English Title of Thesis)}
 \newcommand*{\jnut@value@en@author}{(Author's Name)}
 \newcommand*{\jnut@value@en@supervisor}{Professor (Supervisor's Name)}
 \newcommand*{\jnut@value@en@major}{Author's Major}
@@ -1925,8 +1931,8 @@ December\fi
 %
 % 定义江南大学学位论文英文摘要页中要填写的字段的默认值：
 %    \begin{macrocode}
-\newcommand*{\jnut@value@abstract@en@titlea}{\jnut@value@en@title}
-\newcommand*{\jnut@value@abstract@en@titleb}{}
+\newcommand*{\jnut@value@abstract@en@titlea}{\jnut@value@en@titlea}
+\newcommand*{\jnut@value@abstract@en@titleb}{\jnut@value@en@titleb}
 \newcommand*{\jnut@value@abstract@en@keywords}{}
 %    \end{macrocode}
 %
@@ -3036,18 +3042,24 @@ December\fi
   \renewcommand{\jnut@value@department}{#1}}
 \newcommand*{\institute}[1]{%
   \renewcommand{\jnut@value@institute}{#1}}
+\newcommand*{\directormembers}[1]{%
+  \renewcommand{\jnut@value@directormembers}{#1}}
 \newcommand*{\submitdate}[1]{%
   \renewcommand{\jnut@value@submitdate}{#1}}
 \newcommand*{\defenddate}[1]{%
   \renewcommand{\jnut@value@defenddate}{#1}}
+\newcommand*{\degreedate}[1]{%
+  \renewcommand{\jnut@value@degreedate}{#1}}
 \renewcommand*{\date}[1]{%
   \renewcommand{\jnut@value@date}{#1}}
 %    \end{macrocode}
 %
 % 英文封面字段设置：
 %    \begin{macrocode}
-\newcommand*{\englishtitle}[1]{%
-  \renewcommand{\jnut@value@en@title}{#1}}
+\newcommand*{\englishtitlea}[1]{%
+  \renewcommand{\jnut@value@en@titlea}{#1}}
+\newcommand*{\englishtitleb}[1]{%
+  \renewcommand{\jnut@value@en@titleb}{#1}}
 \newcommand*{\englishauthor}[1]{%
   \renewcommand{\jnut@value@en@author}{#1}}
 \newcommand{\englishsupervisor}[1]{%
@@ -3141,48 +3153,61 @@ December\fi
 %    \begin{macrocode}
 \newcommand*{\jnut@covertable@onelinetitle}{
   \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\jnut@cap@cover@title}
+      \makebox[7em][s]{\jnut@cap@cover@title:}
       & \jnutunderline[310pt]{\jnut@value@title}\\
-      \makebox[7em][s]{\jnut@cap@cover@author}
+      \makebox[7em][s]{\jnut@cap@cover@entitle:}
+      & \jnutunderline[310pt]{\jnut@value@en@titlea}\\
+      \makebox[7em][s]{}
+      & \jnutunderline[310pt]{\jnut@value@en@titleb}\\
+      \makebox[7em][s]{\jnut@cap@cover@author:}
       & \jnutunderline[310pt]{\jnut@value@author}\\
-      \makebox[7em][s]{\jnut@cap@cover@major}
+      \makebox[7em][s]{\jnut@cap@cover@major:}
       & \jnutunderline[310pt]{\jnut@value@major}\\
-      \makebox[7em][s]{\jnut@cap@cover@supervisor}
-      & \jnutunderline[310pt]{\jnut@value@supervisor}\\
-      \makebox[7em][s]{\jnut@cap@cover@researchfield}
+      \makebox[7em][s]{\jnut@cap@cover@researchfield:}
       & \jnutunderline[310pt]{\jnut@value@researchfield}\\
+      \makebox[7em][s]{\jnut@cap@cover@supervisor:}
+      & \jnutunderline[310pt]{\jnut@value@supervisor}\\
+      \makebox[7em][s]{\jnut@cap@cover@directormembers:}
+      & \jnutunderline[310pt]{\jnut@value@directormembers}\\
+      \makebox[7em][s]{\jnut@cap@cover@degreedate:}
+      & \jnutunderline[310pt]{\jnut@value@degreedate}\\
   \end{tabular}
 }
 \newcommand*{\jnut@covertable@twolinetitle}{
   \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\jnut@cap@cover@title}
+      \makebox[7em][s]{\jnut@cap@cover@title:}
       & \jnutunderline[310pt]{\jnut@value@titlea}\\
       \makebox[7em][s]{}
       & \jnutunderline[310pt]{\jnut@value@titleb}\\
-      \makebox[7em][s]{\jnut@cap@cover@author}
+      \makebox[7em][s]{\jnut@cap@cover@entitle:}
+	  & \jnutunderline[310pt]{\zihao{5}\jnut@value@en@titlea}\\
+      \makebox[7em][s]{}
+	  & \jnutunderline[310pt]{\zihao{5}\jnut@value@en@titleb}\\
+      \makebox[7em][s]{\jnut@cap@cover@author:}
       & \jnutunderline[310pt]{\jnut@value@author}\\
-      \makebox[7em][s]{\jnut@cap@cover@major}
+      \makebox[7em][s]{\jnut@cap@cover@major:}
       & \jnutunderline[310pt]{\jnut@value@major}\\
-      \makebox[7em][s]{\jnut@cap@cover@supervisor}
-      & \jnutunderline[310pt]{\jnut@value@supervisor}\\
-      \makebox[7em][s]{\jnut@cap@cover@researchfield}
+      \makebox[7em][s]{\jnut@cap@cover@researchfield:}
       & \jnutunderline[310pt]{\jnut@value@researchfield}\\
+      \makebox[7em][s]{\jnut@cap@cover@supervisor:}
+      & \jnutunderline[310pt]{\jnut@value@supervisor}\\
+      \makebox[7em][s]{\jnut@cap@cover@directormembers:}
+      & \jnutunderline[310pt]{\jnut@value@directormembers}\\
+      \makebox[7em][s]{\jnut@cap@cover@degreedate:}
+      & \jnutunderline[310pt]{\jnut@value@degreedate}\\
   \end{tabular}
 }
 \renewcommand*{\maketitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@cover}{cover}
   \begin{center}
+	%% TODO: 分类号，密级
     \vskip 10mm
-    \includegraphics[width=1.96cm]{\jnut@cap@institute@logo} \\
-    \includegraphics[height=2cm]{\jnut@cap@institute@name} \\
-    \vskip 8mm
-    {\bf\kaishu\zihao{1}\makebox[10em][s]{\jnut@cap@cover@thesis}}\\
-    \vskip 5mm
-    {\bf\kaishu\zihao{1}（\makebox[7em][s]{\jnut@cap@cover@apply}）}\\
+    \includegraphics[height=1.46cm,width=5.20cm]{\jnut@cap@institute@name} \\
+    {\bf\heiti\zihao{1}\makebox[10em][s]{\jnut@cap@cover@thesis}}\\
     \vskip\stretch{1}
     {\bgroup
-    \bf\kaishu\zihao{3}
+    \songti\zihao{4}
     \def\tabcolsep{1pt}
     \def\arraystretch{1.5}
     \ifdefempty{\jnut@cap@cover@title}{\jnut@covertable@onelinetitle}{\jnut@covertable@twolinetitle}
@@ -3190,21 +3215,7 @@ December\fi
     \vskip \stretch{1}
     {\bf\kaishu\zihao{4}\jnut@value@date}
   \end{center}
-  \ifjnut@backinfo
-    \clearpage
-    \thispagestyle{empty}
-    \vspace*{\stretch{1}}
-    {\bf\kaishu\zihao{-3}
-    \noindent
-    \begin{tabular}{p{6.2em}l}
-    \makebox[6em][s]{\jnut@cap@coverback@studentnum}： &\jnut@value@studentnum\\
-    \makebox[6em][s]{\jnut@cap@coverback@defenddate}： &\jnut@value@defenddate\\
-    \makebox[6em][s]{\jnut@cap@coverback@supervisor}： &\jnut@cap@coverback@sign\\
-    \end{tabular}}
-    \clearpage
-  \else
-    \cleardoublepage
-  \fi
+  \cleardoublepage
 }
 %    \end{macrocode}
 %  \end{macro}
@@ -3217,7 +3228,8 @@ December\fi
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-    \bf\sffamily\zihao{2}\jnut@value@en@title
+	%% TODO: 两行英文标题；查证江南大学是否完全不需要英文封面
+    \bf\sffamily\zihao{2}\jnut@value@en@titlea
     \vskip \stretch{1}
     \normalfont\rmfamily\zihao{4}\jnut@cap@cover@en@by
     \vskip 3pt

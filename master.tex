@@ -5,7 +5,7 @@
 %%
 %% 本样例文档中用到了吕琦同学的博士论文的提高和部分内容，在此对他表示感谢。
 %%
-\documentclass[master]{jnuthesis}
+\documentclass[master,winfonts]{jnuthesis}
 %% jnuthesis 文档类的可选参数有：
 %%   nobackinfo 取消封二页导师签名信息。注意，按照南大的规定，是需要签名页的。
 %%   phd/master/bachelor 选择博士/硕士/学士论文
@@ -15,99 +15,59 @@
 \usepackage[math]{blindtext}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 设置《国家图书馆封面》的内容，仅博士论文才需要填写
-
-% 设置论文按照《中国图书资料分类法》的分类编号
-\classification{0175.2}
-% 论文的密级。需按照GB/T 7156-2003标准进行设置。预定义的值包括：
-% - \openlevel，表示公开级：此级别的文献可在国内外发行和交换。
-% - \controllevel，表示限制级：此级别的文献内容不涉及国家秘密，但在一定时间内
-%   限制其交流和使用范围。
-% - \confidentiallevel，表示秘密级：此级别的文献内容涉及一般国家秘密。
-% - \clasifiedlevel，表示机密级：此级别的文献内容涉及重要的国家秘密 。
-% - \mostconfidentiallevel，表示绝密级：此级别的文献内容涉及最重要的国家秘密。
-% 此属性可选，默认为\openlevel，即公开级。
-\securitylevel{\openlevel}
-% 设置论文按照《国际十进分类法UDC》的分类编号
-% 该编号可在下述网址查询：http://www.udcc.org/udcsummary/php/index.php?lang=chi
-\udc{004.72}
-% 国家图书馆封面上的论文标题第一行，不可换行。此属性可选，默认值为通过\title设置的标题。
-\nlctitlea{数据中心}
-% 国家图书馆封面上的论文标题第二行，不可换行。此属性可选，默认值为空白。
-\nlctitleb{网络模型研究}
-% 国家图书馆封面上的论文标题第三行，不可换行。此属性可选，默认值为空白。
-\nlctitlec{}
-% 导师的单位名称及地址
-\supervisorinfo{南京大学计算机科学与技术系~~南京市汉口路22号~~210093}
-% 答辩委员会主席
-\chairman{张三丰~~教授}
-% 第一位评阅人
-\reviewera{阳顶天~~教授}
-% 第二位评阅人
-\reviewerb{张无忌~~副教授}
-% 第三位评阅人
-\reviewerc{黄裳~~教授}
-% 第四位评阅人
-\reviewerd{郭靖~~研究员}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置论文的中文封面
 
 % 论文标题，不可换行
-\title{数据中心网络模型研究}
+% \title{}
 % 如果论文标题过长，可以分两行，第一行用\titlea{}定义，第二行用\titleb{}定义，将上面的\title{}注释掉
-% \titlea{半轻衰变$D^+\to \omega(\phi)e^+\nu_e$的研究}
-% \titleb{和弱衰变$J/\psi \to D_s^{(*)-}e^+\nu_e$的寻找}
+\titlea{基于Docker, Android与Web的社会关系研究}
+\titleb{——以江南大学为例}
+% 论文的英文标题第一行
+\englishtitlea{A Research on Social Relationships based on Docker, Android and Web}
+% 论文的英文标题第二行
+\englishtitleb{-- Take Jiangnan University as an Example}
 
 % 论文作者姓名
-\author{韦小宝}
-% 论文作者联系电话
-\telphone{13671413272}
-% 论文作者电子邮件地址
-\email{xiaobao.wei@gmail.com}
-% 论文作者学生证号
-\studentnum{MG0033011}
-% 论文作者入学年份（年级）
-\grade{2010}
+\author{王雪瑞}
 % 导师姓名职称
-\supervisor{陈近南~~教授}
-% 导师的联系电话
-\supervisortelphone{13671607471}
+\supervisor{刘渊~~教授}
 % 论文作者的学科与专业方向
-\major{计算机软件与理论}
+\major{数字媒体技术}
 % 论文作者的研究方向
-\researchfield{计算机网络与信息安全}
+\researchfield{网络媒体应用与安全技术}
 % 论文作者所在院系的中文名称
-\department{计算机科学与技术系}
-% 论文作者所在学校或机构的名称。此属性可选，默认值为``南京大学''。
-\institute{南京大学}
+\department{}
+% 论文作者所在学校或机构的名称。此属性可选，默认值为``江南大学''。
+\institute{江南大学}
+% 论文的指导小组成员。
+\directormembers{}
 % 论文的提交日期，需设置年、月、日。
-\submitdate{2013年5月10日}
+\submitdate{2017年5月}
 % 论文的答辩日期，需设置年、月、日。
-\defenddate{2013年6月1日}
+\defenddate{2017年6月}
 % 论文的定稿日期，需设置年、月、日。此属性可选，默认值为最后一次编译时的日期，精确到日。
 %% \date{2013年5月1日}
+% 获得学位日期。
+\degreedate{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置论文的英文封面
 
-% 论文的英文标题，不可换行
-\englishtitle{A Research on Network Infrastructures for Data Centers}
 % 论文作者姓名的拼音
-\englishauthor{WEI Xiao-Bao}
+\englishauthor{WANG Xuerui}
 % 导师姓名职称的英文
-\englishsupervisor{Professor CHEN Jin-Nan}
+\englishsupervisor{}
 % 论文作者学科与专业的英文名
-\englishmajor{Computer Software and Theory}
+\englishmajor{}
 % 论文作者所在院系的英文名称
-\englishdepartment{Department of Computer Science and Technology}
-% 论文作者所在学校或机构的英文名称。此属性可选，默认值为``Nanjing University''。
-\englishinstitute{Nanjing University}
+\englishdepartment{}
+% 论文作者所在学校或机构的英文名称。此属性可选，默认值为``Jiangnan University''。
+\englishinstitute{Jiangnan University}
 % 论文完成日期的英文形式，它将出现在英文封面下方。需设置年、月、日。日期格式使用美国的日期
 % 格式，即``Month day, year''，其中``Month''为月份的英文名全称，首字母大写；``day''为
 % 该月中日期的阿拉伯数字表示；``year''为年份的四位阿拉伯数字表示。此属性可选，默认值为最后
 % 一次编译时的日期。
-\englishdate{May 1, 2013}
+\englishdate{May 1, 2017}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 设置论文的中文摘要
@@ -124,22 +84,18 @@
 
 % 设置英文摘要页面的论文标题及副标题的第一行。
 % 此属性可选，其默认值为使用|\englishtitle|命令所设置的论文标题
-\englishabstracttitlea{A Research on Network Infrastructures}
+\englishabstracttitlea{}
 % 设置英文摘要页面的论文标题及副标题的第二行。
 % 此属性可选，其默认值为空白
-\englishabstracttitleb{for Data Centers}
+\englishabstracttitleb{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% 制作国家图书馆封面（博士学位论文才需要）
-\makenlctitle
 % 制作中文封面
 \maketitle
-% 制作英文封面
-\makeenglishtitle
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
