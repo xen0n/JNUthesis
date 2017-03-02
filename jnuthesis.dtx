@@ -2443,6 +2443,9 @@ December\fi
 % \subsection{中文标题格式}
 %
 % 设置章节格式如下：
+%
+% 硕士学位论文：
+%
 % \begin{description}
 % \item[零级节标题] 命令为\cs{chapter}，格式为三号黑体，居中排列，段前空1ex，段后空1ex；
 % \item[一级节标题] 命令为\cs{section}，格式为四号加粗宋体，左排列，段前空0.5ex，段后空0.5ex；
@@ -2453,9 +2456,42 @@ December\fi
 %% \item[五级节标题] 命令为\cs{subparagraph}，格式为小四号黑体，左排列，段前空1.5ex，段后空1ex；
 % \end{description}
 %
+% 学士学位论文：
+%
+% \begin{description}
+% \item[零级节标题] 命令为\cs{chapter}，格式为三号加粗宋体，居中排列，段前空-2.5ex，段后空0ex；
+% \item[一级节标题] 命令为\cs{section}，格式为四号加粗宋体，左排列，段前空0ex，段后空1ex；
+% \item[二级节标题] 命令为\cs{subsection}，格式为小四号加粗宋体，左排列，段前空0ex，段后空1ex；
+% \end{description}
+%
 % 使用|titlesec|宏包提供的\cs{titleformat}和\cs{titlespacing}命令可以方便地设置标题
 % 的样式：
 %    \begin{macrocode}
+\ifjnut@bachelor
+%% 学士学位
+\titleformat{\chapter}[hang]
+            {\centering\zihao{3}\songti\bfseries}
+            {\chaptertitlename}{1em}{}
+\titlespacing{\chapter}
+             {0pt}
+             {*-2.5}
+             {*0}
+\titleformat{\section}[hang]
+            {\zihao{4}\songti\bfseries}
+            {\thesection}{1em}{}
+\titlespacing{\section}
+             {0pt}
+             {*0}
+             {*1}
+\titleformat{\subsection}[hang]
+            {\zihao{-4}\songti\bfseries}
+            {\thesubsection}{1em}{}
+\titlespacing{\subsection}
+             {0pt}
+             {*0}
+             {*1}
+\else
+%% 硕士学位
 \titleformat{\chapter}[hang]
             {\centering\zihao{3}\bfseries}
             {\chaptertitlename}{1em}{}
@@ -2499,6 +2535,7 @@ December\fi
              {0pt}
              {*1.5}
              {*1}
+\fi
 %    \end{macrocode}
 %
 % 设置章节标题编号最多到第4层（即\cs{subsubsection}），超过第四层的章节不再自动编号。
