@@ -3412,16 +3412,27 @@ December\fi
   \thispagestyle{empty}
   \bf\kaishu\zihao{4}
   \begin{center}
-    \heiti\zihao{3}独 创 性 声 明
+    %% not sure why \ziju causes compilation error here
+    \begingroup
+    \renewcommand{\CJKglue}{\hskip 0.5em}
+    \heiti\zihao{3}独创性声明
+    \endgroup
   \end{center}
-  \vskip 3pt
+
+  \vskip 2em
+
   本人声明所呈交的学位论文是本人在导师指导下进行的研究工作及取得的研究成果。
   尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果，
   也不包含本人为获得江南大学或其它教育机构的学位或证书而使用过的材料。
   与我一同工作的同志对本研究所做的任何贡献均已在论文中作了明确的说明并表示谢意。
-  \vskip 1pt
-  %% TODO: 此处格式
-  签名：日期：
+
+  \vskip 1.5em
+  \begingroup
+    %% \ziju{5.29mm}
+    \begin{tabular}{ll}
+      签　　名：\jnutunderline[8em]{} & 日　　期：\\
+    \end{tabular}
+  \endgroup
 
   \vfill
 
@@ -3436,9 +3447,14 @@ December\fi
   并且本人电子文档的内容和纸质论文的内容相一致。
 
   保密的学位论文在解密后也遵守此规定。
-  \vskip 1pt
-  签名：导师签名：
-  日期：
+  \vskip 1.5em
+  \begingroup
+    %% \ziju{5.29mm}
+    \begin{tabular}{ll}
+      签　　名：\jnutunderline[8em]{} & 导师签名：\jnutunderline[8em]{} \\
+                                      & 日　　期：\\
+    \end{tabular}
+  \endgroup
 
   \vfill
 
