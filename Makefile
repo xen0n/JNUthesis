@@ -18,7 +18,6 @@ SAMPLE=master
 SAMPLE_B=bachelor
 SAMPLECONTENTS=$(SAMPLE).tex
 SAMPLEBIB=$(SAMPLE).bib
-INSTITUTE_LOGO=jnulogo.eps
 INSTITUTE_NAME=jnuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
@@ -52,7 +51,7 @@ $(PACKAGE).pdf: $(CLS)
 
 sample:	 $(SAMPLE).pdf
 
-$(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB)
+$(SAMPLE).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB)
 	xelatex $(SAMPLE).tex
 	bibtex $(SAMPLE)
 	xelatex $(SAMPLE).tex
@@ -61,7 +60,7 @@ $(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).
 
 bachelor: $(SAMPLE_B).pdf
 
-$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB)
+$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB)
 	xelatex $(SAMPLE_B).tex
 	bibtex $(SAMPLE)
 	xelatex $(SAMPLE_B).tex
@@ -70,9 +69,9 @@ $(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE
 
 ###### install
 
-install: $(SOURCE) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
+install: $(SOURCE) $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
 	mkdir -p $(TEXMFLOCAL)/tex/latex/jnuthesis
-	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/jnuthesis/
+	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/jnuthesis/
 	mkdir -p $(TEXMFLOCAL)/doc/latex/jnuthesis
 	cp -rvf $(PACKAGE).pdf $(SAMPLE).pdf $(TEXMFLOCAL)/doc/latex/jnuthesis/
 	mkdir -p $(TEXMFLOCAL)/bibtex/bst
