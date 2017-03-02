@@ -15,6 +15,7 @@ BST_URL=https://raw.githubusercontent.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/m
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
 SAMPLE=master
+SAMPLE_B=bachelor
 SAMPLECONTENTS=$(SAMPLE).tex
 SAMPLEBIB=$(SAMPLE).bib
 INSTITUTE_LOGO=jnulogo.eps
@@ -57,6 +58,16 @@ $(SAMPLE).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).
 	xelatex $(SAMPLE).tex
 	xelatex $(SAMPLE).tex
 
+
+bachelor: $(SAMPLE_B).pdf
+
+$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB)
+	xelatex $(SAMPLE_B).tex
+	bibtex $(SAMPLE)
+	xelatex $(SAMPLE_B).tex
+	xelatex $(SAMPLE_B).tex
+
+
 ###### install
 
 install: $(SOURCE) $(CLS) $(INSTITUTE_LOGO) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
@@ -91,7 +102,6 @@ clean:
 		*.lof \
 		*.lot \
 		*.loe \
-		*.sty \
 		*.cfg \
 		*.cls \
-		*.sty
+		dtx-style.sty
