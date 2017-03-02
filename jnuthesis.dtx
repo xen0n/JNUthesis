@@ -2444,12 +2444,13 @@ December\fi
 %
 % 设置章节格式如下：
 % \begin{description}
-% \item[零级节标题] 命令为\cs{chapter}，格式为三号黑体，居中排列，段前空4ex，段后空3ex；
-% \item[一级节标题] 命令为\cs{section}，格式为四号加粗宋体，左排列，段前空3.5ex，段后空2.3ex；
-% \item[二级节标题] 命令为\cs{subsection}，格式为小四号加粗宋体，左排列，段前空3.0ex，段后空1.5ex；
-% \item[三级节标题] 命令为\cs{subsubsection}，格式为小三号黑体，左排列，段前空2.5ex，段后空1.5ex；
-% \item[四级节标题] 命令为\cs{paragraph}，格式为四号黑体，左排列，段前空2.0ex，段后空1ex；
-% \item[五级节标题] 命令为\cs{subparagraph}，格式为小四号黑体，左排列，段前空1.5ex，段后空1ex；
+% \item[零级节标题] 命令为\cs{chapter}，格式为三号黑体，居中排列，段前空1ex，段后空1ex；
+% \item[一级节标题] 命令为\cs{section}，格式为四号加粗宋体，左排列，段前空0.5ex，段后空0.5ex；
+% \item[二级节标题] 命令为\cs{subsection}，格式为小四号加粗宋体，左排列，段前空0.5ex，段后空0.5ex；
+%% NOTE: 以下格式江南大学未使用。
+%% \item[三级节标题] 命令为\cs{subsubsection}，格式为小三号黑体，左排列，段前空2.5ex，段后空1.5ex；
+%% \item[四级节标题] 命令为\cs{paragraph}，格式为四号黑体，左排列，段前空2.0ex，段后空1ex；
+%% \item[五级节标题] 命令为\cs{subparagraph}，格式为小四号黑体，左排列，段前空1.5ex，段后空1ex；
 % \end{description}
 %
 % 使用|titlesec|宏包提供的\cs{titleformat}和\cs{titlespacing}命令可以方便地设置标题
@@ -2460,22 +2461,22 @@ December\fi
             {\chaptertitlename}{1em}{}
 \titlespacing{\chapter}
              {0pt}
-             {*4}
-             {*3}
+             {*0}  % NOTE: 使用 *1 的话顶端边距太多了
+             {*1}
 \titleformat{\section}[hang]
             {\zihao{4}\songti\bfseries}
             {\thesection}{1em}{}
 \titlespacing{\section}
              {0pt}
-             {*3.5}
-             {*2.3}
+             {*0.5}
+             {*0.5}
 \titleformat{\subsection}[hang]
             {\zihao{-4}\songti\bfseries}
             {\thesubsection}{1em}{}
 \titlespacing{\subsection}
              {0pt}
-             {*3}
-             {*1.5}
+             {*0.5}
+             {*0.5}
 %% NOTE: 以下格式江南大学未使用。
 \titleformat{\subsubsection}[hang]
             {\zihao{-3}\bfseries}
