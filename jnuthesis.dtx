@@ -3039,7 +3039,7 @@ December\fi
 \newcommand{\jnut@underline}[2][\textwidth]%
            {\CJKunderline{\makebox[#1]{#2}}}
 \newcommand{\jnut@infounderline}[2][\textwidth]%
-           {\CJKunderline{\hspace{1em}\makebox[#1]{#2}}}
+           {\CJKunderline{\hbox to #1{\hspace{1em}#2\hfill}}}
 
 \def\jnutunderline{\@ifnextchar[\jnut@underline\CJKunderline}
 %% TODO
