@@ -2806,7 +2806,18 @@ December\fi
     \else
       \@restonecolfalse
     \fi
-    \nchapter{\contentsname}%
+    %% 学士学位论文不要把目录本身放进目录
+    \ifjnut@bachelor%
+      \if@mainmatter%
+        \@mainmatterfalse%
+        \chapter*{\contentsname}%
+        \@mainmattertrue%
+      \else%
+        \chapter*{\contentsname}%
+      \fi%
+    \else%
+      \nchapter{\contentsname}%
+    \fi%
     \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
