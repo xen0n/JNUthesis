@@ -2672,10 +2672,19 @@ December\fi
 %% TODO: 下面的 mainmatter 判定有坑
 \fancyhead{}
 \fancyhead[C]{%
+%% 学士学位论文使用宋体小五号字页眉
+\ifjnut@bachelor\songti\zihao{-5}\fi%
 \ifthenelse{\isodd{\value{page}}}%
             {\leftmark}%
             {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\leftmark\fi}%
 }
+%    \end{macrocode}
+%
+% 设置|fancy|风格的页脚，学士学位论文要求使用小五号宋体显示页码。
+%    \begin{macrocode}
+\ifjnut@bachelor
+  \fancyfoot[C]{\songti\zihao{-5}\thepage}
+\fi
 %    \end{macrocode}
 %
 % 设置全局使用|fancy|风格。
