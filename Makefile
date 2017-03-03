@@ -14,7 +14,7 @@ BST_FILE=gbt7714-2005.bst
 BST_URL=https://raw.githubusercontent.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/master/gbt7714-2005.bst
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
-SAMPLE_D=sample
+SAMPLE_D=phd
 SAMPLE_M=master
 SAMPLE_B=bachelor
 SAMPLEBIB_D=$(SAMPLE_D).bib
@@ -53,7 +53,7 @@ $(PACKAGE).pdf: $(CLS)
 
 phd:	 $(SAMPLE_D).pdf
 
-$(SAMPLE_D).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB_D)
+$(SAMPLE_D).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_D).tex $(SAMPLEBIB_D)
 	xelatex $(SAMPLE_D).tex
 	bibtex $(SAMPLE_D)
 	xelatex $(SAMPLE_D).tex
@@ -62,7 +62,7 @@ $(SAMPLE_D).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB_
 
 master:	 $(SAMPLE_M).pdf
 
-$(SAMPLE_M).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB_M)
+$(SAMPLE_M).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_M).tex $(SAMPLEBIB_M)
 	xelatex $(SAMPLE_M).tex
 	bibtex $(SAMPLE_M)
 	xelatex $(SAMPLE_M).tex
