@@ -3056,11 +3056,15 @@ December\fi
 % 中文封面字段设置：
 %    \begin{macrocode}
 \renewcommand*{\title}[1]{%
-  \renewcommand{\jnut@value@title}{#1}}
+  \renewcommand{\jnut@value@title}{#1}%
+  \renewcommand{\jnut@value@titlea}{\jnut@value@title}%
+  \renewcommand{\jnut@value@titleb}{}}
 \newcommand*{\titlea}[1]{%
-  \renewcommand{\jnut@value@titlea}{#1}}
+  \renewcommand{\jnut@value@titlea}{#1}%
+  \renewcommand{\jnut@value@title}{\jnut@value@titlea\jnut@value@titleb}}
 \newcommand*{\titleb}[1]{%
-  \renewcommand{\jnut@value@titleb}{#1}}
+  \renewcommand{\jnut@value@titleb}{#1}%
+  \renewcommand{\jnut@value@title}{\jnut@value@titlea\jnut@value@titleb}}
 \renewcommand*{\author}[1]{%
   \renewcommand{\jnut@value@author}{#1}}
 \newcommand*{\telphone}[1]{%
