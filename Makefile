@@ -14,16 +14,18 @@ BST_FILE=gbt7714-2005.bst
 BST_URL=https://raw.githubusercontent.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/master/gbt7714-2005.bst
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
-SAMPLE=master
+SAMPLE_D=sample
+SAMPLE_M=master
 SAMPLE_B=bachelor
-SAMPLECONTENTS=$(SAMPLE).tex
-SAMPLEBIB=$(SAMPLE).bib
+SAMPLEBIB_D=$(SAMPLE_D).bib
+SAMPLEBIB_M=$(SAMPLE_M).bib
+SAMPLEBIB_B=$(SAMPLE_B).bib
 INSTITUTE_NAME=jnuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
-.PHONY: all clean cls doc sample
+.PHONY: all clean cls doc phd master bachelor
 
-all: bst cls doc sample
+all: bst cls doc phd master bachelor
 
 ###### update bst file
 bst:  $(BST_FILE)
@@ -49,18 +51,27 @@ $(PACKAGE).pdf: $(CLS)
 
 ###### for sample
 
-sample:	 $(SAMPLE).pdf
+phd:	 $(SAMPLE_D).pdf
 
-$(SAMPLE).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB)
-	xelatex $(SAMPLE).tex
-	bibtex $(SAMPLE)
-	xelatex $(SAMPLE).tex
-	xelatex $(SAMPLE).tex
+$(SAMPLE_D).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB_D)
+	xelatex $(SAMPLE_D).tex
+	bibtex $(SAMPLE_D)
+	xelatex $(SAMPLE_D).tex
+	xelatex $(SAMPLE_D).tex
+
+
+master:	 $(SAMPLE_M).pdf
+
+$(SAMPLE_M).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE).tex $(SAMPLEBIB_M)
+	xelatex $(SAMPLE_M).tex
+	bibtex $(SAMPLE_M)
+	xelatex $(SAMPLE_M).tex
+	xelatex $(SAMPLE_M).tex
 
 
 bachelor: $(SAMPLE_B).pdf
 
-$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB)
+$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB_B)
 	xelatex $(SAMPLE_B).tex
 	bibtex $(SAMPLE_B)
 	xelatex $(SAMPLE_B).tex
@@ -69,11 +80,11 @@ $(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBI
 
 ###### install
 
-install: $(SOURCE) $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE).pdf
+install: $(SOURCE) $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE_D).pdf $(SAMPLE_M).pdf $(SAMPLE_B).pdf
 	mkdir -p $(TEXMFLOCAL)/tex/latex/jnuthesis
 	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/jnuthesis/
 	mkdir -p $(TEXMFLOCAL)/doc/latex/jnuthesis
-	cp -rvf $(PACKAGE).pdf $(SAMPLE).pdf $(TEXMFLOCAL)/doc/latex/jnuthesis/
+	cp -rvf $(PACKAGE).pdf $(SAMPLE_D).pdf $(SAMPLE_M).pdf $(SAMPLE_B).pdf $(TEXMFLOCAL)/doc/latex/jnuthesis/
 	mkdir -p $(TEXMFLOCAL)/bibtex/bst
 	cp -rvf $(BST_FILE) $(TEXMFLOCAL)/bibtex/bst/
 	texhash
