@@ -3377,8 +3377,8 @@ December\fi
   \thispagestyle{empty}
   \begin{center}
     \vspace*{20pt}
-	%% TODO: 两行英文标题；查证江南大学是否完全不需要英文封面
-    \bf\sffamily\zihao{2}\jnut@value@en@titlea
+    %% TODO: 两行英文标题；查证江南大学是否完全不需要英文封面
+    \bf\sffamily\zihao{2}\jnut@value@en@titlea\jnut@value@en@titleb
     \vskip \stretch{1}
     \normalfont\rmfamily\zihao{4}\jnut@cap@cover@en@by
     \vskip 3pt
@@ -3390,7 +3390,8 @@ December\fi
     \vskip\stretch{1}
     \normalsize\rmfamily\jnut@cap@cover@en@statement
     \vskip\stretch{2}
-    \includegraphics[width=2.5cm]{\jnut@cap@institute@logo} \\
+    %% TODO: 此处未移植，待查证江南大学格式并实现
+    %% \includegraphics[width=2.5cm]{\jnut@cap@institute@logo} \\
     \vskip 3mm
     \normalfont\jnut@value@en@department\\
     \jnut@value@en@institute
