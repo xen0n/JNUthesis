@@ -62,7 +62,7 @@ bachelor: $(SAMPLE_B).pdf
 
 $(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB)
 	xelatex $(SAMPLE_B).tex
-	bibtex $(SAMPLE)
+	bibtex $(SAMPLE_B)
 	xelatex $(SAMPLE_B).tex
 	xelatex $(SAMPLE_B).tex
 
