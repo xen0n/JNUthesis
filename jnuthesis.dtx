@@ -3415,6 +3415,7 @@ December\fi
 %	 \begin{macrocode}
 \newcommand*{\makeoriginalitypage}{%
   \thispagestyle{empty}
+  \bgroup
   \bf\kaishu\zihao{4}
   \begin{center}
     %% not sure why \ziju causes compilation error here
@@ -3463,7 +3464,7 @@ December\fi
 
   \vfill
 
-  \normalfont
+  \egroup
   \cleardoublepage
 }
 %    \end{macrocode}
