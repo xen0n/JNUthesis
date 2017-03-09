@@ -24,4 +24,4 @@
 
 以下环境存在已知问题：
 
-* macOS，Smaller MacTeX：校名 logo 缺失
+* macOS，Smaller MacTeX：校名 logo 缺失。请使用完整 MacTeX 安装
