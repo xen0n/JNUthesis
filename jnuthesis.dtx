@@ -1641,9 +1641,10 @@
 %
 % 定义用于重定义\cs{chaptername}命令的常量。若当前所处位置是文档的|mainmatter|部分，ze
 % 将其定义为``第XX章''的形式，否则将其定义为空字符串。
+% 此处学士学位论文采用阿拉伯数字，硕士学位论文采用汉字数字。
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@chaptername}{%
-  \if@mainmatter{第\CJKnumber{\thechapter}章}\fi%
+  \if@mainmatter{第{\ifjnut@bachelor\thechapter\else\CJKnumber{\thechapter}\fi}章}\fi%
 }
 %    \end{macrocode}
 %
