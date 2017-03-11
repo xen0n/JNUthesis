@@ -3349,7 +3349,14 @@ December\fi
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@cover}{cover}
   \begin{center}
-    {\bf\songti\zihao{4}分类号\hfill{密级}\hspace{2em}}
+    {%
+      \songti\zihao{4}%
+      {\bf\songti\jnut@cap@nlc@classification}%
+      ~\jnut@value@nlc@classification%
+      \hfill%
+      {\bf\songti\jnut@cap@nlc@securitylevel}%
+      ~\jnut@value@nlc@securitylevel%
+    }
     \vskip 10mm
     \includegraphics[height=1.46cm,width=5.20cm]{\jnut@cap@institute@name} \\
     {\bf\heiti\zihao{1}\makebox[10em][s]{\jnut@cap@cover@thesis}}\\
