@@ -2795,6 +2795,13 @@ December\fi
 % 黑体5号字，段前间距为0.5行，段后间距为0行; 其它（二、三级目录）用宋体5号字，
 % 段前、段后间距为0行。
 %
+% \begin{macro}{\frontmatter}
+% 在非学士学位论文中使用大写罗马数字编码前言各页。
+%    \begin{macrocode}
+\let\jnut@origfrontmatter\frontmatter
+\def\frontmatter{\jnut@origfrontmatter\ifjnut@bachelor\else\pagenumbering{Roman}\fi}
+%    \end{macrocode}
+% \end{macro}
 % \begin{macro}{\nchapter}
 % 用于产生没有编号但在目录中列出的章。
 %    \begin{macrocode}
