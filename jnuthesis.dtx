@@ -2863,16 +2863,17 @@ December\fi
 % \end{macro}
 %
 % \begin{macro}{\l@chapter}
-% 改变缺省的目录中的点线为中文习惯。
+% 改变缺省的chapter点线为中文习惯，并对学士学位论文蛋疼地设置点线与页码的字号为四号。
 %    \begin{macrocode}
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
     \setlength\@tempdima{1.5em}%
     \begingroup
+      \ifjnut@bachelor\zihao{4}\fi
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
-      \leavevmode \bfseries
+      \leavevmode
       \advance\leftskip\@tempdima
       \hskip -\leftskip
       #1\nobreak
