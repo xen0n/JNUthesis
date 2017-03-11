@@ -1787,7 +1787,15 @@ in\\
 % 定义江南大学学位论文英文摘要页的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@abstract@en}{英文摘要}
-\newcommand*{\jnut@cap@abstract@en@abstractname}{Abstract}
+\newcommand*{\jnut@cap@abstract@en@abstractname@bachelor}{ABSTRACT}
+\newcommand*{\jnut@cap@abstract@en@abstractname@other}{Abstract}
+\newcommand*{\jnut@cap@abstract@en@abstractname}{%
+  \ifjnut@bachelor%
+  \jnut@cap@abstract@en@abstractname@bachelor%
+  \else%
+  \jnut@cap@abstract@en@abstractname@other%
+  \fi%
+}
 \newcommand*{\jnut@cap@abstract@en@keywordsname}{Keywords}
 %    \end{macrocode}
 %
