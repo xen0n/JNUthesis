@@ -2851,7 +2851,7 @@ December\fi
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
       {\leavevmode
-       \large \bfseries #1
+       #1
        \leaders\hbox{$\m@th\mkern 1.5mu\cdot\mkern 1.5mu$}
        \hfil \hb@xt@\@pnumwidth{\hss #2}}\par
        \nobreak
@@ -2868,7 +2868,6 @@ December\fi
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \vskip 1.0em \@plus\p@
     \setlength\@tempdima{1.5em}%
     \begingroup
       \parindent \z@ \rightskip \@pnumwidth
