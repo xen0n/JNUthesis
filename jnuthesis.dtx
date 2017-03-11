@@ -2893,14 +2893,14 @@ December\fi
 %    \end{macrocode}
 % \end{macro}
 %
-% 改变目录项的字号（学士学位）与缩进（公共）。
+% 改变目录项的字号（学士学位；硕士学位的|subsection|项）与缩进（公共）。
 %    \begin{macrocode}
 \renewcommand*{\l@section}{%
   \ifjnut@bachelor\zihao{-4}\fi%
   \@dottedtocline{1}{3.4mm}{2.3em}%
 }
 \renewcommand*{\l@subsection}{%
-  \ifjnut@bachelor\zihao{5}\fi%
+  \zihao{5}%
   \@dottedtocline{2}{7.41mm}{3.2em}%
 }
 %    \end{macrocode}
