@@ -2740,6 +2740,8 @@ December\fi
   \hbox{}\thispagestyle{empty}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
 \newcommand{\setnonempty}{\let\cleardoublepage\jnut@origcleardoublepage}
+\let\jnut@origmainmatter\mainmatter
+\def\mainmatter{\jnut@origmainmatter\setnonempty}
 %    \end{macrocode}
 %
 % \subsection{列表环境}
