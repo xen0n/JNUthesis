@@ -3519,7 +3519,11 @@ December\fi
   \fi%
   \normalsize\par%
 }{%
-  \cleardoublepage
+  \ifjnut@bachelor%
+  \clearpage%
+  \else%
+  \cleardoublepage%
+  \fi%
 }
 %    \end{macrocode}
 % \end{environment}
