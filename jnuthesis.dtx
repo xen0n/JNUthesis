@@ -3513,6 +3513,10 @@ December\fi
 \newenvironment{abstract}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@abstract}{abstract}
+  \ifjnut@bachelor
+  \else
+    \nchapter{\jnut@cap@abstract@abstractname}
+  \fi
   \begin{center}
     {\bf\heiti\zihao{3}\jnut@cap@abstract@abstractname}
   \end{center}%
@@ -3560,6 +3564,10 @@ December\fi
 \newenvironment{englishabstract}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@abstract@en}{englishabstract}
+  \ifjnut@bachelor
+  \else
+    \nchapter{\jnut@cap@abstract@en@abstractname}
+  \fi
   \begin{center}
     {\bf\zihao{3}\jnut@cap@abstract@en@abstractname}
   \end{center}%
