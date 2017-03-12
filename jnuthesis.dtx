@@ -1645,7 +1645,7 @@
 % 此处学士学位论文采用阿拉伯数字，硕士学位论文采用汉字数字。
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@chaptername}{%
-  \if@mainmatter{第{\ifjnut@bachelor\thechapter\else\CJKnumber{\thechapter}\fi}章}\fi%
+  \if@mainmatter{\thechapter}\fi%
 }
 %    \end{macrocode}
 %
@@ -2606,7 +2606,7 @@ December\fi
 %
 % 修改章节编号的样式：
 %    \begin{macrocode}
-\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\thechapter}{第{\ifjnut@bachelor\arabic{chapter}\else\CJKnumber{\arabic{chapter}}\fi}章}
 \renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
 \renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
@@ -2914,7 +2914,7 @@ December\fi
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \setlength\@tempdima{1.5em}%
+    \setlength\@tempdima{4.0em}%
     \begingroup
       \ifjnut@bachelor\zihao{4}\fi
       \parindent \z@ \rightskip \@pnumwidth
