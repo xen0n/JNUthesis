@@ -2014,6 +2014,38 @@ December\fi
 \input{jnuthesis.cfg}
 %    \end{macrocode}
 %
+% \subsection{内部环境状态初始化}
+%
+% 为处理学士学位论文中不规则的页眉设置，需要跟踪当前页面所处的具体环境。
+%    \begin{macrocode}
+\newbool{bachelor@zhabstract}
+\newbool{bachelor@enabstract}
+\newbool{bachelor@toc}
+\newcommand*{\jnut@state@reset}{%
+  \boolfalse{bachelor@zhabstract}%
+  \boolfalse{bachelor@enabstract}%
+  \boolfalse{bachelor@toc}%
+}
+\newcommand*{\jnut@state@zhabstract}{%
+  \jnut@state@reset%
+  \ifjnut@bachelor%
+    \booltrue{bachelor@zhabstract}%
+  \fi%
+}
+\newcommand*{\jnut@state@enabstract}{%
+  \jnut@state@reset%
+  \ifjnut@bachelor%
+    \booltrue{bachelor@enabstract}%
+  \fi%
+}
+\newcommand*{\jnut@state@toc}{%
+  \jnut@state@reset%
+  \ifjnut@bachelor%
+    \booltrue{bachelor@toc}%
+  \fi%
+}
+%    \end{macrocode}
+%
 % \subsection{字体设置}
 %
 % 首先根据文档选项选择正确的中文字体名称。
@@ -2750,7 +2782,7 @@ December\fi
 
 \newcommand{\setnonempty}{\let\cleardoublepage\jnut@origcleardoublepage}
 \let\jnut@origmainmatter\mainmatter
-\def\mainmatter{\jnut@origmainmatter\setnonempty}
+\def\mainmatter{\jnut@origmainmatter\jnut@state@reset\setnonempty}
 %    \end{macrocode}
 %
 % \subsection{列表环境}
@@ -3532,6 +3564,7 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
+  \jnut@state@zhabstract
   \thispagestyle{empty}
   \ifjnut@bachelor
     \pdfbookmark[0]{\jnut@cap@abstract}{abstract}
@@ -3587,6 +3620,7 @@ December\fi
 % \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 \newenvironment{englishabstract}{%
+  \jnut@state@enabstract
   \thispagestyle{empty}
   \ifjnut@bachelor
     \pdfbookmark[0]{\jnut@cap@abstract@en}{englishabstract}
@@ -4017,6 +4051,7 @@ December\fi
 
 % 修改\cs{tableofcontents}命令用于生成目录页。
 \renewcommand{\tableofcontents}{%
+    \jnut@state@toc
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
