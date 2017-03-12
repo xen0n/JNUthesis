@@ -1866,6 +1866,7 @@ in\\
 \newcommand*{\jnut@value@studentnum}{XXXXXXXX}
 \newcommand*{\jnut@value@grade}{XXXX}
 \newcommand*{\jnut@value@supervisor}{(导师姓名和职称)}
+\newcommand*{\jnut@value@supervisorb}{(第二行导师姓名和职称)}
 \newcommand*{\jnut@value@supervisortelphone}{(导师电话号码)}
 \newcommand*{\jnut@value@major}{(作者专业)}
 \newcommand*{\jnut@value@researchfield}{(作者研究方向)}
@@ -3152,6 +3153,8 @@ December\fi
   \renewcommand{\jnut@value@grade}{#1}}
 \newcommand*{\supervisor}[1]{%
   \renewcommand{\jnut@value@supervisor}{#1}}
+\newcommand*{\supervisorb}[1]{%
+  \renewcommand{\jnut@value@supervisorb}{#1}}
 \newcommand*{\supervisortelphone}[1]{%
   \renewcommand{\jnut@value@supervisortelphone}{#1}}
 \newcommand*{\major}[1]{%
@@ -3399,11 +3402,10 @@ December\fi
       \def\tabcolsep{1pt}
       \def\arraystretch{1.5}
       \begin{tabular}{lc}
-        %% TODO: 导师第二行
         \songti\jnut@cap@cover@bachelorstudentnum & \jnutinfounderline[220pt]{\heiti\jnut@value@studentnum}\\
         \songti\jnut@cap@cover@bachelorauthor & \jnutinfounderline[220pt]{\heiti\jnut@value@author}\\
         \songti\jnut@cap@cover@bachelorsupervisor & \jnutinfounderline[220pt]{\heiti\jnut@value@supervisor}\\
-                                                  & \jnutinfounderline[220pt]{}\\
+                                                  & \jnutinfounderline[220pt]{\heiti\jnut@value@supervisorb}\\
       \end{tabular}%\\
 
     \vskip 10mm
