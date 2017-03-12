@@ -1637,7 +1637,7 @@
 \newcommand*{\jnut@cap@tablename}{表}
 \newcommand*{\jnut@cap@preface}{前　言}
 \newcommand*{\jnut@cap@acknowledgementname}{致　谢}
-\newcommand*{\jnut@cap@appendixname}{附录\thechapter}
+\newcommand*{\jnut@cap@appendixname}{附录\arabic{chapter}}
 %    \end{macrocode}
 %
 % 定义用于重定义\cs{chaptername}命令的常量。若当前所处位置是文档的|mainmatter|部分，ze
@@ -2395,9 +2395,9 @@ December\fi
 %    \begin{macrocode}
 \newcommand{\dashnumber}[2]%
   {{#1}\kern.07em\rule[.5ex]{.4em}{.15ex}\kern.07em{#2}}
-\renewcommand*{\thefigure}{\dashnumber{\thechapter}{\arabic{figure}}}
-\renewcommand*{\thetable}{\dashnumber{\thechapter}{\arabic{table}}}
-\renewcommand*{\theequation}{\dashnumber{\thechapter}{\arabic{equation}}}
+\renewcommand*{\thefigure}{\dashnumber{\arabic{chapter}}{\arabic{figure}}}
+\renewcommand*{\thetable}{\dashnumber{\arabic{chapter}}{\arabic{table}}}
+\renewcommand*{\theequation}{\dashnumber{\arabic{chapter}}{\arabic{equation}}}
 \renewcommand*{\thesubfigure}{(\alph{subfigure})}
 \renewcommand*{\thesubtable}{(\alph{subtable})}
 %    \end{macrocode}
@@ -2449,13 +2449,13 @@ December\fi
 %
 % 修改上面定义的各定理环境的编号样式：
 %    \begin{macrocode}
-\renewcommand*{\thedefinition}{\dashnumber{\thechapter}{\arabic{definition}}}
-\renewcommand*{\thetheorem}{\dashnumber{\thechapter}{\arabic{theorem}}}
-\renewcommand*{\theaxiom}{\dashnumber{\thechapter}{\arabic{axiom}}}
-\renewcommand*{\theproblem}{\dashnumber{\thechapter}{\arabic{problem}}}
-\renewcommand*{\theexercise}{\dashnumber{\thechapter}{\arabic{exercise}}}
-\renewcommand*{\theexample}{\dashnumber{\thechapter}{\arabic{example}}}
-\renewcommand*{\theremark}{\dashnumber{\thechapter}{\arabic{remark}}}
+\renewcommand*{\thedefinition}{\dashnumber{\arabic{chapter}}{\arabic{definition}}}
+\renewcommand*{\thetheorem}{\dashnumber{\arabic{chapter}}{\arabic{theorem}}}
+\renewcommand*{\theaxiom}{\dashnumber{\arabic{chapter}}{\arabic{axiom}}}
+\renewcommand*{\theproblem}{\dashnumber{\arabic{chapter}}{\arabic{problem}}}
+\renewcommand*{\theexercise}{\dashnumber{\arabic{chapter}}{\arabic{exercise}}}
+\renewcommand*{\theexample}{\dashnumber{\arabic{chapter}}{\arabic{example}}}
+\renewcommand*{\theremark}{\dashnumber{\arabic{chapter}}{\arabic{remark}}}
 %    \end{macrocode}
 %
 % \subsection{设置浮动环境格式}
@@ -2607,7 +2607,7 @@ December\fi
 % 修改章节编号的样式：
 %    \begin{macrocode}
 \renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\thesection}{\thechapter\thinspace.\thinspace\arabic{section}}
+\renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
 \renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
 %    \end{macrocode}
