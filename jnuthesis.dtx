@@ -2020,14 +2020,14 @@ December\fi
 % \subsection{内部环境状态初始化}
 %
 % 为处理学士学位论文中不规则的页眉设置，需要跟踪当前页面所处的具体环境。
+% 目录页的页眉设置是特殊的，直接在生成目录页时覆盖掉默认页眉即可，因此此处
+% 不设置相应状态flag。
 %    \begin{macrocode}
 \newbool{bachelor@zhabstract}
 \newbool{bachelor@enabstract}
-\newbool{bachelor@toc}
 \newcommand*{\jnut@state@reset}{%
   \boolfalse{bachelor@zhabstract}%
   \boolfalse{bachelor@enabstract}%
-  \boolfalse{bachelor@toc}%
 }
 \newcommand*{\jnut@state@zhabstract}{%
   \jnut@state@reset%
@@ -2039,12 +2039,6 @@ December\fi
   \jnut@state@reset%
   \ifjnut@bachelor%
     \booltrue{bachelor@enabstract}%
-  \fi%
-}
-\newcommand*{\jnut@state@toc}{%
-  \jnut@state@reset%
-  \ifjnut@bachelor%
-    \booltrue{bachelor@toc}%
   \fi%
 }
 %    \end{macrocode}
@@ -2747,11 +2741,8 @@ December\fi
 {%
   \ifbool{bachelor@enabstract}%
   {\jnut@cap@abstract@en@abstractname@bachelorhead}%
-  {%
-    \ifbool{bachelor@toc}%
-    {\jnut@cap@contentsname@bachelorhead}%
-    %% 再处理一般情况
-    {\ifthenelse{%
+  %% 再处理一般情况
+  {\ifthenelse{%
         \isodd{\value{page}}}%
             {%
               \ifjnut@bachelor%
@@ -2765,7 +2756,7 @@ December\fi
                 \leftmark%
               \fi}%
             {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\leftmark\fi}%
-      }}}%
+    }}%
 }
 %    \end{macrocode}
 %
@@ -2973,7 +2964,12 @@ December\fi
     \else%
       \nchapter{\contentsname}%
     \fi%
-    \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    %% 学士学位论文要设置不规则页眉
+    \ifjnut@bachelor%
+      \@mkboth{\jnut@cap@contentsname@bachelorhead}{\jnut@cap@contentsname@bachelorhead}%
+    \else%
+      \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+    \fi%
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
 }
@@ -4064,7 +4060,6 @@ December\fi
 
 % 修改\cs{tableofcontents}命令用于生成目录页。
 \renewcommand{\tableofcontents}{%
-    \jnut@state@toc
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
