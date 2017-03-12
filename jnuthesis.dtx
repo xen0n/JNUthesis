@@ -3206,11 +3206,13 @@ December\fi
 % \begin{macro}{\jnutunderline}
 % 定义封面中用到的生成下划线的宏。
 %    \begin{macrocode}
-%% 左对齐
 \newcommand{\jnut@underline}[2][\textwidth]%
            {\CJKunderline{\makebox[#1]{#2}}}
+%% 左对齐
+\newcommand{\jnut@ljustunderline}[3]%
+           {\CJKunderline{\hbox to #1{\hspace{#2}#3\hfill}}}
 \newcommand{\jnut@infounderline}[2][\textwidth]%
-           {\CJKunderline{\hbox to #1{\hspace{1em}#2\hfill}}}
+           {\jnut@ljustunderline{#1}{1em}{#2}}
 
 \def\jnutunderline{\@ifnextchar[\jnut@underline\CJKunderline}
 %% TODO
