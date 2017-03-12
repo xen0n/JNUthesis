@@ -1623,6 +1623,7 @@
 %<*cfg>
 \newcommand*{\jnut@cap@abstractname}{摘　要}
 \newcommand*{\jnut@cap@contentsname}{目　录}
+\newcommand*{\jnut@cap@contentsname@bachelorhead}{目录}
 \newcommand*{\jnut@cap@revisionhistory}{修订历史}
 \newcommand*{\jnut@cap@listfigurename}{插图清单}
 \newcommand*{\jnut@cap@listtablename}{附表清单}
@@ -1781,6 +1782,7 @@ in\\
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@abstract}{中文摘要}
 \newcommand*{\jnut@cap@abstract@abstractname}{摘　要}
+\newcommand*{\jnut@cap@abstract@abstractname@bachelorhead}{摘要}
 \newcommand*{\jnut@cap@abstract@keywordsname}{关键词}
 %    \end{macrocode}
 %
@@ -1788,6 +1790,7 @@ in\\
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@abstract@en}{英文摘要}
 \newcommand*{\jnut@cap@abstract@en@abstractname@bachelor}{ABSTRACT}
+\newcommand*{\jnut@cap@abstract@en@abstractname@bachelorhead}{Abstract}
 \newcommand*{\jnut@cap@abstract@en@abstractname@other}{Abstract}
 \newcommand*{\jnut@cap@abstract@en@abstractname}{%
   \ifjnut@bachelor%
@@ -2734,14 +2737,25 @@ December\fi
 % 信息；但若当前页面尚未开始本章的第一节（即\cs{rightmark}为空），则奇数页左上角也
 % 显示当前章信息（即\cs{leftmark}）。
 %    \begin{macrocode}
-%% TODO: 下面的 mainmatter 判定有坑
 \fancyhead{}
 \fancyhead[C]{%
 %% 江南大学页眉使用宋体小五号字
 \songti\zihao{-5}%
-\ifthenelse{\isodd{\value{page}}}%
+%% 先处理不规则页眉的情况
+\ifbool{bachelor@zhabstract}%
+{\jnut@cap@abstract@abstractname@bachelorhead}%
+{%
+  \ifbool{bachelor@enabstract}%
+  {\jnut@cap@abstract@en@abstractname@bachelorhead}%
+  {%
+    \ifbool{bachelor@toc}%
+    {\jnut@cap@contentsname@bachelorhead}%
+    %% 再处理一般情况
+    {\ifthenelse{%
+        \isodd{\value{page}}}%
             {%
               \ifjnut@bachelor%
+                %% TODO: 下面的 mainmatter 判定有坑
                 \if@mainmatter%
                   \jnut@value@titlea\jnut@value@titleb%
                 \else%
@@ -2751,6 +2765,7 @@ December\fi
                 \leftmark%
               \fi}%
             {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\leftmark\fi}%
+      }}}%
 }
 %    \end{macrocode}
 %
