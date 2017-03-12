@@ -3211,12 +3211,14 @@ December\fi
 %% 左对齐
 \newcommand{\jnut@ljustunderline}[3]%
            {\CJKunderline{\hbox to #1{\hspace{#2}#3\hfill}}}
+\newcommand{\jnut@titleunderline}[2][\textwidth]%
+           {\jnut@ljustunderline{#1}{0em}{#2}}
 \newcommand{\jnut@infounderline}[2][\textwidth]%
            {\jnut@ljustunderline{#1}{1em}{#2}}
 
 \def\jnutunderline{\@ifnextchar[\jnut@underline\CJKunderline}
-%% TODO
 \def\jnutschoolunderline{\@ifnextchar[\jnut@underline\CJKunderline}
+\def\jnuttitleunderline{\@ifnextchar[\jnut@titleunderline\CJKunderline}
 \def\jnutinfounderline{\@ifnextchar[\jnut@infounderline\CJKunderline}
 %    \end{macrocode}
 % \end{macro}
@@ -3379,8 +3381,8 @@ December\fi
       \begingroup
         \zihao{2}
         \begin{tabular}{lc}
-          \textbf{\songti\jnut@cap@cover@bachelortitle} & \jnutunderline[320pt]{\heiti\jnut@value@titlea}\\
-                                                        & \jnutunderline[320pt]{\heiti\jnut@value@titleb}\\
+          \textbf{\songti\jnut@cap@cover@bachelortitle} & \jnuttitleunderline[320pt]{\heiti\jnut@value@titlea}\\
+                                                        & \jnuttitleunderline[320pt]{\heiti\jnut@value@titleb}\\
         \end{tabular}
       \endgroup
 
