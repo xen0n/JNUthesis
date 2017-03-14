@@ -1382,11 +1382,6 @@
 \RequirePackage{geometry}
 %    \end{macrocode}
 %
-% 使用|ctexheading|宏包设置目录中章节标题为“第X章”的形式，而不影响|thechapter|的定义。
-%    \begin{macrocode}
-\RequirePackage{ctexheading}
-%    \end{macrocode}
-%
 % 使用|titlesec|宏包设置标题格式。
 %    \begin{macrocode}
 \RequirePackage{titlesec}
@@ -2031,9 +2026,11 @@ December\fi
 %    \begin{macrocode}
 \newbool{bachelor@zhabstract}
 \newbool{bachelor@enabstract}
+\newbool{jnut@toc}
 \newcommand*{\jnut@state@reset}{%
   \boolfalse{bachelor@zhabstract}%
   \boolfalse{bachelor@enabstract}%
+  \boolfalse{jnut@toc}%
 }
 \newcommand*{\jnut@state@zhabstract}{%
   \jnut@state@reset%
@@ -2046,6 +2043,10 @@ December\fi
   \ifjnut@bachelor%
     \booltrue{bachelor@enabstract}%
   \fi%
+}
+\newcommand*{\jnut@state@toc}{%
+  \jnut@state@reset%
+  \booltrue{jnut@toc}%
 }
 %    \end{macrocode}
 %
@@ -2612,7 +2613,9 @@ December\fi
 %
 % 修改章节编号的样式：
 %    \begin{macrocode}
-\renewcommand{\thechapter}{\arabic{chapter}}
+%% 对于|chapter|的编号，要在目录页中使用“第X章”的形式，而保持正文中为单个数字
+%% 此处使用了|protect|命令，避免在写入toc文件时即过早扩展|ifbool|命令。
+\renewcommand{\thechapter}{\protect\ifbool{jnut@toc}{\jnut@cap@chaptername}{\arabic{chapter}}}
 \renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
 \renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
@@ -2955,6 +2958,7 @@ December\fi
 % 修改\cs{tableofcontents}命令用于生成目录页，并将目录页本身也被加入目录中。
 %    \begin{macrocode}
 \renewcommand*{\tableofcontents}{%
+    \jnut@state@toc
     \if@twocolumn
       \@restonecoltrue\onecolumn
     \else
