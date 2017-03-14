@@ -1638,6 +1638,7 @@
 \newcommand*{\jnut@cap@preface}{前　言}
 \newcommand*{\jnut@cap@acknowledgementname}{致　谢}
 \newcommand*{\jnut@cap@appendixname}{附录\arabic{chapter}}
+\newcommand*{\jnut@cap@appendixname@head}{附录}
 %    \end{macrocode}
 %
 % 定义用于重定义\cs{chaptername}命令的常量。若当前所处位置是文档的|mainmatter|部分，ze
@@ -2027,10 +2028,12 @@ December\fi
 \newbool{bachelor@zhabstract}
 \newbool{bachelor@enabstract}
 \newbool{jnut@toc}
+\newbool{jnut@appendix}
 \newcommand*{\jnut@state@reset}{%
   \boolfalse{bachelor@zhabstract}%
   \boolfalse{bachelor@enabstract}%
   \boolfalse{jnut@toc}%
+  \boolfalse{jnut@appendix}%
 }
 \newcommand*{\jnut@state@zhabstract}{%
   \jnut@state@reset%
@@ -2047,6 +2050,10 @@ December\fi
 \newcommand*{\jnut@state@toc}{%
   \jnut@state@reset%
   \booltrue{jnut@toc}%
+}
+\newcommand*{\jnut@state@appendix}{%
+  \jnut@state@reset%
+  \booltrue{jnut@appendix}%
 }
 %    \end{macrocode}
 %
@@ -2750,8 +2757,11 @@ December\fi
 {%
   \ifbool{bachelor@enabstract}%
   {\jnut@cap@abstract@en@abstractname@bachelorhead}%
-  %% 再处理一般情况
-  {\ifthenelse{%
+  {%
+    \ifbool{jnut@appendix}%
+    {\jnut@cap@appendixname@head}%
+    %% 再处理一般情况
+    {\ifthenelse{%
         \isodd{\value{page}}}%
             {%
               \ifjnut@bachelor%
@@ -2765,7 +2775,7 @@ December\fi
                 \leftmark%
               \fi}%
             {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\leftmark\fi}%
-    }}%
+    }}}%
 }
 %    \end{macrocode}
 %
@@ -2798,6 +2808,15 @@ December\fi
 \newcommand{\setnonempty}{\let\cleardoublepage\jnut@origcleardoublepage}
 \let\jnut@origmainmatter\mainmatter
 \def\mainmatter{\jnut@origmainmatter\jnut@state@reset\setnonempty}
+%    \end{macrocode}
+%
+% 设置附录页页眉，所有附录页的页眉均为“附录”，不规则，需要跟踪。
+% 我们覆盖\cs{appendix}与\cs{backmatter}命令使其设置|jnut@appendix| flag。
+%    \begin{macrocode}
+\let\jnut@origappendix\appendix
+\let\jnut@origbackmatter\backmatter
+\def\appendix{\jnut@origappendix\jnut@state@appendix}
+\def\backmatter{\jnut@origbackmatter\jnut@state@appendix}
 %    \end{macrocode}
 %
 % \subsection{列表环境}
