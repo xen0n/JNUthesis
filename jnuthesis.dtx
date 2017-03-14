@@ -3529,11 +3529,11 @@ December\fi
   \cleardoublepage
 }
 \renewcommand*{\maketitle}{%
-  \ifjnut@bachelor
-    \jnut@covertable@bachelortitle[normal]
-  \else
-    \jnut@covertable@masterphdtitle
-  \fi
+  \ifjnut@bachelor%
+    \jnut@covertable@bachelortitle[normal]%
+  \else%
+    \jnut@covertable@masterphdtitle%
+  \fi%
 }
 \newcommand*{\makebachelorrelated}{%
   \jnut@covertable@bachelortitle[related]%
