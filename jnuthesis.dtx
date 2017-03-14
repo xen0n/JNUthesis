@@ -1739,6 +1739,9 @@
 \newcommand*{\jnut@cap@cover@thesis}{{\jnut@value@degree}学位论文}
 \newcommand*{\jnut@cap@cover@bachelorthesis}{本科生毕业设计（论文）}
 \newcommand*{\jnut@cap@cover@bachelorthesis@related}{相关资料}
+\newcommand*{\jnut@cap@cover@bachelorthesis@translation@a}{毕业设计（论文）}
+\newcommand*{\jnut@cap@cover@bachelorthesis@translation@b}{外文资料翻译}
+\newcommand*{\jnut@cap@cover@bachelorthesis@translation@c}{及原文}
 \newcommand*{\jnut@cap@cover@apply}{}
 \newcommand*{\jnut@cap@cover@title}{题　　　　目}
 \newcommand*{\jnut@cap@cover@bachelortitle}{题目：}
@@ -3365,10 +3368,8 @@ December\fi
       & \jnutunderline[310pt]{\jnut@value@degreedate}\\
   \end{tabular}
 }
-\def\jnut@covertable@bachelortitle[#1]{
-  \thispagestyle{empty}
-  \pdfbookmark[0]{\jnut@cap@cover}{cover}
-  \begin{onehalfspace}
+%% 学士学位封面页，编号
+\newcommand*{\jnut@covertable@bachelortitle@number}{
     \begingroup
     \songti\zihao{-4}
     %% 27em 是估计的值, 原模板此处是首行缩进 10 字符然后居中...
@@ -3378,35 +3379,9 @@ December\fi
     \renewcommand{\CJKglue}{\hskip 1.411112mm}
     \textbf{编号}
     \endgroup
-
-    \begin{center}
-      \vskip 20mm
-
-      %% 原模板如此, 丑陋啊丑陋... 没有保持纵横比, 不过算了
-      \includegraphics[height=2.05cm,width=6.14cm]{\jnut@cap@institute@name} \\
-
-      \vskip 20mm
-
-      \begingroup
-        %% 字符间距, 为何都是如此恶趣味的数字...
-        \renewcommand{\CJKglue}{\hskip 0.881945mm}
-        \textbf{\songti\zihao{-0}\jnut@cap@cover@bachelorthesis}\\
-      \endgroup
-
-      \IfEqCase{#1}{%
-        {related}{%
-          \vskip 5mm%
-          \begingroup%
-            \renewcommand{\CJKglue}{\hskip 1.058334mm}%
-            \textbf{\songti\zihao{1}\jnut@cap@cover@bachelorthesis@related}%
-          \endgroup%
-          \vskip 10mm%
-        }%
-        {normal}{%
-        \vskip 20mm%
-        }%
-      }[\PackageError{JNUthesis}{Undefined option to bachelortitle: #1}{}]%
-
+}
+%% 学士学位封面页，主要信息部分
+\newcommand*{\jnut@covertable@bachelortitle@content}{
       \begingroup
         \zihao{2}
         \begin{tabular}{lc}
@@ -3442,8 +3417,81 @@ December\fi
       \end{tabular}%\\
 
     \vskip 10mm
-
+}
+%% 学士学位封面页，底部
+\newcommand*{\jnut@covertable@bachelortitle@footer}{%
+    \zihao{-2}
     \heiti{\jnut@value@bachelordegreeyear}\songti{年}\heiti{\jnut@value@bachelordegreemonth}\songti{月}
+}
+%% 学士学位封面页
+\def\jnut@covertable@bachelortitle[#1]{
+  \thispagestyle{empty}
+  \pdfbookmark[0]{\jnut@cap@cover}{cover}
+  \begin{onehalfspace}
+    %% 外文资料翻译封面页没有编号部分
+    %% 顶部边距是随手写的
+    \IfEqCase{#1}{%
+      {translation}{\vglue 10mm}%
+    }[\jnut@covertable@bachelortitle@number]
+
+    \begin{center}
+      \vskip 20mm
+
+      %% 原模板如此, 丑陋啊丑陋... 没有保持纵横比, 不过算了
+      \includegraphics[height=2.05cm,width=6.14cm]{\jnut@cap@institute@name} \\
+
+      \vskip 20mm
+
+      \begingroup
+        %% 字符间距, 为何都是如此恶趣味的数字...
+        \renewcommand{\CJKglue}{\hskip 0.881945mm}
+        \bf\songti\zihao{-0}
+
+        \IfEqCase{#1}{%
+          {translation}{\jnut@cap@cover@bachelorthesis@translation@a}%
+        }[\jnut@cap@cover@bachelorthesis]
+      \endgroup
+
+      \IfEqCase{#1}{%
+        {translation}{%
+          %% 外文资料翻译及原文封面页，没有论文信息，有 footer
+          %% 此处间隔随手写的
+          \vskip 40mm%
+          \begingroup%
+            %% 原模板为0.88mm，“小初”磅或更大，都是什么鬼
+            \renewcommand{\CJKglue}{\hskip 2mm}%
+            %% 原模板此处为28pt
+            \bf\songti\zihao{1}%
+            \jnut@cap@cover@bachelorthesis@translation@b
+            %% 随手写的
+            \vskip 5mm
+            \jnut@cap@cover@bachelorthesis@translation@c
+          \endgroup
+
+          \vskip \stretch{1}
+
+          \jnut@covertable@bachelortitle@footer
+        }%
+        {related}{%
+          %% 相关资料封面页
+          \vskip 5mm%
+          \begingroup%
+            \renewcommand{\CJKglue}{\hskip 1.058334mm}%
+            \textbf{\songti\zihao{1}\jnut@cap@cover@bachelorthesis@related}%
+          \endgroup%
+          \vskip 10mm%
+
+          \jnut@covertable@bachelortitle@content%
+          \jnut@covertable@bachelortitle@footer%
+        }%
+        {normal}{%
+          %% 正常封面页
+          \vskip 20mm%
+
+          \jnut@covertable@bachelortitle@content%
+          \jnut@covertable@bachelortitle@footer%
+        }%
+      }[\PackageError{JNUthesis}{Undefined option to bachelortitle: #1}{}]%
     \end{center}
   \end{onehalfspace}
 
@@ -3489,6 +3537,9 @@ December\fi
 }
 \newcommand*{\makebachelorrelated}{%
   \jnut@covertable@bachelortitle[related]%
+}
+\newcommand*{\makebachelortranslation}{%
+  \jnut@covertable@bachelortitle[translation]%
 }
 %    \end{macrocode}
 %  \end{macro}
