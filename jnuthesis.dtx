@@ -3366,7 +3366,18 @@ December\fi
       & \jnutunderline[310pt]{\jnut@value@directormembers}\\
       \makebox[7em][s]{\jnut@cap@cover@degreedate:}
       & \jnutunderline[310pt]{\jnut@value@degreedate}\\
+      & \hfill\jnut@cap@nlc@chairman\jnutunderline[100pt]{\jnut@value@nlc@chairman}\\
   \end{tabular}
+
+  \begingroup
+    \bf\heiti\zihao{-2}%
+    %% 模拟一个空格的“字距”效果
+    \renewcommand{\CJKglue}{\hskip 3mm}%
+    \jnut@value@institute%
+  \endgroup
+
+  %% TODO: 此处样式
+  {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
 }
 %% 学士学位封面页，编号
 \newcommand*{\jnut@covertable@bachelortitle@number}{
@@ -3524,7 +3535,7 @@ December\fi
     \ifdefempty{\jnut@cap@cover@title}{\jnut@covertable@onelinetitle}{\jnut@covertable@twolinetitle}
     \egroup}\\
     \vskip \stretch{1}
-    {\bf\kaishu\zihao{4}\jnut@value@date}
+    {\songti\zihao{-4}\jnut@value@date}
   \end{center}
   \cleardoublepage
 }
