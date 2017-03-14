@@ -3345,6 +3345,8 @@ December\fi
   \end{tabular}
 }
 \newcommand*{\jnut@covertable@twolinetitle}{
+  \begingroup
+  \setlength\extrarowheight{0.75em}
   \begin{tabular}{p{7.3em}c}
       \makebox[7em][s]{\jnut@cap@cover@title:}
       & \jnutunderline[310pt]{\jnut@value@titlea}\\
@@ -3368,6 +3370,9 @@ December\fi
       & \jnutunderline[310pt]{\jnut@value@degreedate}\\
       & \hfill\jnut@cap@nlc@chairman\jnutunderline[100pt]{\jnut@value@nlc@chairman}\\
   \end{tabular}
+  \endgroup
+
+  \vfill
 
   \begingroup
     \bf\heiti\zihao{-2}%
@@ -3375,6 +3380,8 @@ December\fi
     \renewcommand{\CJKglue}{\hskip 3mm}%
     \jnut@value@institute%
   \endgroup
+
+  \vfill
 
   %% TODO: 此处样式
   {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
