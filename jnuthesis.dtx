@@ -368,7 +368,7 @@
 %     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
-%     |url|      & |etoolbox| &  &  &  & \\
+%     |url|      & |etoolbox| & |ctexheading| &  &  & \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\jnuthesis}用到的宏包}\label{table:dependence}
@@ -1382,6 +1382,11 @@
 \RequirePackage{geometry}
 %    \end{macrocode}
 %
+% 使用|ctexheading|宏包设置目录中章节标题为“第X章”的形式，而不影响|thechapter|的定义。
+%    \begin{macrocode}
+\RequirePackage{ctexheading}
+%    \end{macrocode}
+%
 % 使用|titlesec|宏包设置标题格式。
 %    \begin{macrocode}
 \RequirePackage{titlesec}
@@ -1645,7 +1650,7 @@
 % 此处学士学位论文采用阿拉伯数字，硕士学位论文采用汉字数字。
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@chaptername}{%
-  \if@mainmatter{\thechapter}\fi%
+  \if@mainmatter{第{\ifjnut@bachelor\arabic{chapter}\else\CJKnumber{\arabic{chapter}}\fi}章}\fi%
 }
 %    \end{macrocode}
 %
@@ -2607,7 +2612,7 @@ December\fi
 %
 % 修改章节编号的样式：
 %    \begin{macrocode}
-\renewcommand{\thechapter}{第{\ifjnut@bachelor\arabic{chapter}\else\CJKnumber{\arabic{chapter}}\fi}章}
+\renewcommand{\thechapter}{\arabic{chapter}}
 \renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
 \renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
