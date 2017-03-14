@@ -17,15 +17,16 @@ CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
 SAMPLE_D=phd
 SAMPLE_M=master
 SAMPLE_B=bachelor
+SAMPLE_BR=bachelor-related
 SAMPLEBIB_D=$(SAMPLE_D).bib
 SAMPLEBIB_M=$(SAMPLE_M).bib
 SAMPLEBIB_B=$(SAMPLE_B).bib
 INSTITUTE_NAME=jnuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
-.PHONY: all clean cls doc phd master bachelor
+.PHONY: all clean cls doc phd master bachelor bachelorrelated
 
-all: bst cls doc phd master bachelor
+all: bst cls doc phd master bachelor bachelorrelated
 
 ###### update bst file
 bst:  $(BST_FILE)
@@ -76,6 +77,14 @@ $(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBI
 	bibtex $(SAMPLE_B)
 	xelatex $(SAMPLE_B).tex
 	xelatex $(SAMPLE_B).tex
+
+
+bachelorrelated: $(SAMPLE_BR).pdf
+
+$(SAMPLE_BR).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_BR).tex
+	xelatex $(SAMPLE_BR).tex
+	xelatex $(SAMPLE_BR).tex
+	xelatex $(SAMPLE_BR).tex
 
 
 ###### install

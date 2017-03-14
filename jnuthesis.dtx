@@ -368,7 +368,7 @@
 %     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
 %     |titlesec| & |glossaries|  & |ifthen|   & |makeidx| & |footmisc| &  |CJKnumb| \\
-%     |url|      & |etoolbox| & |ctexheading| &  &  & \\
+%     |url|      & |etoolbox| & |xstring| &  &  & \\
 %   \hline
 %   \end{tabular*}
 %   \caption{{\jnuthesis}用到的宏包}\label{table:dependence}
@@ -1611,9 +1611,10 @@
 %</cls>
 %    \end{macrocode}
 %
-% |etoolbox|宏包提供了一些工具宏。
+% |etoolbox|、|xstring|宏包提供了一些工具宏。
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
+\RequirePackage{xstring}
 %    \end{macrocode}
 %
 % \subsection{字符串常量定义}
@@ -1737,6 +1738,7 @@
 \newcommand*{\jnut@cap@cover}{中文封面}
 \newcommand*{\jnut@cap@cover@thesis}{{\jnut@value@degree}学位论文}
 \newcommand*{\jnut@cap@cover@bachelorthesis}{本科生毕业设计（论文）}
+\newcommand*{\jnut@cap@cover@bachelorthesis@related}{相关资料}
 \newcommand*{\jnut@cap@cover@apply}{}
 \newcommand*{\jnut@cap@cover@title}{题　　　　目}
 \newcommand*{\jnut@cap@cover@bachelortitle}{题目：}
@@ -3363,7 +3365,7 @@ December\fi
       & \jnutunderline[310pt]{\jnut@value@degreedate}\\
   \end{tabular}
 }
-\newcommand*{\jnut@covertable@bachelortitle}{
+\def\jnut@covertable@bachelortitle[#1]{
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@cover}{cover}
   \begin{onehalfspace}
@@ -3391,20 +3393,19 @@ December\fi
         \textbf{\songti\zihao{-0}\jnut@cap@cover@bachelorthesis}\\
       \endgroup
 
-      %% TODO: 相关资料封面页
-      %%\IfEqCase{#1}{%
-      %%  {related}{%
-      %%    \vskip 5mm%
-      %%    \begingroup%
-      %%      \renewcommand{\CJKglue}{\hskip 1.058334mm}%
-      %%      \textbf{\songti\zihao{1}\JNUT@label@related}%
-      %%    \endgroup%
-      %%    \vskip 10mm%
-      %%  }%
-      %%  {normal}{%
-          \vskip 20mm%
-      %%  }%
-      %%}[\PackageError{JNUthesis}{Undefined option to maketitle: #1}{}]%
+      \IfEqCase{#1}{%
+        {related}{%
+          \vskip 5mm%
+          \begingroup%
+            \renewcommand{\CJKglue}{\hskip 1.058334mm}%
+            \textbf{\songti\zihao{1}\jnut@cap@cover@bachelorthesis@related}%
+          \endgroup%
+          \vskip 10mm%
+        }%
+        {normal}{%
+        \vskip 20mm%
+        }%
+      }[\PackageError{JNUthesis}{Undefined option to bachelortitle: #1}{}]%
 
       \begingroup
         \zihao{2}
@@ -3481,10 +3482,13 @@ December\fi
 }
 \renewcommand*{\maketitle}{%
   \ifjnut@bachelor
-    \jnut@covertable@bachelortitle
+    \jnut@covertable@bachelortitle[normal]
   \else
     \jnut@covertable@masterphdtitle
   \fi
+}
+\newcommand*{\makebachelorrelated}{%
+  \jnut@covertable@bachelortitle[related]%
 }
 %    \end{macrocode}
 %  \end{macro}
