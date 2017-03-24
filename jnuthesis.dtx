@@ -2812,7 +2812,16 @@ December\fi
 
 \newcommand{\setnonempty}{\let\cleardoublepage\jnut@origcleardoublepage}
 \let\jnut@origmainmatter\mainmatter
-\def\mainmatter{\jnut@origmainmatter\jnut@state@reset\setnonempty}
+\def\mainmatter{%
+  \jnut@origmainmatter%
+  \jnut@state@reset%
+  \setnonempty%
+  \ifjnut@bachelor%
+  \else%
+  %% 硕士（博士？）论文正文的章节不要强制开始于奇数页
+  \@twosidefalse%
+  \fi%
+}
 %    \end{macrocode}
 %
 % 设置附录页页眉，所有附录页的页眉均为“附录”，不规则，需要跟踪。
