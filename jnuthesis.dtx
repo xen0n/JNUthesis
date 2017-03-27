@@ -2885,10 +2885,10 @@ December\fi
 % 段前、段后间距为0行。
 %
 % \begin{macro}{\frontmatter}
-% 在非学士学位论文中使用大写罗马数字编码前言各页。
+% 使用大写罗马数字编码前言各页。
 %    \begin{macrocode}
 \let\jnut@origfrontmatter\frontmatter
-\def\frontmatter{\jnut@origfrontmatter\ifjnut@bachelor\else\pagenumbering{Roman}\fi}
+\def\frontmatter{\jnut@origfrontmatter\pagenumbering{Roman}}
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\nchapter}
@@ -3015,6 +3015,11 @@ December\fi
     \else%
       \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
     \fi%
+    %% 学士学位论文要重新开始小写罗马字母页码
+    \ifjnut@bachelor%
+      \pagenumbering{roman}%
+    \fi%
+    %% 生成目录
     \@starttoc{toc}%
     \if@restonecol\twocolumn\fi
 }
