@@ -2129,6 +2129,14 @@ December\fi
 \setmonofont{\jnut@enfn@mono}
 %    \end{macrocode}
 %
+% 允许强制使用等宽字体（例如在|figure|环境中），因为正常情况下江南大学不允许在
+% 正文中使用等宽字体排版。
+%
+%    \begin{macrocode}
+\newfontfamily{\forcedtt}{\jnut@enfn@mono}
+\DeclareTextFontCommand{\textforcedtt}{\forcedtt}
+%    \end{macrocode}
+%
 % 定义中文字体选择命令。
 %    \begin{macrocode}
 \newcommand*{\songti}{\CJKfamily{song}}
