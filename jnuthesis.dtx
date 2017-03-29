@@ -2636,9 +2636,9 @@ December\fi
 %% 对于|chapter|的编号，要在目录页中使用“第X章”的形式，而保持正文中为单个数字
 %% 此处使用了|protect|命令，避免在写入toc文件时即过早扩展|ifbool|命令。
 \renewcommand{\thechapter}{\protect\ifbool{jnut@toc}{\jnut@cap@chaptername}{\arabic{chapter}}}
-\renewcommand{\thesection}{\arabic{chapter}\thinspace.\thinspace\arabic{section}}
-\renewcommand{\thesubsection}{\thesection\thinspace.\thinspace\arabic{subsection}}
-\renewcommand{\thesubsubsection}{\thesubsection\thinspace.\thinspace\arabic{subsubsection}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 %    \end{macrocode}
 %
 % \subsection{浮动环境}
