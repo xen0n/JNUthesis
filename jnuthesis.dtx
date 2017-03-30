@@ -2496,16 +2496,16 @@ December\fi
 % 得下。我们可以通过修改\cs{topfraction}和\cs{bottomfraction}分别设置顶端和底端的浮动
 % 环境的最大比例。
 %    \begin{macrocode}
-\renewcommand*{\topfraction}{0.9}
+\renewcommand*{\topfraction}{0.97}
 \renewcommand*{\bottomfraction}{0.8}
 %    \end{macrocode}
-% 有时{\LaTeX}会把一个浮动环境单独放在一页，我们要求这个环境至少要占据$85\%$才能单独放在
+% 有时{\LaTeX}会把一个浮动环境单独放在一页，我们要求这个环境至少要占据$95\%$才能单独放在
 % 一页。
 % \begin{note}
 % \cs{floatpagefraction}的数值必须小于\cs{topfraction}。
 % \end{note}
 %    \begin{macrocode}
-\renewcommand*{\floatpagefraction}{0.85}
+\renewcommand*{\floatpagefraction}{0.95}
 %    \end{macrocode}
 %
 % \subsection{中文标题名称}
