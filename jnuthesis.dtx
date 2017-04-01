@@ -530,6 +530,12 @@
 % 这三个选项必须设置一个且只能设置一个。
 % \end{note}
 %
+% \item[replaceperiod] 用于开启自动替换中文句号“。”为英文句点“.”。这对排版多含公式与
+% 数字下标的科技类论文有很大好处。
+% \begin{example}
+% \documentclass[winfonts,replaceperiod]{jnuthesis}
+% \end{example}
+%
 % \end{description}
 %
 % 本文档类不再提供对字号、字体和单双面打印的选择选项。因为国内各大学的学位论文基本上都要求
@@ -1317,6 +1323,7 @@
 \newif\ifjnut@phd\jnut@phdfalse
 \newif\ifjnut@master\jnut@masterfalse
 \newif\ifjnut@bachelor\jnut@bachelorfalse
+\newif\ifjnut@replaceperiod\jnut@replaceperiodfalse
 \DeclareOption{adobefonts}{\jnut@adobefontstrue
   \jnut@winfontsfalse
   \jnut@linuxfontsfalse
@@ -1343,6 +1350,7 @@
 \DeclareOption{bachelor}{\jnut@bachelortrue
   \jnut@phdfalse
   \jnut@masterfalse}
+\DeclareOption{replaceperiod}{\jnut@replaceperiodtrue}
 %    \end{macrocode}
 %
 % 把没有定义的选项传递给底层的文档类，在这里为|book|。
@@ -2060,6 +2068,20 @@ December\fi
   \jnut@state@reset%
   \booltrue{jnut@appendix}%
 }
+%    \end{macrocode}
+%
+% \subsection{自动中文句号替换}
+%
+% 有时候我们想替换所有中文句号为英文句点，这对排版含有大量数学公式，
+% 尤其是数字下标的科技论文很有用。如果宏包加载时指定了|replaceperiod|选项，
+% 则重新定义中文句号字符。
+%
+%    \begin{macrocode}
+\ifjnut@replaceperiod
+%% http://tex.stackexchange.com/a/40832
+\catcode`\。=13
+\def。{.}
+\fi
 %    \end{macrocode}
 %
 % \subsection{字体设置}
