@@ -1771,10 +1771,14 @@
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@a}{毕业设计（论文）}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@b}{外文资料翻译}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@c}{及原文}
+%% TODO: 专硕学位论文盲审封面
+\newcommand*{\jnut@cap@cover@masterthesis@blindreview}{硕士学位论文抽检封面}
 \newcommand*{\jnut@cap@cover@apply}{}
 \newcommand*{\jnut@cap@cover@title}{题　　　　目}
 \newcommand*{\jnut@cap@cover@bachelortitle}{题目：}
 \newcommand*{\jnut@cap@cover@entitle}{英文并列题目}
+\newcommand*{\jnut@cap@cover@blindreview@number@a}{盲审论文编号}
+\newcommand*{\jnut@cap@cover@blindreview@number@b}{[由学位办填写]}
 \newcommand*{\jnut@cap@cover@author}{研 　究 　生}
 \newcommand*{\jnut@cap@cover@bachelorauthor}{学生姓名}
 \newcommand*{\jnut@cap@cover@bachelorstudentnum}{学　　号}
@@ -3615,7 +3619,76 @@ December\fi
   {\songti\zihao{-4}\jnut@value@date}
 }
 \newcommand*{\jnut@covertable@masterphdtitle@inner@blindreview}{%
-  TODO
+  \includegraphics[height=1.34cm,width=4.78cm]{\jnut@cap@institute@name}
+  \vskip 5mm
+  {\bf\heiti\zihao{1}\jnut@cap@cover@masterthesis@blindreview}
+  \vskip 5mm
+  {\bf\songti\zihao{3}（20~~\textasciitilde{}20~~学年）}
+  \vskip 10mm
+  {\bgroup
+  \songti\zihao{4}
+  \def\tabcolsep{1pt}
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\jnut@cap@cover@title:}
+      & \jnutunderline[310pt]{\jnut@value@titlea}\\
+      \makebox[7em][s]{}
+      & \jnutunderline[310pt]{\jnut@value@titleb}\\
+  \end{tabular}
+
+  \vfill
+
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\jnut@cap@cover@entitle:}
+      & \jnutunderline[310pt]{\zihao{5}\jnut@value@en@titlea}\\
+      \makebox[7em][s]{}
+      & \jnutunderline[310pt]{\zihao{5}\jnut@value@en@titleb}\\
+  \end{tabular}
+
+  \vfill
+
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\jnut@cap@cover@blindreview@number@a:}
+      {\zihao{5}\jnut@cap@cover@blindreview@number@b}
+      & \jnutunderline[310pt]{}\\
+  \end{tabular}
+
+  \vfill
+
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\jnut@cap@cover@major:}
+      & \jnutunderline[310pt]{\jnut@value@major}\\
+  \end{tabular}
+
+  \vfill
+
+  \begin{tabular}{p{7.3em}c}
+      \makebox[7em][s]{\jnut@cap@cover@researchfield:}
+      & \jnutunderline[310pt]{\jnut@value@researchfield}\\
+  \end{tabular}
+  \egroup}
+
+  \vfill
+
+  %% 很脏的 hack，通过让下边高一些来让上边的垂直间隔小一点
+  %% TODO: 优雅地解决这个问题
+  \vspace*{15mm}
+
+  \begingroup
+    \bf\heiti\zihao{-2}%
+    %% 模拟一个空格的“字距”效果
+    \renewcommand{\CJKglue}{\hskip 3mm}%
+    \jnut@value@institute%
+  \endgroup
+
+  \vspace*{5mm}
+
+  %% TODO: 此处样式
+  {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
+
+  \vspace*{5mm}
+
+  %% TODO: 日期格式是形如“二〇一七年三月”
+  {\songti\zihao{-4}\jnut@value@date}
 }
 \newcommand*{\jnut@covertable@masterphdtitle}{%
   \thispagestyle{empty}
