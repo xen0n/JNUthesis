@@ -16,17 +16,21 @@ SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
 SAMPLE_D=phd
 SAMPLE_M=master
+SAMPLE_MB=master-blind
 SAMPLE_B=bachelor
 SAMPLE_BR=bachelor-related
 SAMPLEBIB_D=$(SAMPLE_D).bib
 SAMPLEBIB_M=$(SAMPLE_M).bib
+SAMPLEBIB_MB=$(SAMPLE_M).bib
 SAMPLEBIB_B=$(SAMPLE_B).bib
+PREAMBLE_M=$(SAMPLE_M)-preamble
+CONTENTS_M=$(SAMPLE_M)-contents
 INSTITUTE_NAME=jnuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
-.PHONY: all clean cls doc phd master bachelor bachelorrelated
+.PHONY: all clean cls doc phd master masterblind bachelor bachelorrelated
 
-all: bst cls doc phd master bachelor bachelorrelated
+all: bst cls doc phd master masterblind bachelor bachelorrelated
 
 ###### update bst file
 bst:  $(BST_FILE)
@@ -63,11 +67,20 @@ $(SAMPLE_D).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_D).tex $(SAMPLEBI
 
 master:	 $(SAMPLE_M).pdf
 
-$(SAMPLE_M).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_M).tex $(SAMPLEBIB_M)
+$(SAMPLE_M).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_M).tex $(PREAMBLE_M).tex $(CONTENTS_M).tex $(SAMPLEBIB_M)
 	xelatex $(SAMPLE_M).tex
 	bibtex $(SAMPLE_M)
 	xelatex $(SAMPLE_M).tex
 	xelatex $(SAMPLE_M).tex
+
+
+masterblind:	 $(SAMPLE_MB).pdf
+
+$(SAMPLE_MB).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MB).tex $(PREAMBLE_M).tex $(CONTENTS_M).tex $(SAMPLEBIB_MB)
+	xelatex $(SAMPLE_MB).tex
+	bibtex $(SAMPLE_MB)
+	xelatex $(SAMPLE_MB).tex
+	xelatex $(SAMPLE_MB).tex
 
 
 bachelor: $(SAMPLE_B).pdf
@@ -89,11 +102,11 @@ $(SAMPLE_BR).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_BR).tex
 
 ###### install
 
-install: $(SOURCE) $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE_D).pdf $(SAMPLE_M).pdf $(SAMPLE_B).pdf
+install: $(SOURCE) $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(PACKAGE).pdf $(SAMPLE_D).pdf $(SAMPLE_M).pdf $(SAMPLE_MB).pdf $(SAMPLE_B).pdf
 	mkdir -p $(TEXMFLOCAL)/tex/latex/jnuthesis
 	cp -rvf $(SOURCES) $(CLS) $(INSTITUTE_NAME) $(TEXMFLOCAL)/tex/latex/jnuthesis/
 	mkdir -p $(TEXMFLOCAL)/doc/latex/jnuthesis
-	cp -rvf $(PACKAGE).pdf $(SAMPLE_D).pdf $(SAMPLE_M).pdf $(SAMPLE_B).pdf $(TEXMFLOCAL)/doc/latex/jnuthesis/
+	cp -rvf $(PACKAGE).pdf $(SAMPLE_D).pdf $(SAMPLE_M).pdf $(SAMPLE_MB).pdf $(SAMPLE_B).pdf $(TEXMFLOCAL)/doc/latex/jnuthesis/
 	mkdir -p $(TEXMFLOCAL)/bibtex/bst
 	cp -rvf $(BST_FILE) $(TEXMFLOCAL)/bibtex/bst/
 	texhash
