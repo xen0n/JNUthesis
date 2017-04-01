@@ -536,6 +536,18 @@
 % \documentclass[winfonts,replaceperiod]{jnuthesis}
 % \end{example}
 %
+% \item[blindreview] 用于指定生成盲审论文。
+% 目前只有|master|即硕士学位论文支持盲审论文格式的生成。
+% 效果为无视作者字段，并自动替换封面页为盲审封面。
+%
+% \textbf{注意！该选项不能自动隐去发表论文列表中作者及导师姓名。}
+% 建议使用模块化方式撰写论文，使用两个tex主文件|include|相同的导言区、提纲，
+% 但设置不同的宏包选项以及|include|不同的发表论文列表。
+%
+% \begin{example}
+% \documentclass[winfonts,master,blindreview]{jnuthesis}
+% \end{example}
+%
 % \end{description}
 %
 % 本文档类不再提供对字号、字体和单双面打印的选择选项。因为国内各大学的学位论文基本上都要求
@@ -1324,6 +1336,7 @@
 \newif\ifjnut@master\jnut@masterfalse
 \newif\ifjnut@bachelor\jnut@bachelorfalse
 \newif\ifjnut@replaceperiod\jnut@replaceperiodfalse
+\newif\ifjnut@blindreview\jnut@blindreviewfalse
 \DeclareOption{adobefonts}{\jnut@adobefontstrue
   \jnut@winfontsfalse
   \jnut@linuxfontsfalse
@@ -1351,6 +1364,7 @@
   \jnut@phdfalse
   \jnut@masterfalse}
 \DeclareOption{replaceperiod}{\jnut@replaceperiodtrue}
+\DeclareOption{blindreview}{\jnut@blindreviewtrue}
 %    \end{macrocode}
 %
 % 把没有定义的选项传递给底层的文档类，在这里为|book|。
