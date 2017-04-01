@@ -3918,7 +3918,8 @@ December\fi
 % 定义作者攻读学位期间发表论文列表环境。此环境必须被放在|resume|环境中。
 %    \begin{macrocode}
 \newenvironment{publications}{%
-  \paragraph*{\jnut@cap@resume@publications}
+  %% 江南大学不需要小标题
+  %% \paragraph*{\jnut@cap@resume@publications}
   \begin{enumerate}[label=\arabic*., labelindent=0em, leftmargin=*]
 }{%
   \end{enumerate}
