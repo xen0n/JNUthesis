@@ -1395,6 +1395,12 @@
 \RequireXeTeX
 %    \end{macrocode}
 %
+% 使用|comment|宏包来抹去一些环境。生成盲审版论文需要去除致谢内容，因而需要使用
+% 该宏包辅助实现以避免不必要的代码重复。
+%    \begin{macrocode}
+\RequirePackage{comment}
+%    \end{macrocode}
+%
 % 使用|lastpage|宏包来获得最后一页的页码，从而生成“第3页，共20页”这样的页码标签。
 %    \begin{macrocode}
 \RequirePackage{lastpage}
@@ -3863,10 +3869,16 @@ December\fi
 %
 % \begin{environment}{acknowledgement}
 % 该环境用于``致谢''页。
+% 如果生成盲审版论文，则视同该环境为注释。
 %    \begin{macrocode}
+\ifjnut@blindreview
+\newenvironment{acknowledgement}{}{}
+\excludecomment{acknowledgement}
+\else
 \newenvironment{acknowledgement}{%
   \nchapter{\jnut@cap@acknowledgementname}
 }{}
+\fi
 %    \end{macrocode}
 % \end{environment}
 %
