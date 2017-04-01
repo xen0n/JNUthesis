@@ -3702,8 +3702,9 @@ December\fi
   %% TODO: 优雅地解决这个问题
   \vspace*{15mm}
 
-  %% TODO: 日期格式是形如“二〇一七年三月”
-  \jnut@covertable@institutefooter{\vspace*{5mm}}{\jnut@value@date}
+  \jnut@covertable@institutefooter{\vspace*{5mm}}{%
+    \CJKdigits{\number\year}年\CJKnumber{\number\month}月%
+  }
 }
 %%
 %% 硕士学位论文封面
