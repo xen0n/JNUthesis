@@ -3586,30 +3586,40 @@ December\fi
     \cleardoublepage
   \fi
 }
+\newcommand*{\jnut@covertable@masterphdtitle@inner@normal}{%
+  {%
+    \songti\zihao{4}%
+    {\bf\songti\jnut@cap@nlc@classification}%
+    ~\jnut@value@nlc@classification%
+    \hfill%
+    {\bf\songti\jnut@cap@nlc@securitylevel}%
+    ~\jnut@value@nlc@securitylevel%
+  }
+  \vskip 10mm
+  \includegraphics[height=1.46cm,width=5.20cm]{\jnut@cap@institute@name} \\
+  {\bf\heiti\zihao{1}\makebox[10em][s]{\jnut@cap@cover@thesis}}\\
+  \vskip\stretch{1}
+  {\bgroup
+  \songti\zihao{4}
+  \def\tabcolsep{1pt}
+  \def\arraystretch{1.5}
+  \ifdefempty{\jnut@cap@cover@title}{\jnut@covertable@onelinetitle}{\jnut@covertable@twolinetitle}
+  \egroup}\\
+  \vskip \stretch{1}
+  {\songti\zihao{-4}\jnut@value@date}
+}
+\newcommand*{\jnut@covertable@masterphdtitle@inner@blindreview}{%
+  TODO
+}
 \newcommand*{\jnut@covertable@masterphdtitle}{%
   \thispagestyle{empty}
   \pdfbookmark[0]{\jnut@cap@cover}{cover}
   \begin{center}
-    {%
-      \songti\zihao{4}%
-      {\bf\songti\jnut@cap@nlc@classification}%
-      ~\jnut@value@nlc@classification%
-      \hfill%
-      {\bf\songti\jnut@cap@nlc@securitylevel}%
-      ~\jnut@value@nlc@securitylevel%
-    }
-    \vskip 10mm
-    \includegraphics[height=1.46cm,width=5.20cm]{\jnut@cap@institute@name} \\
-    {\bf\heiti\zihao{1}\makebox[10em][s]{\jnut@cap@cover@thesis}}\\
-    \vskip\stretch{1}
-    {\bgroup
-    \songti\zihao{4}
-    \def\tabcolsep{1pt}
-    \def\arraystretch{1.5}
-    \ifdefempty{\jnut@cap@cover@title}{\jnut@covertable@onelinetitle}{\jnut@covertable@twolinetitle}
-    \egroup}\\
-    \vskip \stretch{1}
-    {\songti\zihao{-4}\jnut@value@date}
+    \ifjnut@blindreview%
+      \jnut@covertable@masterphdtitle@inner@blindreview%
+    \else%
+      \jnut@covertable@masterphdtitle@inner@normal%
+    \fi%
   \end{center}
   \cleardoublepage
 }
