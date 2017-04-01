@@ -3678,8 +3678,9 @@ December\fi
 %
 % \begin{macro}{\makeoriginalitypage}
 % 生成固定格式的独创性声明与使用授权说明页面。
+% 生成盲审版论文时该命令为空操作。
 %	 \begin{macrocode}
-\newcommand*{\makeoriginalitypage}{%
+\newcommand*{\jnut@covertable@originalitypage}{%
   \thispagestyle{empty}
   \bgroup
   \bf\kaishu\zihao{4}
@@ -3732,6 +3733,9 @@ December\fi
 
   \egroup
   \cleardoublepage
+}
+\newcommand*{\makeoriginalitypage}{%
+  \ifjnut@blindreview\else\jnut@covertable@originalitypage\fi%
 }
 %    \end{macrocode}
 % \end{macro}
