@@ -3400,6 +3400,26 @@ December\fi
 % 注意我们使用了前面修改过的\cs{cleardoublepage}命令来插入无页眉页脚的空白页。
 %    \begin{macrocode}
 %%
+%% 硕士学位论文底部校名、地址、日期，需要已经位于|centering|环境中
+%%
+\newcommand*{\jnut@covertable@institutefooter}[2]{%
+  \begingroup
+    \bf\heiti\zihao{-2}%
+    %% 模拟一个空格的“字距”效果
+    \renewcommand{\CJKglue}{\hskip 3mm}%
+    \jnut@value@institute%
+  \endgroup
+
+  #1
+
+  %% TODO: 此处样式
+  {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
+
+  #1
+
+  {\songti\zihao{-4}{#2}}
+}
+%%
 %% 硕士学位论文封面，一行标题
 %%
 \newcommand*{\jnut@covertable@onelinetitle}{
@@ -3457,17 +3477,7 @@ December\fi
 
   \vfill
 
-  \begingroup
-    \bf\heiti\zihao{-2}%
-    %% 模拟一个空格的“字距”效果
-    \renewcommand{\CJKglue}{\hskip 3mm}%
-    \jnut@value@institute%
-  \endgroup
-
-  \vfill
-
-  %% TODO: 此处样式
-  {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
+  \jnut@covertable@institutefooter{\vfill}{\jnut@value@date}
 }
 %%
 %% 学士学位封面页，编号
@@ -3632,8 +3642,6 @@ December\fi
   \def\arraystretch{1.5}
   \ifdefempty{\jnut@cap@cover@title}{\jnut@covertable@onelinetitle}{\jnut@covertable@twolinetitle}
   \egroup}\\
-  \vskip \stretch{1}
-  {\songti\zihao{-4}\jnut@value@date}
 }
 %%
 %% 盲审版硕士学位论文封面内部
@@ -3693,22 +3701,8 @@ December\fi
   %% TODO: 优雅地解决这个问题
   \vspace*{15mm}
 
-  \begingroup
-    \bf\heiti\zihao{-2}%
-    %% 模拟一个空格的“字距”效果
-    \renewcommand{\CJKglue}{\hskip 3mm}%
-    \jnut@value@institute%
-  \endgroup
-
-  \vspace*{5mm}
-
-  %% TODO: 此处样式
-  {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
-
-  \vspace*{5mm}
-
   %% TODO: 日期格式是形如“二〇一七年三月”
-  {\songti\zihao{-4}\jnut@value@date}
+  \jnut@covertable@institutefooter{\vspace*{5mm}}{\jnut@value@date}
 }
 %%
 %% 硕士学位论文封面
