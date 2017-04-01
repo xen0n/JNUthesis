@@ -1401,6 +1401,11 @@
 \RequirePackage{comment}
 %    \end{macrocode}
 %
+% 使用|fp|宏包支持代数运算，用于硕士学位论文盲审封面的自动学年计算。
+%    \begin{macrocode}
+\RequirePackage[nomessages]{fp}
+%    \end{macrocode}
+%
 % 使用|lastpage|宏包来获得最后一页的页码，从而生成“第3页，共20页”这样的页码标签。
 %    \begin{macrocode}
 \RequirePackage{lastpage}
@@ -3652,7 +3657,16 @@ December\fi
   \vskip 5mm
   {\bf\heiti\zihao{1}\jnut@cap@cover@masterthesis@blindreview}
   \vskip 5mm
-  {\bf\songti\zihao{3}（20~~\textasciitilde{}20~~学年）}
+  {\begingroup%
+    \bf\songti\zihao{3}%
+    （%
+    %% 取当前年份，计算学年
+    %% 假设当前时间为下学期，那么我们就在{\number\year - 1}到{\number\year}学年
+    \def\schoolyearend{\number\year}%
+    \FPeval{\schoolyearstart}{clip(\schoolyearend - 1)}%
+    {\schoolyearstart\textasciitilde{}\schoolyearend}学年%
+    ）%
+  \endgroup}
   \vskip 10mm
   {\bgroup
   \songti\zihao{4}
