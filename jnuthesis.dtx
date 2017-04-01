@@ -1912,8 +1912,8 @@ in\\
 \newcommand*{\jnut@value@department}{(作者所属院系)}
 \newcommand*{\jnut@value@directormembers}{(指导小组成员)}
 \newcommand*{\jnut@value@degreedate}{(学位授予日期)}
-\newcommand*{\jnut@value@bachelordegreeyear}{(学士学位授予年份，大写数字)}
-\newcommand*{\jnut@value@bachelordegreemonth}{(学士学位授予月份，汉字)}
+\newcommand*{\jnut@value@bachelordegreeyear}{\number\year}
+\newcommand*{\jnut@value@bachelordegreemonth}{\number\month}
 \newcommand*{\jnut@value@institute}{江南大学}
 \newcommand*{\jnut@value@submitdate}{xxxx年xx月xx日}
 \newcommand*{\jnut@value@defenddate}{xxxx年xx月xx日}
@@ -3538,7 +3538,8 @@ December\fi
 %%
 \newcommand*{\jnut@covertable@bachelortitle@footer}{%
     \zihao{-2}
-    \heiti{\jnut@value@bachelordegreeyear}\songti{年}\heiti{\jnut@value@bachelordegreemonth}\songti{月}
+    \heiti{\CJKdigits\jnut@value@bachelordegreeyear}\songti{年}%
+    \heiti{\CJKnumber\jnut@value@bachelordegreemonth}\songti{月}
 }
 %%
 %% 学士学位封面页
