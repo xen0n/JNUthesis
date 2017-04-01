@@ -2756,14 +2756,20 @@ December\fi
 \renewcommand{\footrulewidth}{0pt}
 %    \end{macrocode}
 %
+% 江南大学页眉页脚的字体字号设置。
+% 学士学位论文：宋体小五号；
+% 硕士学位论文：宋体五号。
+%    \begin{macrocode}
+\newcommand{\jnut@headfoot@font}{\songti\ifjnut@bachelor\zihao{-5}\else\zihao{5}\fi}
+%    \end{macrocode}
+%
 % 设置|fancy|风格的页眉，令偶数页按如上要求显示，奇数页显示当前节
 % 信息；但若当前页面尚未开始本章的第一节（即\cs{rightmark}为空），则奇数页左上角也
 % 显示当前章信息（即\cs{leftmark}）。
 %    \begin{macrocode}
 \fancyhead{}
 \fancyhead[C]{%
-%% 江南大学页眉使用宋体小五号字
-\songti\zihao{-5}%
+\jnut@headfoot@font%
 %% 先处理不规则页眉的情况
 \ifbool{bachelor@zhabstract}%
 {\jnut@cap@abstract@abstractname@bachelorhead}%
@@ -2792,9 +2798,9 @@ December\fi
 }
 %    \end{macrocode}
 %
-% 设置|fancy|风格的页脚，江南大学要求使用小五号宋体显示页码。
+% 设置|fancy|风格的页脚，显示页码。
 %    \begin{macrocode}
-\fancyfoot[C]{\songti\zihao{-5}\thepage}
+\fancyfoot[C]{\jnut@headfoot@font\thepage}
 %    \end{macrocode}
 %
 % 设置全局使用|fancy|风格。
