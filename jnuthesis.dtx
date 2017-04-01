@@ -789,6 +789,7 @@
 % \myentry{作者姓名}
 % \DescribeMacro{\author}
 % 命令\cs{author}用于设置论文作者的姓名。此属性必须被设置。
+% 生成盲审版论文时此选项会被自动忽略。
 %
 % \begin{example}
 % \author{张三}
@@ -3239,7 +3240,9 @@ December\fi
   \renewcommand{\jnut@value@titleb}{#1}%
   \renewcommand{\jnut@value@title}{\jnut@value@titlea\jnut@value@titleb}}
 \renewcommand*{\author}[1]{%
-  \renewcommand{\jnut@value@author}{#1}}
+  %% 强制设置盲审版论文的作者为空
+  \ifjnut@blindreview\renewcommand{\jnut@value@author}{}\else%
+  \renewcommand{\jnut@value@author}{#1}\fi}
 \newcommand*{\telphone}[1]{%
   \renewcommand{\jnut@value@telphone}{#1}}
 \newcommand*{\email}[1]{%
