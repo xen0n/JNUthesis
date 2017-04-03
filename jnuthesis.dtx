@@ -3431,34 +3431,9 @@ December\fi
   {\songti\zihao{-4}{\jnut@value@date}}
 }
 %%
-%% 硕士学位论文封面，一行标题
+%% 学术型硕士学位论文封面，两行标题
 %%
-\newcommand*{\jnut@covertable@onelinetitle}{
-  \begin{tabular}{p{7.3em}c}
-      \makebox[7em][s]{\jnut@cap@cover@title:}
-      & \jnutunderline[310pt]{\jnut@value@title}\\
-      \makebox[7em][s]{\jnut@cap@cover@entitle:}
-      & \jnutunderline[310pt]{\jnut@value@en@titlea}\\
-      \makebox[7em][s]{}
-      & \jnutunderline[310pt]{\jnut@value@en@titleb}\\
-      \makebox[7em][s]{\jnut@cap@cover@author:}
-      & \jnutunderline[310pt]{\jnut@value@author}\\
-      \makebox[7em][s]{\jnut@cap@cover@major:}
-      & \jnutunderline[310pt]{\jnut@value@major}\\
-      \makebox[7em][s]{\jnut@cap@cover@researchfield:}
-      & \jnutunderline[310pt]{\jnut@value@researchfield}\\
-      \makebox[7em][s]{\jnut@cap@cover@supervisor:}
-      & \jnutunderline[310pt]{\jnut@value@supervisor~\jnut@value@supervisorpos}\\
-      \makebox[7em][s]{\jnut@cap@cover@directormembers:}
-      & \jnutunderline[310pt]{\jnut@value@directormembers}\\
-      \makebox[7em][s]{\jnut@cap@cover@degreedate:}
-      & \jnutunderline[310pt]{\jnut@value@degreedate}\\
-  \end{tabular}
-}
-%%
-%% 硕士学位论文封面，两行标题
-%%
-\newcommand*{\jnut@covertable@twolinetitle}{
+\newcommand*{\jnut@covertable@masterphdtitle@academic}{
   \begingroup
   \setlength\extrarowheight{0.75em}
   \begin{tabular}{p{7.3em}c}
@@ -3652,7 +3627,7 @@ December\fi
   \songti\zihao{4}
   \def\tabcolsep{1pt}
   \def\arraystretch{1.5}
-  \ifdefempty{\jnut@cap@cover@title}{\jnut@covertable@onelinetitle}{\jnut@covertable@twolinetitle}
+  \jnut@covertable@masterphdtitle@academic
   \egroup}\\
 }
 %%
