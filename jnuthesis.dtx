@@ -530,6 +530,11 @@
 % 这三个选项必须设置一个且只能设置一个。
 % \end{note}
 %
+% \item[prodegree] 用于启用专业学位样式。仅对|master|、|phd|有效。
+% \begin{example}
+% \documentclass[winfonts,master,prodegree]{jnuthesis}
+% \end{example}
+%
 % \item[replaceperiod] 用于开启自动替换中文句号“。”为英文句点“.”。这对排版多含公式与
 % 数字下标的科技类论文有很大好处。
 % \begin{example}
@@ -1336,6 +1341,7 @@
 \newif\ifjnut@phd\jnut@phdfalse
 \newif\ifjnut@master\jnut@masterfalse
 \newif\ifjnut@bachelor\jnut@bachelorfalse
+\newif\ifjnut@prodegree\jnut@prodegreefalse
 \newif\ifjnut@replaceperiod\jnut@replaceperiodfalse
 \newif\ifjnut@blindreview\jnut@blindreviewfalse
 \DeclareOption{adobefonts}{\jnut@adobefontstrue
@@ -1364,6 +1370,7 @@
 \DeclareOption{bachelor}{\jnut@bachelortrue
   \jnut@phdfalse
   \jnut@masterfalse}
+\DeclareOption{prodegree}{\jnut@prodegreetrue}
 \DeclareOption{replaceperiod}{\jnut@replaceperiodtrue}
 \DeclareOption{blindreview}{\jnut@blindreviewtrue}
 %    \end{macrocode}
@@ -1778,6 +1785,7 @@
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@c}{及原文}
 %% TODO: 专硕学位论文盲审封面
 \newcommand*{\jnut@cap@cover@masterthesis@blindreview}{硕士学位论文抽检封面}
+\newcommand*{\jnut@cap@cover@thesis@prodegree@fullday}{全日制专业学位\jnut@cap@cover@thesis}
 \newcommand*{\jnut@cap@cover@apply}{}
 \newcommand*{\jnut@cap@cover@title}{题　　　　目}
 \newcommand*{\jnut@cap@cover@bachelortitle}{题目：}
@@ -3621,7 +3629,12 @@ December\fi
   }
   \vskip 10mm
   \includegraphics[height=1.46cm,width=5.20cm]{\jnut@cap@institute@name} \\
-  {\bf\heiti\zihao{1}\makebox[12em][s]{\jnut@cap@cover@thesis}}\\
+  {\bf\heiti\zihao{1}
+  \ifjnut@prodegree%
+  \jnut@cap@cover@thesis@prodegree@fullday%
+  \else%
+  \makebox[12em][s]{\jnut@cap@cover@thesis}%
+  \fi}\\
   \vskip\stretch{1}
   {\bgroup
   \songti\zihao{4}
