@@ -16,14 +16,16 @@ SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
 SAMPLE_D=phd
 SAMPLE_M=master
-SAMPLE_MP=master-p
 SAMPLE_MB=master-blind
+SAMPLE_MP=master-p
+SAMPLE_MPB=master-p-blind
 SAMPLE_B=bachelor
 SAMPLE_BR=bachelor-related
 SAMPLEBIB_D=$(SAMPLE_D).bib
 SAMPLEBIB_M=$(SAMPLE_M).bib
-SAMPLEBIB_MP=$(SAMPLE_M).bib
 SAMPLEBIB_MB=$(SAMPLE_M).bib
+SAMPLEBIB_MP=$(SAMPLE_M).bib
+SAMPLEBIB_MPB=$(SAMPLE_M).bib
 SAMPLEBIB_B=$(SAMPLE_B).bib
 PREAMBLE_M=$(SAMPLE_M)-preamble
 CONTENTS_M=$(SAMPLE_M)-contents
@@ -76,6 +78,15 @@ $(SAMPLE_M).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_M).tex $(PREAMBLE
 	xelatex $(SAMPLE_M).tex
 
 
+masterblind:	 $(SAMPLE_MB).pdf
+
+$(SAMPLE_MB).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MB).tex $(PREAMBLE_M).tex $(CONTENTS_M).tex $(SAMPLEBIB_MB)
+	xelatex $(SAMPLE_MB).tex
+	bibtex $(SAMPLE_MB)
+	xelatex $(SAMPLE_MB).tex
+	xelatex $(SAMPLE_MB).tex
+
+
 masterpro:	 $(SAMPLE_MP).pdf
 
 $(SAMPLE_MP).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MP).tex $(PREAMBLE_M).tex $(CONTENTS_M).tex $(SAMPLEBIB_MP)
@@ -85,13 +96,13 @@ $(SAMPLE_MP).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MP).tex $(PREAMB
 	xelatex $(SAMPLE_MP).tex
 
 
-masterblind:	 $(SAMPLE_MB).pdf
+masterproblind:	 $(SAMPLE_MPB).pdf
 
-$(SAMPLE_MB).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MB).tex $(PREAMBLE_M).tex $(CONTENTS_M).tex $(SAMPLEBIB_MB)
-	xelatex $(SAMPLE_MB).tex
-	bibtex $(SAMPLE_MB)
-	xelatex $(SAMPLE_MB).tex
-	xelatex $(SAMPLE_MB).tex
+$(SAMPLE_MPB).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MPB).tex $(PREAMBLE_M).tex $(CONTENTS_M).tex $(SAMPLEBIB_MP)
+	xelatex $(SAMPLE_MPB).tex
+	bibtex $(SAMPLE_MPB)
+	xelatex $(SAMPLE_MPB).tex
+	xelatex $(SAMPLE_MPB).tex
 
 
 bachelor: $(SAMPLE_B).pdf
