@@ -32,9 +32,9 @@ CONTENTS_M=$(SAMPLE_M)-contents
 INSTITUTE_NAME=jnuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
-.PHONY: all clean cls doc phd master masterblind bachelor bachelorrelated
+.PHONY: all clean cls doc phd master masterblind masterpro masterproblind bachelor bachelorrelated
 
-all: bst cls doc phd master masterblind bachelor bachelorrelated
+all: bst cls doc phd master masterblind masterpro masterproblind bachelor bachelorrelated
 
 ###### update bst file
 bst:  $(BST_FILE)
