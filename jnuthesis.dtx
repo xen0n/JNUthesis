@@ -3709,6 +3709,11 @@ December\fi
   \includegraphics[height=1.34cm,width=4.78cm]{\jnut@cap@institute@name}
   \vskip 5mm
   {\bf\heiti\zihao{1}\jnut@cap@cover@masterthesis@blindreview}
+
+  %% 专硕盲审封面没有学年
+  \ifjnut@prodegree
+  \vskip 10mm
+  \else
   \vskip 5mm
   {\begingroup%
     \bf\songti\zihao{3}%
@@ -3720,6 +3725,8 @@ December\fi
     {\schoolyearstart\textasciitilde{}\schoolyearend}学年%
     ）%
   \endgroup}
+  \fi
+
   \vskip 10mm
   {\bgroup
   \songti\zihao{4}
