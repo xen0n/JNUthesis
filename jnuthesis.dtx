@@ -3423,7 +3423,7 @@ December\fi
 %%
 \newcommand*{\jnut@covertable@institutefooter}[1]{%
   \begingroup
-    \bf\heiti\zihao{-2}%
+    \bf\ifjnut@prodegree\songti\else\heiti\fi\zihao{-2}%
     %% 模拟一个空格的“字距”效果
     \renewcommand{\CJKglue}{\hskip 3mm}%
     \jnut@value@institute%
@@ -3432,16 +3432,19 @@ December\fi
   #1
 
   %% TODO: 此处样式
-  {\songti\zihao{5}地址：无锡市蠡湖大道1800号}
+  {\ifjnut@prodegree\bf\fi\songti\zihao{5}地址：无锡市蠡湖大道1800号}
 
   #1
 
-  {\songti\zihao{-4}{\jnut@value@date}}
+  {\ifjnut@prodegree\bf\fi\songti\zihao{-4}{\jnut@value@date}}
 }
 %%
 %% 学术型硕士学位论文封面，两行标题
 %%
 \newcommand*{\jnut@covertable@masterphdtitle@academic}{
+  \songti\zihao{4}
+  \def\tabcolsep{1pt}
+  \def\arraystretch{1.5}
   \begingroup
   \setlength\extrarowheight{0.75em}
   \begin{tabular}{p{7.3em}c}
@@ -3472,6 +3475,17 @@ December\fi
   \vfill
 
   \jnut@covertable@institutefooter{\vfill}
+}
+%%
+%% 专业硕士学位论文封面
+%%
+\newcommand*{\jnut@covertable@masterphdtitle@prodegree}{
+  \begingroup
+  \endgroup
+
+  \vfill
+
+  \jnut@covertable@institutefooter{\vspace*{5mm}}
 }
 %%
 %% 学士学位封面页，编号
@@ -3636,12 +3650,11 @@ December\fi
   \makebox[12em][s]{\jnut@cap@cover@thesis}%
   \fi}\\
   \vskip\stretch{1}
-  {\bgroup
-  \songti\zihao{4}
-  \def\tabcolsep{1pt}
-  \def\arraystretch{1.5}
+  \ifjnut@prodegree
+  \jnut@covertable@masterphdtitle@prodegree
+  \else
   \jnut@covertable@masterphdtitle@academic
-  \egroup}\\
+  \fi
 }
 %%
 %% 盲审版硕士学位论文封面内部
