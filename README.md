@@ -6,7 +6,7 @@
 
 [njuthesis]: https://github.com/Haixing-Hu/nju-thesis
 
-目前该模板支持排版学士和学术型硕士的学位论文。
+目前该模板支持排版学士和硕士（学术型与专业型）的学位论文。
 
 虽然该模板主要用于排版江南大学的学位论文，但亦可经过简单的设置或修改用于排版国内其他大学的学位论文。
 
@@ -16,6 +16,9 @@
 	- 学术型硕士：
 		- 学位论文：`master` 选项
 		- 盲审版论文：`master,blindreview` 选项
+	- 专业型硕士：
+		- 学位论文：`master,prodegree` 选项
+		- 盲审版论文：`master,prodegree,blindreview` 选项
 	- 学士：
 		- 学位论文：`bachelor` 选项
 		- 相关资料，外文资料翻译：详见 [`bachelor-related.tex`](./bachelor-related.tex)
