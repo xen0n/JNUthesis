@@ -3436,22 +3436,22 @@ December\fi
 %%
 %% 硕士学位论文底部校名、地址、日期，需要已经位于|centering|环境中
 %%
-\newcommand*{\jnut@covertable@institutefooter}[1]{%
+\newcommand*{\jnut@covertable@institutefooter}[2]{%
   \begingroup
-    \bf\ifjnut@prodegree\songti\else\heiti\fi\zihao{-2}%
+    \bf\IfEqCase{#1}{{prodegree}{\songti}}[\heiti]\zihao{-2}%
     %% 模拟一个空格的“字距”效果
     \renewcommand{\CJKglue}{\hskip 3mm}%
     \jnut@value@institute%
   \endgroup
 
-  #1
+  #2
 
   %% TODO: 此处样式
-  {\ifjnut@prodegree\bf\fi\songti\zihao{5}地址：无锡市蠡湖大道1800号}
+  {\IfEqCase{#1}{{prodegree}{\bf}}\songti\zihao{5}地址：无锡市蠡湖大道1800号}
 
-  #1
+  #2
 
-  {\ifjnut@prodegree\bf\fi\songti\zihao{-4}{\jnut@value@date}}
+  {\IfEqCase{#1}{{prodegree}{\bf}}\songti\zihao{-4}{\jnut@value@date}}
 }
 %%
 %% 学术型硕士学位论文封面，两行标题
@@ -3489,7 +3489,7 @@ December\fi
 
   \vfill
 
-  \jnut@covertable@institutefooter{\vfill}
+  \jnut@covertable@institutefooter{academic}{\vfill}
 }
 %%
 %% 专业硕士学位论文封面
@@ -3531,7 +3531,7 @@ December\fi
 
   \vfill
 
-  \jnut@covertable@institutefooter{\vspace*{2mm}}
+  \jnut@covertable@institutefooter{prodegree}{\vspace*{2mm}}
 }
 %%
 %% 学士学位封面页，编号
@@ -3776,7 +3776,8 @@ December\fi
   %% TODO: 优雅地解决这个问题
   \vspace*{15mm}
 
-  \jnut@covertable@institutefooter{\vspace*{5mm}}
+  %% 专硕盲审封面也用学硕此处的底部格式
+  \jnut@covertable@institutefooter{academic}{\vspace*{5mm}}
 }
 %%
 %% 硕士学位论文封面
