@@ -1413,6 +1413,11 @@
 \RequirePackage[nomessages]{fp}
 %    \end{macrocode}
 %
+% 使用|tikz|宏包支持创建图形，以及为专业硕士学位论文封面创建带圈数字。
+%    \begin{macrocode}
+\RequirePackage{tikz}
+%    \end{macrocode}
+%
 % 使用|lastpage|宏包来获得最后一页的页码，从而生成“第3页，共20页”这样的页码标签。
 %    \begin{macrocode}
 \RequirePackage{lastpage}
@@ -1774,6 +1779,12 @@
 \newcommand*{\jnut@cap@nlc@mostconfidentiallevel}{绝密}
 %    \end{macrocode}
 %
+% 为专硕封面定义带圈数字的渲染命令：
+%    \begin{macrocode}
+\newcommand*\jnut@circled[1]{\tikz[baseline=(char.base)]{
+  \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+%    \end{macrocode}
+%
 % 定义江南大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@cover}{中文封面}
@@ -1796,8 +1807,12 @@
 \newcommand*{\jnut@cap@cover@bachelorauthor}{学生姓名}
 \newcommand*{\jnut@cap@cover@bachelorstudentnum}{学　　号}
 \newcommand*{\jnut@cap@cover@supervisor}{导　　　　师}
+\newcommand*{\jnut@cap@cover@supervisor@prodegree@a}{导师~\jnut@circled{1}~姓名}
+\newcommand*{\jnut@cap@cover@supervisor@prodegree@b}{导师~\jnut@circled{2}~姓名}
+\newcommand*{\jnut@cap@cover@supervisor@prodegree@pos}{职　　　　称}
 \newcommand*{\jnut@cap@cover@bachelorsupervisor}{指导教师}
 \newcommand*{\jnut@cap@cover@major}{专　　　　业}
+\newcommand*{\jnut@cap@cover@major@prodegree}{专 业 名 称}
 \newcommand*{\jnut@cap@cover@bachelormajor}{专业}
 \newcommand*{\jnut@cap@cover@researchfield}{研 究 方 向}
 \newcommand*{\jnut@cap@cover@department}{院系}
@@ -3480,12 +3495,43 @@ December\fi
 %% 专业硕士学位论文封面
 %%
 \newcommand*{\jnut@covertable@masterphdtitle@prodegree}{
+  \vfill
+
   \begingroup
+  \def\tabcolsep{1pt}
+  \bf
+  \songti
+  \zihao{-3}
+  \begin{tabular}{p{40.6mm}p{31.8mm}p{38.1mm}p{8.6mm}p{33.2mm}}
+    \makebox[40.6mm][s]{\jnut@cap@cover@title：} & \multicolumn{4}{c}{\jnutunderline[111.7mm]{\jnut@value@titlea}} \\
+    & \multicolumn{4}{c}{\jnutunderline[111.7mm]{\jnut@value@titleb}} \\
+
+    \makebox[40.6mm][s]{\jnut@cap@cover@entitle：} & \multicolumn{4}{c}{\jnutunderline[111.7mm]{\zihao{5}\jnut@value@en@titlea}} \\
+    & \multicolumn{4}{c}{\jnutunderline[111.7mm]{\zihao{5}\jnut@value@en@titleb}} \\
+    %% TODO: 第三行英文标题
+    & \multicolumn{4}{c}{\jnutunderline[111.7mm]{}} \\
+
+    \makebox[40.6mm][s]{\jnut@cap@cover@author：} & \jnutunderline[31.8mm]{\jnut@value@author} &
+    \makebox[38.1mm][s]{\jnut@cap@cover@major@prodegree：} & \multicolumn{2}{c}{\jnutunderline[41.8mm]{\jnut@value@major}} \\
+
+    \makebox[40.6mm][s]{\jnut@cap@cover@researchfield：} & \multicolumn{4}{c}{\jnutunderline[111.7mm]{\jnut@value@researchfield}} \\
+
+    \makebox[40.6mm][s]{\jnut@cap@cover@supervisor@prodegree@a：} & \jnutunderline[31.8mm]{\jnut@value@supervisor} &
+    \makebox[38.1mm][s]{\jnut@cap@cover@supervisor@prodegree@pos：} & \multicolumn{2}{c}{\jnutunderline[41.8mm]{\jnut@value@supervisorpos}} \\
+
+    \makebox[40.6mm][s]{\jnut@cap@cover@supervisor@prodegree@b：} & \jnutunderline[31.8mm]{\jnut@value@supervisorb} &
+    \makebox[38.1mm][s]{\jnut@cap@cover@supervisor@prodegree@pos：} & \multicolumn{2}{c}{\jnutunderline[41.8mm]{\jnut@value@supervisorbpos}} \\
+
+    \makebox[40.6mm][s]{\jnut@cap@cover@degreedate：} & \multicolumn{4}{c}{\jnutunderline[111.7mm]{\jnut@value@degreedate}} \\
+
+    \\
+    & & \multicolumn{2}{l}{\makebox[46.7mm][s]{\jnut@cap@nlc@chairman}} & \jnutunderline[33.2mm]{\jnut@value@nlc@chairman} \\
+  \end{tabular}
   \endgroup
 
   \vfill
 
-  \jnut@covertable@institutefooter{\vspace*{5mm}}
+  \jnut@covertable@institutefooter{\vspace*{2mm}}
 }
 %%
 %% 学士学位封面页，编号
