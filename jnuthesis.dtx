@@ -1923,7 +1923,7 @@ in\\
 \newcommand*{\jnut@value@submitdate}{xxxx年xx月xx日}
 \newcommand*{\jnut@value@defenddate}{xxxx年xx月xx日}
 \newcommand*{\jnut@value@date}{%
-{\number\year}年{\number\month}月{\number\day}日%
+\CJKdigits{\number\year}年\CJKnumber{\number\month}月%
 }
 %    \end{macrocode}
 %
@@ -3407,7 +3407,7 @@ December\fi
 %%
 %% 硕士学位论文底部校名、地址、日期，需要已经位于|centering|环境中
 %%
-\newcommand*{\jnut@covertable@institutefooter}[2]{%
+\newcommand*{\jnut@covertable@institutefooter}[1]{%
   \begingroup
     \bf\heiti\zihao{-2}%
     %% 模拟一个空格的“字距”效果
@@ -3422,7 +3422,7 @@ December\fi
 
   #1
 
-  {\songti\zihao{-4}{#2}}
+  {\songti\zihao{-4}{\jnut@value@date}}
 }
 %%
 %% 硕士学位论文封面，一行标题
@@ -3482,7 +3482,7 @@ December\fi
 
   \vfill
 
-  \jnut@covertable@institutefooter{\vfill}{\jnut@value@date}
+  \jnut@covertable@institutefooter{\vfill}
 }
 %%
 %% 学士学位封面页，编号
@@ -3716,9 +3716,7 @@ December\fi
   %% TODO: 优雅地解决这个问题
   \vspace*{15mm}
 
-  \jnut@covertable@institutefooter{\vspace*{5mm}}{%
-    \CJKdigits{\number\year}年\CJKnumber{\number\month}月%
-  }
+  \jnut@covertable@institutefooter{\vspace*{5mm}}
 }
 %%
 %% 硕士学位论文封面
