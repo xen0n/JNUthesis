@@ -1788,15 +1788,15 @@
 % 定义江南大学学位论文中文封面的字符串常量：
 %    \begin{macrocode}
 \newcommand*{\jnut@cap@cover}{中文封面}
-\newcommand*{\jnut@cap@cover@thesis}{{\jnut@value@degree}学位论文}
+\newcommand*{\jnut@cap@cover@prodegree@fullday}{全日制专业学位}
+\newcommand*{\jnut@cap@cover@prodegree@maybe}{\ifjnut@prodegree\jnut@cap@cover@prodegree@fullday\fi}
+\newcommand*{\jnut@cap@cover@thesis}{\jnut@cap@cover@prodegree@maybe{\jnut@value@degree}学位论文}
 \newcommand*{\jnut@cap@cover@bachelorthesis}{本科生毕业设计（论文）}
 \newcommand*{\jnut@cap@cover@bachelorthesis@related}{相关资料}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@a}{毕业设计（论文）}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@b}{外文资料翻译}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@c}{及原文}
-%% TODO: 专硕学位论文盲审封面
-\newcommand*{\jnut@cap@cover@masterthesis@blindreview}{硕士学位论文抽检封面}
-\newcommand*{\jnut@cap@cover@thesis@prodegree@fullday}{全日制专业学位\jnut@cap@cover@thesis}
+\newcommand*{\jnut@cap@cover@masterthesis@blindreview}{{\jnut@cap@cover@thesis}抽检封面}
 \newcommand*{\jnut@cap@cover@apply}{}
 \newcommand*{\jnut@cap@cover@title}{题　　　　目}
 \newcommand*{\jnut@cap@cover@bachelortitle}{题目：}
@@ -3691,7 +3691,7 @@ December\fi
   \includegraphics[height=1.46cm,width=5.20cm]{\jnut@cap@institute@name} \\
   {\bf\heiti\zihao{1}
   \ifjnut@prodegree%
-  \jnut@cap@cover@thesis@prodegree@fullday%
+  \jnut@cap@cover@thesis%
   \else%
   \makebox[12em][s]{\jnut@cap@cover@thesis}%
   \fi}\\
