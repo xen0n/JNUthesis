@@ -1909,8 +1909,10 @@ in\\
 \newcommand*{\jnut@value@email}{(作者电子邮件)}
 \newcommand*{\jnut@value@studentnum}{XXXXXXXX}
 \newcommand*{\jnut@value@grade}{XXXX}
-\newcommand*{\jnut@value@supervisor}{(导师姓名和职称)}
-\newcommand*{\jnut@value@supervisorb}{(第二行导师姓名和职称)}
+\newcommand*{\jnut@value@supervisor}{(导师姓名)}
+\newcommand*{\jnut@value@supervisorpos}{(导师职称)}
+\newcommand*{\jnut@value@supervisorb}{(第二行导师姓名)}
+\newcommand*{\jnut@value@supervisorbpos}{(第二行导师职称)}
 \newcommand*{\jnut@value@supervisortelphone}{(导师电话号码)}
 \newcommand*{\jnut@value@major}{(作者专业)}
 \newcommand*{\jnut@value@researchfield}{(作者研究方向)}
@@ -3268,8 +3270,12 @@ December\fi
   \renewcommand{\jnut@value@grade}{#1}}
 \newcommand*{\supervisor}[1]{%
   \renewcommand{\jnut@value@supervisor}{#1}}
+\newcommand*{\supervisorpos}[1]{%
+  \renewcommand{\jnut@value@supervisorpos}{#1}}
 \newcommand*{\supervisorb}[1]{%
   \renewcommand{\jnut@value@supervisorb}{#1}}
+\newcommand*{\supervisorbpos}[1]{%
+  \renewcommand{\jnut@value@supervisorbpos}{#1}}
 \newcommand*{\supervisortelphone}[1]{%
   \renewcommand{\jnut@value@supervisortelphone}{#1}}
 \newcommand*{\major}[1]{%
@@ -3442,7 +3448,7 @@ December\fi
       \makebox[7em][s]{\jnut@cap@cover@researchfield:}
       & \jnutunderline[310pt]{\jnut@value@researchfield}\\
       \makebox[7em][s]{\jnut@cap@cover@supervisor:}
-      & \jnutunderline[310pt]{\jnut@value@supervisor}\\
+      & \jnutunderline[310pt]{\jnut@value@supervisor~\jnut@value@supervisorpos}\\
       \makebox[7em][s]{\jnut@cap@cover@directormembers:}
       & \jnutunderline[310pt]{\jnut@value@directormembers}\\
       \makebox[7em][s]{\jnut@cap@cover@degreedate:}
@@ -3471,7 +3477,7 @@ December\fi
       \makebox[7em][s]{\jnut@cap@cover@researchfield:}
       & \jnutunderline[310pt]{\jnut@value@researchfield}\\
       \makebox[7em][s]{\jnut@cap@cover@supervisor:}
-      & \jnutunderline[310pt]{\jnut@value@supervisor}\\
+      & \jnutunderline[310pt]{\jnut@value@supervisor~\jnut@value@supervisorpos}\\
       \makebox[7em][s]{\jnut@cap@cover@directormembers:}
       & \jnutunderline[310pt]{\jnut@value@directormembers}\\
       \makebox[7em][s]{\jnut@cap@cover@degreedate:}
@@ -3532,8 +3538,8 @@ December\fi
       \begin{tabular}{lc}
         \songti\jnut@cap@cover@bachelorstudentnum & \jnutinfounderline[220pt]{\heiti\jnut@value@studentnum}\\
         \songti\jnut@cap@cover@bachelorauthor & \jnutinfounderline[220pt]{\heiti\jnut@value@author}\\
-        \songti\jnut@cap@cover@bachelorsupervisor & \jnutinfounderline[220pt]{\heiti\jnut@value@supervisor}\\
-                                                  & \jnutinfounderline[220pt]{\heiti\jnut@value@supervisorb}\\
+        \songti\jnut@cap@cover@bachelorsupervisor & \jnutinfounderline[220pt]{\heiti\jnut@value@supervisor~\jnut@value@supervisorpos}\\
+                                                  & \jnutinfounderline[220pt]{\heiti\jnut@value@supervisorb~\jnut@value@supervisorbpos}\\
       \end{tabular}%\\
 
     \vskip 10mm
