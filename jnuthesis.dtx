@@ -2725,10 +2725,11 @@ December\fi
 \captionsetup{font=small}
 %    \end{macrocode}
 %
-% 根据学位论文格式要求，表格的标题必须位于表格上方，插图的标题必须位于插图下方。
+% 根据学位论文格式要求，表格的标题必须位于表格上方，插图的标题必须位于插图下方，
+% 且不要使用冒号分隔编号与图表标题。
 %    \begin{macrocode}
-\captionsetup[table]{position=above}
-\captionsetup[figure]{position=below}
+\captionsetup[table]{position=above,labelsep=space}
+\captionsetup[figure]{position=below,labelsep=space}
 \floatstyle{plaintop}
 \restylefloat{table}
 %    \end{macrocode}
