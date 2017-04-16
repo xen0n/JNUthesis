@@ -363,7 +363,7 @@
 %   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}*{6}{l}}
 %   \hline
 %     |ifxetex|  & |indentfirst| & |xeCJK|    & |lastpage| & |geometry|  & |graphicx| \\
-%     |subfig|   & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
+%     |subcaption| & |caption|     & |float|    & |array|    & |longtable| & |booktabs| \\
 %     |multirow| & |hyperref|    & |enumitem| & |xcolor|   & |amsmath|   & |amsfonts| \\
 %     |amsthm|   & |amssymb|    & |bm|        & |mathrsfs| & |txfonts|  & |pifont|  \\
 %     |setspace| & |wasysym|    & |hypernat| & |fancyhdr| & |natbib|    & |tabularx| \\
@@ -1454,9 +1454,9 @@
 \RequirePackage{float}
 %    \end{macrocode}
 %
-% |subfigure|宏包已经不再推荐使用，改用新的|subfig|宏包支持插入子图和子表。
+% |subfigure|宏包已经不再推荐使用，改用新的|subcaption|宏包支持插入子图和子表。
 %    \begin{macrocode}
-\RequirePackage{subfig}
+\RequirePackage[labelformat=simple]{subcaption}
 %    \end{macrocode}
 %
 % 使用|array|宏包扩展表格的列选项。
@@ -4317,7 +4317,7 @@ December\fi
 \RequirePackage{xcolor}
 \RequirePackage{txfonts}
 \RequirePackage{xltxtra}
-\RequirePackage{subfigure}
+\RequirePackage{subcaption}
 \RequirePackage{marvosym}
 \RequirePackage{booktabs}
 \RequirePackage{paralist}
