@@ -26,6 +26,7 @@
 * 自动生成中文封面、中文摘要页、英文摘要页、独创性声明页等必需页面；
 * 支持自动替换所有中文句号为英文句点，方便理工科论文排版：`replaceperiod` 选项。
 
+
 ## 支持环境
 
 以下环境测试支持：
@@ -35,5 +36,13 @@
 
 以下环境存在已知问题：
 
-* Gentoo Linux，TeXLive 2016，freetype/fontconfig with Infinality，Windows 字体：（可能为个例）PDF 内文字无法正常选择
+* Windows/Linux，TeXLive 2016，Windows 字体：PDF 内文字复制粘贴乱码
 * macOS，MacTeX BasicTeX：校名 logo 缺失。请使用完整 MacTeX 安装
+
+
+## TODO
+
+* 更多论文封面
+	- 专业学位（在职）学位
+	- 同等学力硕士学位
+	- 高校教师硕士学位
