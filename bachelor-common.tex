@@ -1,0 +1,1193 @@
+%% 使用 jnuthesis 文档类生成南京大学学位论文的示例文档
+%%
+%% 作者：胡海星，starfish (at) gmail (dot) com
+%% 项目主页: http://haixing-hu.github.io/jnu-thesis/
+%%
+%% 本样例文档中用到了吕琦同学的博士论文的提高和部分内容，在此对他表示感谢。
+%%
+
+%% jnuthesis 文档类的可选参数有：
+%%   nobackinfo 取消封二页导师签名信息。注意，按照南大的规定，是需要签名页的。
+%%   phd/master/bachelor 选择博士/硕士/学士论文
+
+% 使用 blindtext 宏包自动生成章节文字
+% 这仅仅是用于生成样例文档，正式论文中一般用不到该宏包
+\usepackage[math]{blindtext}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 设置论文的中文封面
+
+% 如果论文标题过长，可以分两行，第一行用\titlea{}定义，第二行用\titleb{}定义，将上面的\title{}注释掉
+\titlea{半轻衰变$D^+\to \omega(\phi)e^+\nu_e$的研究}
+\titleb{和弱衰变$J/\psi \to D_s^{(*)-}e^+\nu_e$的寻找}
+
+% 论文作者姓名
+\author{韦小宝}
+% 论文作者学生证号
+\studentnum{1234567890}
+% 导师姓名职称
+\supervisor{陈近南}
+\supervisorpos{教授}
+% 第二行导师姓名职称，仿照第一行填写，没有则留空
+\supervisorb{}
+\supervisorbpos{}
+% 论文作者的学科与专业方向
+\major{数字媒体技术}
+% 论文作者所在院系的中文名称，学士学位论文此处不带“学院”二字
+\department{数字媒体}
+% 论文作者所在学校或机构的名称。此属性可选，默认值为``江南大学''。
+\institute{江南大学}
+% 学士学位获得日期，需设置年、月，默认为编译日期。
+%\bachelordegreeyear{2017}
+%\bachelordegreemonth{6}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 制作中文封面
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 开始前言部分
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 论文的中文摘要
+\begin{abstract}
+复杂网络的研究可上溯到20世纪60年代对ER网络的研究。90年后代随着Internet
+的发展，以及对人类社会、通信网络、生物网络、社交网络等各领域研究的深入，
+发现了小世界网络和无尺度现象等普适现象与方法。对复杂网络的定性定量的科
+学理解和分析，已成为如今网络时代科学研究的一个重点课题。
+
+在此背景下，由于云计算时代的到来，本文针对面向云计算的数据中心网络基础
+设施设计中的若干问题，进行了几方面的研究。………………
+% 中文关键词。关键词之间用中文全角分号隔开，末尾无标点符号。
+\keywords{小世界理论；网络模型；数据中心}
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 论文的英文摘要
+\begin{englishabstract}
+\blindtext
+% 英文关键词。关键词之间用英文半角逗号隔开，末尾无符号。
+\englishkeywords{Small World, Network Model, Data Center}
+\end{englishabstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 生成论文目次
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 开始正文部分
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 学位论文的正文应以《绪论》作为第一章
+\chapter{绪论}\label{chapter_introduction}
+\section{研究背景}
+
+在分布式网络领域，沿着高性能集群、普世计算、网格计算的方向，现已走入云
+计算时代。
+
+云计算对信息技术架构造成了越来越大的影响。例如，借助Amazon EC2云平台，
+用户借助其基础设施，可以十分方便的部署各类应用，以支持企业服务需求。用
+户可以按需购买计算资源，网络带宽，存储空间等各类资源以支持他们的业务需
+求，并在业务完成之后迅速的归还这些资源。通过云技术，用户可以集中在他们
+擅长的核心业务之中，而不会被诸如硬件购买、安装系统、网络设置、备份和安
+全等等问题干扰。
+
+与此同时，随着计算机的普及化和微型化，现在的手持设备拥有不输于7年前台式
+机的处理能力。在网络时代面前，智能终端广泛普及，每个人都可成为信息源。
+在信息爆炸的时代，数据挖掘、机器学习、金融分析和模拟等行业中不断涌现新
+的需求，诸如针对用户行为和社会关系的挖掘进行广告精准投放，用户行为预测
+等。为了支撑PB级尺度的数据规模，需要海量的计算节点，催生并不断促进了各
+行各业对云计算基础设施的建设需求。
+
+海量的数据需要海量的处理能力，然而海量的处理能力又需要高带宽的网络IO为
+承载。作为云环境中最基础的一环，IaaS层在网络、存储、计算资源的分割这几
+方面，承担起整个系统的基石。虽然并非必须，但一般来说，为考虑沙盘环境，
+以及对资源的细粒度切割分配，IaaS通常会伴随着虚拟化技术的运用。虚拟化具
+有许多与云计算切合的特点，例如，虚拟化可以屏蔽物理环境的差异，可在多物
+理节点中进行无缝迁移，可对系统进行快照和还原。这些特点都与云计算时代所
+追求的灵活性、高伸缩性、快速响应等特点而吻合。
+
+在虚拟化实现方面，目前已取得了诸如ESXi，Xen，KVM等成熟成果。然而当虚拟
+化扩大的一定规模，随着节点数目的增多，在网络方面将会面临一系列取舍的问
+题。例如，基于二层交换的扁平网络，当节点数目上升到千数量级时，广播报文
+将会极大的拖累网络性能，必须通过划分子网，通过三层路由等形式重新规划为
+多层网络结构；另一方面，除了联通之外，还需要考虑ACL控制，负载均衡，外网
+通讯等各类防火墙以及NAT规则的实现。这些复杂的网络配置，在一定程度上抵消
+了虚拟机带来的灵活性。例如虽然虚拟机可根据需要动态迁移，但在迁移之后，
+由于网络位置的变化需要重新进行网络参数配置。虽然虚拟机在迁移过程中系统
+内部状态没有变化，但站在网络角度看，该虚拟节点跟关机重启没有区别。
+
+针对上述问题，本文站在面向云计算时代的数据中心网络建设的角度，对网络模
+型进行深入研究和探讨。通过改善二层交换网络的ARP机制来解决广播风暴问题，
+引入比树形网络更为复杂的复杂网络理论，指导网络节点的互联模型。从而将网
+络的复杂性隐藏在节点环境之外，在节点层面仅提供简单但巨大的二层交换扁平
+网络。
+
+\section{研究目的与意义}
+\subsection{现有解决方法}
+\Blindtext
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test1}
+\end{table}
+\Blindtext
+\subsection{现有问题与不足}
+
+测试一下脚注\footnote{测试脚注}，测试一下脚注\footnote{测试脚注}，测试一下脚
+注\footnote{测试脚注}，测试一下脚注\footnote{测试脚注}，测试一下脚注\footnote{测
+  试脚注}，测试一下脚注\footnote{测试脚注}，测试一下脚注\footnote{测试脚注}，测
+试一下脚注\footnote{测试脚注}，测试一下脚注\footnote{测试脚注}，测试一下脚
+注\footnote{测试脚注}。
+
+测试一下引用\cite{newman2006structure}，连续引用
+\cite{newman2001random,aiello2000random,bollobas2001random}，另一个连续引用
+\cite{newman2001random,bollobas2001random,barabasi1999emergence}。测试一下带页码
+的引用\cite[124--128]{erdHos1961strength}。
+
+下面是一个项目列表：
+
+\begin{itemize}
+\item 这是第一项。这是第一项。
+\item 这是第二项。这是第二项。这是第二项。这是第二项。这是第二项。这是第二项。这
+  是第二项。这是第二项。这是第二项。这是第二项。这是第二项。
+\item 这是第三项。这是第三项。这是第三项。
+  \begin{itemize}
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。
+  \begin{itemize}
+     \item 测试第三层列表。测试第三层列表。
+     \item 测试第三层列表。测试第三层列表。
+  \end{itemize}
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。
+  \end{itemize}
+\item 这是第四项。这是第四项。这是第四项。
+  \begin{enumerate}
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。测试第二层列表。测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。
+  \end{enumerate}
+\end{itemize}
+
+下面是一个编号列表：
+
+\begin{enumerate}
+\item 这是第一项。这是第一项。这是第一项。这是第一项。这是第一项。这是第一项。这
+  是第一项。这是第一项。这是第一项。这是第一项。这是第一项。
+\item 这是第二项。这是第二项。
+\item 这是第三项。这是第三项。这是第三项。
+  \begin{itemize}
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。测试第二层列表。测试第二
+    层列表。
+  \end{itemize}
+\item 这是第四项。这是第四项。这是第四项。
+  \begin{enumerate}
+  \item 测试第二层列表。测试第二层列表。
+  \begin{enumerate}
+  \item 测试第三层列表。测试第三层列表。测试第三层列表。测试第三层列表。测试第三
+    层列表。测试第三层列表。
+  \item 测试第三层列表。测试第三层列表。
+  \item 测试第三层列表。测试第三层列表。测试第三层列表。
+  \end{enumerate}
+  \item 测试第二层列表。测试第二层列表。测试第二层列表。
+  \end{enumerate}
+\end{enumerate}
+
+下面是最多三层的阿拉伯数字列表:
+\begin{arabicenum}
+\item 第1项
+\item 第2项
+  \begin{arabicenum}
+  \item 第2.1项
+  \item 第2.2项
+    \begin{arabicenum}
+    \item 第2.2.1项
+    \item 第2.2.2项
+    \item 第2.2.3项
+    \end{arabicenum}
+  \item 第2.3项
+  \end{arabicenum}
+\item 第3项
+\end{arabicenum}
+
+下面是最多两层的罗马数字列表:
+\begin{romanenum}
+\item 第1项
+\item 第2项
+  \begin{romanenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{romanenum}
+\item 第3项
+\end{romanenum}
+
+下面是最多两层的小写字母列表:
+\begin{alphaenum}
+\item 第1项
+\item 第2项
+  \begin{alphaenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{alphaenum}
+\item 第3项
+\end{alphaenum}
+
+下面是最多两层的情况列表:
+\begin{caseenum}
+\item 第1项
+\item 第2项
+  \begin{caseenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{caseenum}
+\item 第3项
+\end{caseenum}
+
+下面是最多两层的步骤列表:
+\begin{stepenum}
+\item 第1项
+\item 第2项
+  \begin{stepenum}
+  \item 第2.1项
+  \item 第2.2项
+  \item 第2.3项
+  \end{stepenum}
+\item 第3项
+\end{stepenum}
+
+下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
+下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
+下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。下面测试一下引用环境|quote|。
+
+\begin{quote}
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。
+\end{quote}
+
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。下面测试一下引用环境|quotation|。
+下面测试一下引用环境|quotation|。
+
+\begin{quotation}
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。这是一段引用。
+这是一段引用。这是一段引用。这是一段引用。
+
+这是一段引用。这是一段引用。
+\end{quotation}
+
+引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。引用结束。
+引用结束。引用结束。引用结束。
+
+测试一下定理环境。
+
+\begin{theorem}[测试定理]
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{theorem}
+\begin{proof}
+\blindtext
+\end{proof}
+
+\blindtext
+
+\begin{theorem}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{theorem}
+\begin{proof}
+\blindtext
+\end{proof}
+
+\blindtext
+
+\begin{lemma}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{lemma}
+\begin{proof}
+\blindtext
+\end{proof}
+
+\blindtext
+
+\begin{definition}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{definition}
+
+\blindtext
+
+\begin{corollary}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{corollary}
+
+\blindtext
+
+\begin{proposition}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{proposition}
+
+\blindtext
+
+\begin{fact}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{fact}
+
+\blindtext
+
+\begin{assumption}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{assumption}
+
+\blindtext
+
+\begin{conjecture}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{conjecture}
+
+\blindtext
+
+\begin{hypothesis}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{hypothesis}
+
+\blindtext
+
+\begin{axiom}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{axiom}
+
+\blindtext
+
+\begin{postulate}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{postulate}
+
+\blindtext
+
+\begin{principle}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{principle}
+
+\blindtext
+
+\begin{problem}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{problem}
+\begin{solution}
+\blindtext
+\end{solution}
+
+\blindtext
+
+\begin{problem}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{problem}
+\begin{solution}
+\blindtext
+\end{solution}
+
+\blindtext
+
+\begin{exercise}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{exercise}
+
+\blindtext
+
+\begin{exercise}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{exercise}
+
+\begin{algorithm}
+测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下定理环境。测试一下
+定理环境。测试一下定理环境。测试一下定理环境。
+\end{algorithm}
+
+\subsection{中心观点与思想}
+
+云计算在概念上通常被分为IaaS、PaaS、SaaS几个层面。但透过分类去理解其本
+质，可认为是上世纪70年代基于大型计算机的中心控制型瘦客户端终端模式，在
+如今技术水平上的一种新的表达，是在技术发展道路中，螺旋上升的结果。
+
+与瘦客户端相比，云计算在设计结构上存在一定的相似性。
+
+\begin{enumerate}
+\item 中心控制的模式：通过中心的大规模硬件提供统一的计算，可大大降低管理成本，提
+  高硬件资源利用率，同时降低客户端的硬件成本需求。例如Nvidia推出Georce GRID平台
+  \cite{NVIDIAGRID}，推出了GaaS\footnote{Gaming as a Service}概念。将
+  GPU放置在云端，使得用户不需要再不断购买升级显卡，并可在更为广泛的终端（包括手机、
+  平板、智能电视）和地点体验最新的游戏。
+\item 数据集中：由于瘦客户端的关系，数据都集中存储在中心，可对数据提供
+  可靠的保护，并且通过按需调用的实现方式，降低对网络带宽的需求。
+\end{enumerate}
+
+在设计思路上，两者都为了降低管理成本和硬件成本、以低能耗、高弹性等需求
+为设计目标。随着技术的进步，云计算在具体实现形态上与传统的大型机也有很
+大的不同：
+
+一方面，云中心不再是传统的一台大型机，而是用大量廉价计算节点的互联来提
+供海量资源。云计算更强调资源规模的无缝、平滑扩展，以及高可靠性，无单点
+故障问题。另一方面，云计算时代的终端，也具备相当计算能力。随着web2.0的
+整合，还有向胖客户端和智能终端发展的趋势。
+
+总而言之，云计算在大框架中是传统的中心控制／终端的模式，但在中心与终端
+两方面，都引入分布式技术加以改良。核心的思路是在低成本的前提下做到高可
+靠性、高灵活性和高伸缩性。因此，云计算并不仅仅以数量换性能的表象，本质
+上为低成本高性能，追求高能效比，并在实现层面讲究可实现性和可操作性。
+\subsection{需要解决的问题与挑战}
+
+测试一下中文字体：
+
+{\songti\zihao{0} 宋体，初号}
+
+{\songti\zihao{-0} 宋体，小初}
+
+{\songti\zihao{1} 宋体，一号}
+
+{\songti\zihao{-1} 宋体，小一}
+
+{\songti\zihao{2} 宋体，二号}
+
+{\songti\zihao{-2} 宋体，小二}
+
+{\songti\zihao{3} 宋体，三号}
+
+{\songti\zihao{-3} 宋体，小三}
+
+{\songti\zihao{4} 宋体，四号}
+
+{\songti\zihao{-4} 宋体，小四}
+
+{\songti\zihao{5} 宋体，五号}
+
+{\songti\zihao{-5} 宋体，小五}
+
+{\songti\zihao{6} 宋体，六号}
+
+{\songti\zihao{-6} 宋体，小六}
+
+{\songti\zihao{7} 宋体，七号}
+
+{\songti\zihao{8} 宋体，八号}
+
+{\heiti\zihao{0} 黑体，初号}
+
+{\heiti\zihao{-0} 黑体，小初}
+
+{\heiti\zihao{1} 黑体，一号}
+
+{\heiti\zihao{-1} 黑体，小一}
+
+{\heiti\zihao{2} 黑体，二号}
+
+{\heiti\zihao{-2} 黑体，小二}
+
+{\heiti\zihao{3} 黑体，三号}
+
+{\heiti\zihao{-3} 黑体，小三}
+
+{\heiti\zihao{4} 黑体，四号}
+
+{\heiti\zihao{-4} 黑体，小四}
+
+{\heiti\zihao{5} 黑体，五号}
+
+{\heiti\zihao{-5} 黑体，小五}
+
+{\heiti\zihao{6} 黑体，六号}
+
+{\heiti\zihao{-6} 黑体，小六}
+
+{\heiti\zihao{7} 黑体，七号}
+
+{\heiti\zihao{8} 黑体，八号}
+
+{\kaishu\zihao{0} 楷书，初号}
+
+{\kaishu\zihao{-0} 楷书，小初}
+
+{\kaishu\zihao{1} 楷书，一号}
+
+{\kaishu\zihao{-1} 楷书，小一}
+
+{\kaishu\zihao{2} 楷书，二号}
+
+{\kaishu\zihao{-2} 楷书，小二}
+
+{\kaishu\zihao{3} 楷书，三号}
+
+{\kaishu\zihao{-3} 楷书，小三}
+
+{\kaishu\zihao{4} 楷书，四号}
+
+{\kaishu\zihao{-4} 楷书，小四}
+
+{\kaishu\zihao{5} 楷书，五号}
+
+{\kaishu\zihao{-5} 楷书，小五}
+
+{\kaishu\zihao{6} 楷书，六号}
+
+{\kaishu\zihao{-6} 楷书，小六}
+
+{\kaishu\zihao{7} 楷书，七号}
+
+{\kaishu\zihao{8} 楷书，八号}
+
+{\fangsong\zihao{0} 仿宋，初号}
+
+{\fangsong\zihao{-0} 仿宋，小初}
+
+{\fangsong\zihao{1} 仿宋，一号}
+
+{\fangsong\zihao{-1} 仿宋，小一}
+
+{\fangsong\zihao{2} 仿宋，二号}
+
+{\fangsong\zihao{-2} 仿宋，小二}
+
+{\fangsong\zihao{3} 仿宋，三号}
+
+{\fangsong\zihao{-3} 仿宋，小三}
+
+{\fangsong\zihao{4} 仿宋，四号}
+
+{\fangsong\zihao{-4} 仿宋，小四}
+
+{\fangsong\zihao{5} 仿宋，五号}
+
+{\fangsong\zihao{-5} 仿宋，小五}
+
+{\fangsong\zihao{6} 仿宋，六号}
+
+{\fangsong\zihao{-6} 仿宋，小六}
+
+{\fangsong\zihao{7} 仿宋，七号}
+
+{\fangsong\zihao{8} 仿宋，八号}
+
+测试一下标准字号：
+
+{\Huge 汉字，Huge}
+
+{\huge 汉字，huge}
+
+{\LARGE 汉字，LARGE}
+
+{\Large 汉字，Large}
+
+{\large 汉字，large}
+
+{\normalsize 汉字，normalsize}
+
+{\small 汉字，small}
+
+{\footnotesize 汉字，footnotesize}
+
+{\scriptsize 汉字，scriptsize}
+
+{\tiny 汉字，tiny}
+
+测试一下标准字体的变形：
+
+{\songti 宋体} {\heiti 黑体} {\kaishu 楷书} {\fangsong 仿宋}
+
+{\textsl{textsl字体}}
+
+{\bfseries bfseries字体}
+
+{\textbf{textbf字体}}
+
+{\textit{textit字体}}
+
+测试一下数学公式中的字体大小。
+
+\newcommand{\set}[1]{\left\{\,#1\,\right\}}
+\newcommand{\card}[1]{\left|\,#1\,\right|}
+
+Fall-Out指标计算公式如下：
+\begin{equation*}
+  \mbox{fallout} = \frac{\card{\set{\text{不相关文档}}\cap\set{\text{获取的文档}}}}{\card{\set{\text{不相关文档}}}}
+\end{equation*}
+
+\section{研究的应用背景}
+云计算作为分布式技术的当前表现形式，通过将众多节点资源整合，以冗余、去
+中心化的分布式模式，实现传统技术中需要大型机才能解决的海量信息问题。一
+言而概之，“人多力量大”。
+
+但随着节点数目的增多，问题的重点将逐步转换为如何对大量节点进行高效互联。图
+\ref{fig:test1}所示为传统IaaS云中心网络结构的一部分。通过BR边界路由器，AR接入路
+由器构建数据中心的主干；核心交换机和接入交换机S，构成二层交换网络层，大量的服务
+器节点通过二层交换机被最终接入整个网络。
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{jnuname.eps}\\
+  \caption{测试插图}\label{fig:test1}
+\end{figure}
+在上述传统网络中，当节点总数达到数千乃至万数量级时，上层链路的聚合带宽
+将不断提高，从而对核心交换机、接入路由器、边界路由器的指标提出了极高的
+要求。以至于少数核心网络设备，成为整个网络中的高价格、高性能单点。一方
+面与原本追求低成本、分布化、去中心化的云技术设计理念背道而驰，另一方面
+也降低了网络的健壮性。因而本文所做工作对数据中心的网络基础设施而言，具
+有较大应用价值。
+\subsection{IaaS云中心}
+\Blindtext
+\subsection{PaaS云中心}
+\Blindtext
+\section{论文结构}
+\Blindtext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{小世界网络模型}\label{chapter_smallworld}
+\section{小世界现象}
+
+生活中，常出现初次见面的陌生人却拥有双方都认识的共同熟人，于是大家时常
+会感叹：“这世界真小！”。这种现象被称为``小世界现象''，后又称为``六度
+分割理论''。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{jnuname.eps}\\
+  \caption{测试插图}\label{fig:test2}
+\end{figure}
+
+1909年，现代无线电之父Guglielmo Marconi在其诺贝尔奖致辞中讨论了覆盖整个地球所需
+的无线电中继站数目，并根据他的实验结果计算出平均需要$5.83$（近似为$6$）个中继站
+\cite{marconi1909nobel}。这个结论，被认为是``六度分割理论''中的常数$6$的最早出处
+\cite{barabasi2003linked}。
+
+1929年，匈牙利作家Frigyes Karinthy发表了一部短篇小说集《Everything is
+  Different》。其中一篇名为《Chain-Links》的小说以抽象的、概念性的和虚
+构的方式研究了网络理论领域的很多问题，而这些问题使得未来几代的数学家、
+社会学家和物理学家都为之着迷\cite{newman2006structure,
+  barabasi2003linked}。Karinthy认为，随着通讯技术和交通技术的发展，人际
+关系网会变得越来越来大，扩张得越来越远，整个世界将因此而``缩小''。他认
+为，虽然人类个体之间的物理距离可能很远，但人类社交网络密度的增加使得人
+类个体之间的社会性距离变得非常小。根据这个假设，Karinthy的小说的主角相
+信：``任何两个人之间可以通过不超过五个中间人相联系''。Karinthy的想法直
+接或间接地影响了早期的社交网络理论的研究，他被认为是六度分隔(six
+degrees of separation)理论的最早提出者\cite{barabasi2003linked}。
+
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test2}
+\end{table}
+
+1961年，Michael Gurevich在社会学家Ithiel de Sola Pool的指导下完成了他的
+博士论文，对社交网络进行了实验性的研究。随后，数学家Manfred Kochen与
+Sola Pool一道在他们的手稿《Contacts and Influences》中对这些实验结果做
+了分析，发现在美国人口中，任意两个人之间通常只需不超过两个中间人即可互
+相联系\cite{pool1978}。1973年他们又利用计算机，基于Gurevich的数据，用
+Monte Carlo法做了模拟，并证实了该结论\cite{pool1978}，从而为心理学家
+Stanley Milgram后来的发现打下了基础。
+
+\section{网络结构的重要指标}
+
+在刻画复杂网络结构的统计特性上有三个重要的指标：平均路径长度（average
+  path length）、聚类系数（clustering coefficient）和度分布（degree
+  distribution）。事实上，Watts和Strogatz提出小世界网络模型的初衷，就是
+想建立一个既具有类似随机图的较小的平均路径长度，又具有类似规则网络的较
+大的聚类系数的网络模型。
+
+\subsection{平均路径长度}
+
+\begin{definition}[节点之间的距离]
+网络中两个节点$i$和$j$之间的距离(distance)$d_{ij}$定义为连接这两个节点
+的最短路径上的边数。
+\end{definition}
+
+\begin{definition}[直径]
+网络中任意两个节点之间的距离的最大值称为该网络的直径，记为$D$，即
+\begin{equation}\label{eq:dimension}
+    D = \max_{i,j} d_{ij}
+\end{equation}
+\end{definition}
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{jnuname.eps}\\
+  \caption{测试插图}\label{fig:test3}
+\end{figure}
+
+\begin{definition}[平均路径长度]
+网络的平均路径长度$L$定义为任意两个节点之间的距离的平均值，即
+\begin{equation}\label{eq:avarage_path_lentgh}
+    L = \frac{2}{N(N+1)}\sum_{i\geq j}d_{ij}
+\end{equation}
+其中$N$为网络节点数。网络的平均路径长度也称为网络的特征路径长度。
+\end{definition}
+
+注意，为了便于数学处理，在公式\eqref{eq:avarage_path_lentgh}中包含了节
+点到其自身的距离（该距离为零）。如果不考虑节点到其自身的距离，那么公式
+\eqref{eq:avarage_path_lentgh}的右端需要乘以因子$(N+1)/(N-1)$。在实际应
+用中，该差别可以忽略不计。
+
+\subsection{聚类系数}
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test3}
+\end{table}
+
+在图论中，聚类系数(clustering coefficient)是用来描述一个图中的顶点之间
+结集成团的程度的系数。具体来说，是一个点的邻接点之间相互连接的程度。许
+多大规模的实际网络都具有明显的聚类效应。例如生活社交网络中，你的朋友同
+时也是朋友的概率会随着网络规模的增加而趋向于某个非零常数。这意味着这些
+实际的复杂网络并不是完全随机的，而是在某种程度上具有类似于社会关系网络
+中“物以类聚，人以群分”的特性。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{jnuname.eps}\\
+  \caption{测试插图}\label{fig:test4}
+\end{figure}
+
+集聚系数分为整体与局部两种。整体集聚系数可以给出一个图中整体的集聚程度
+的评估，而局部集聚系数则可以测量图中每一个结点附近的集聚程度。
+
+\begin{definition}[整体聚类系数]
+整体集聚系数的定义建立在闭三点组（邻近三点组）之上。假设网络中有一部分
+节点是两两相连的，那么可以找出很多个“三角形”，其对应的三点两两相连，
+称为闭三点组。除此以外还有开三点组，也就是之间连有两条边的三点（缺一条
+  边的三角形）。这两种三点组构成了所有的连通三点组。整体集聚系数定义为
+一个网络中所有闭三点组的数量与所有连通三点组（无论开还是闭）的总量之比，
+即
+\[
+    C_{total}=\frac{3\times G_{\triangle}}{3 \times G_{\triangle} + G_{\wedge}}
+\]
+其中$C_{total}$表示网络的整体聚类系数，$G_{\triangle}$表示该网络中闭三
+点组的个数，$G_{\wedge}$表示该网络中开三点组的个数\cite{luce1949method}。
+\end{definition}
+
+对图中具体的某一个点，它的局部集聚系数$C_i$表示与它相连的点抱成团（完全
+  子图）的程度。Watts与Strogatz在1998年的论文
+\cite{watts1998smallworld}中首次引入了这个概念，用以判别一个图是否是小
+世界网络。
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test4}
+\end{table}
+
+\begin{definition}[局部聚类系数]
+
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{jnuname.eps}\\
+  \caption{测试插图}\label{fig:test5}
+\end{figure}
+
+假设网络中的一个节点$i$有$k_i$条边与其他节点相连，这$k_i$个节点称为节点
+$i$的邻居。显然，在这$k_i$个节点之间最多可能有$k_i(k_i-1)/2$条边。而这
+$k_i$个节点之间实际存在的边数$E_i$和总的可能的边数$k_i(k_i-1)/2$之比就
+定义为节点$i$的聚类系数(clustering coefficient)$C_i$，即
+\begin{equation}\label{eq:clustering_coefficient}
+    C_i = \frac{2E_i}{k_i(k_i-1)}
+\end{equation}
+从几何特性上看，上式的一个等价定义为：
+\begin{equation}\label{eq:clustering_coefficient_triangle}
+    C_i = \frac{\text{与节点$i$相连的三角形的数量}}{\text{与节点$i$相连
+        的三元组的数量}}
+\end{equation}
+其中，与节点$i$相连的三元组是指由节点$i$和其两个邻居节点构成的组合。
+\end{definition}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width= 0.5\textwidth]{jnuname.eps}\\
+  \caption{测试插图}\label{fig:test6}
+\end{figure}
+
+知道了一个图里的每一个顶点的局部集聚系数后，可以计算整个图的平均集聚系
+数。这个概念也是Watts与Strogatz在1998年的论文
+\cite{watts1998smallworld}中引入的：
+
+\begin{definition}[平均聚类系数]
+平均聚类系数定义为所有顶点的局部集聚系数的算术平均数，即
+\begin{equation}
+    \bar{C} = \frac{1}{n}\sum_{i=1}^{n} C_i.
+\end{equation}
+\end{definition}
+
+\subsection{度分布}
+
+\begin{definition}[度]
+无向网络中，节点$i$的度(degree)$k_i$定义为与该节点连接的其他节点的数目。
+有向网络中，节点的度分为出度(out-degree)和入度(in-degree)。节点的出度是
+指从该节点指向其他节点的边的数目，节点的入度是指从其他节点指向该节点的
+边的数目。
+\end{definition}
+
+直观上看，一个节点的度越大就意味着这个节点在某种意义上越“重要”。
+
+\begin{definition}[平均度]
+网络中所有节点$i$的度$k_i$的平均值称为网络的平均度，记为$Avg{k}$。
+\end{definition}
+
+\begin{definition}[度分布]
+网络中节点的度的分布状况可用分布函数$P(k)$来描述：
+\begin{equation}\label{eq:degree_distribution}
+    P(k) = \text{一个随机选定的节点的度恰好是$k$的概率}
+\end{equation}
+$P(k)$称为该网络的度分布。
+\end{definition}
+
+\section{小世界网络}
+
+\begin{definition}[小世界网络]
+若网络的平均路径长度和网络的节点数目的对数成正比，即
+\[
+  L_{G} \propto \log N
+\]
+其中$N$是节点数目，则称这样的网络为``小世界网络''。
+\end{definition}
+\blindtext
+
+\section{基于小世界理论的数据中心网络}
+\blindtext
+\subsection{DS小世界模型}
+\Blindtext
+\subsection{DS小世界模型的平均网络距离}
+\Blindtext
+\subsection{高维小世界网络的负载能力与容错分析}
+\Blindtext
+\section{SIDN网络模型}
+\Blindtext
+\subsection{SIDN模型构建}
+\Blindtext
+\subsection{路由策略}
+\Blindtext
+\section{逻辑节点内部资源分配}
+\Blindtext
+\subsection{问题描述}
+\Blindtext
+\subsection{全局路由算法}
+\Blindtext
+\section{SIDN模型参数分析}
+\Blindtext
+\subsection{连通性分析}
+\Blindtext
+\subsection{平均路由跳数}
+\Blindtext
+\subsection{总网络带宽}
+\Blindtext
+\subsection{容错能力}
+\Blindtext
+\section{仿真结果}
+\subsection{平均路由跳数}
+\Blindtext
+\subsection{总网络带宽}
+\Blindtext
+\subsection{容错能力}
+\Blindtext
+\section{小结}
+\Blindtext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{随机网络模型}\label{chapter_random}
+\section{随机网络背景与研究现状}
+\Blindtext
+\section{WarpNet网络模型构建}\label{sec:warpnet_construction}
+\subsection{网络结构}
+\Blindtext
+\subsection{双层拓扑结构}
+\Blindtext
+\section{路由算法}
+\subsection{基于flood的路由发现算法}
+\Blindtext
+\section{网络性能分析}
+\blindtext
+\subsection{连通性与互联通率}
+\Blindtext
+\subsection{路由跳数}
+\Blindtext
+\subsection{总带宽}
+\Blindtext
+\subsection{故障对网络的影响}
+\Blindtext
+\section{仿真分析}
+\Blindtext
+\section{实验验证}
+\Blindtext
+\section{小结}
+\blindtext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{无尺度网络模型}\label{chapter_scalefree}
+\section{无尺度网络背景与研究现状}
+\Blindtext
+\section{基于数据中心的无尺度网络运用}
+\subsection{无尺度网络在数据中心运用的分析}
+\Blindtext
+\subsection{无尺度网络与最大度}
+\Blindtext
+\subsection{带最大度约束的无尺度构造算法}
+\Blindtext
+\section{模型分析}
+\subsection{度-度相关性分析}
+\Blindtext
+\subsection{聚类性分析}
+\Blindtext
+\section{基于数据中心的无尺度网络模型构建分析}
+\blindtext
+\subsection{节点结构与网络性能的关系}
+\Blindtext
+\section{平衡因子的参数调整}
+\blindtext
+\subsection{$q=0$的情况}
+\Blindtext
+\subsection{$q>0$的情况}
+\Blindtext
+\subsection{$q<0$的情况}
+\Blindtext
+\section{TPSF模型构建与性能分析}
+\blindtext
+\subsection{平均路由距离}
+\Blindtext
+\subsection{总网络带宽}
+\Blindtext
+\subsection{容错能力}
+\Blindtext
+\section{仿真结果}
+\subsection{平均路由跳数}
+\Blindtext
+\subsection{总网络带宽}
+\Blindtext
+\subsection{容错能力}
+\Blindtext
+\section{小结}
+\blindtext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{网络模型验证框架}\label{chapter_experiments}
+\section{引言}
+\Blindtext
+\section{模拟平台实现}
+\Blindtext
+\subsection{系统结构}
+\Blindtext
+\subsection{构造模块}
+\Blindtext
+\subsection{虚拟网卡实现}
+\Blindtext
+\subsection{控制核心}
+\Blindtext
+\subsection{受控模块}
+\Blindtext
+\subsection{分布式虚拟交换网络}
+\Blindtext
+\section{验证结果}
+\Blindtext
+\subsection{真实环境验证}
+\Blindtext
+\subsection{海量虚拟化的检测与控制}
+\Blindtext
+\section{小结}
+\blindtext
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 学位论文的正文应以《结论》作为最后一章
+\chapter{结论}\label{chapter_concludes}
+
+本文在第\ref{chapter_smallworld}章中，通过考虑数据中心网络布局构建中的最大度限制
+问题，提出了符合数据中心网络基本要求的DS小世界模型，并分析了它的性质。随后提出
+SIDN，将DS模型映射到具体的网络结构中，并分析了所构成网络的平均直径、网络总带宽、
+对故障的容错能力等各项网络性能。
+
+分析与仿真实验证明，SIDN网络具有很好的扩展能力，网络总带宽与网络规模成
+近似线性增长的关系；具有很强的容错能力，链路损坏与节点损坏几乎无法破坏
+网络的联通性，故障率对网络性能的影响与破坏节点/链路占总资源比率线性相关。
+
+随后在第\ref{chapter_scalefree}章中，分析了无尺度网络在数据中心网络构建应用中的
+理论方面问题。对Scafida \cite{gyarmati2010scafida}文中所述在最大度限制的情况下运
+用BA算法构造的网络并不会损失无尺度性质的观点，进行了深入的分析，并指出了该论点的
+局限性。
+
+在给出了在引入节点最大度限制之后，利用分治和递归的思想，对无尺度网络
+进行多层构建，对所构造的网络进行度-度相关性，以及聚类性分析。
+
+\begin{table}
+  \centering
+  \begin{tabular}{cccp{38mm}}
+    \toprule
+    \textbf{文档域类型} & \textbf{Java类型} & \textbf{宽度(字节)} & \textbf{说明} \\
+    \midrule
+    BOOLEAN  & boolean &  1  & \\
+    CHAR     & char    &  2  & UTF-16字符 \\
+    BYTE     & byte    &  1  & 有符号8位整数 \\
+    SHORT    & short   &  2  & 有符号16位整数 \\
+    INT      & int     &  4  & 有符号32位整数 \\
+    LONG     & long    &  8  & 有符号64位整数 \\
+    STRING   & String  &  字符串长度  & 以UTF-8编码存储 \\
+    DATE     & java.util.Date & 8 & 距离GMT时间1970年1月1日0点0分0秒的毫秒数 \\
+    BYTE\_ARRAY & byte$[]$ & 数组长度 & 用于存储二进制值 \\
+    BIG\_INTEGER & java.math.BigInteger & 和具体值有关 & 任意精度的长整数 \\
+    BIG\_DECIMAL & java.math.BigDecimal & 和具体值有关 & 任意精度的十进制实数 \\
+    \bottomrule
+  \end{tabular}
+  \caption{测试表格}\label{table:test5}
+\end{table}
+
+表\ref{table:test5}用于测试表格。随后分析了无尺度网络构造过程中，交换机节点与数
+据节点的角色区别，分析了两者在不同比率下形成的网络形态，以及对网络性能造成的影响。
+
+通过理论分析和仿真实验，分析并找出比率因子q的最佳取值。此外，无尺度现象
+的引入提高了网络的聚类系数，从而在不失灵活性可靠性的基础上，进一步提升
+了网络的性能。
+
+在第\ref{chapter_random}章中，将关注点转移到交换机本身。由于图论难以描述数据中心
+网络中的交换设备，因此放弃基于图的抽象模型，转而基于多维簇划分的思想，提出并设计
+了WarpNet网络模型。
+
+该网络模型突破了基于图描述的局限性，并对网络的带宽等指标进行理论分析并
+给出定量描述。最后对比了理论分析、仿真测试结果，并在实际物理环境中进系
+真实部署，通过6节点的小规模实验以及1000节点虚拟机的大规模实验，表明该模
+型的理论分析、仿真测试与实际实验吻合，并在网络性能、容错能力、伸缩性灵
+活性方面得到了进一步的提升。
+
+在第\ref{chapter_experiments}章中，针对网络模型研究这一类工作的共性，设计构造通
+用验证平台系统。以海量虚拟机和虚拟分布式交换机的形式，实现了基于少量物理节点，对
+大规模节点的模拟。其模拟运行的过程与真实运行在实现层面完全一致，运行的结果与真实
+环境线性相关。除为本文所涉若干网络模型提供验证外，可进一步推广到更为广泛的领域，
+为各种网络模型及路由算法的研究工作，提供分析、指导与验证。
+
+% 参考文献。应放在\backmatter之前。
+% 推荐使用BibTeX，若不使用BibTeX时注释掉下面一句。
+\nocite{*}
+\bibliography{bachelor}
+% 不使用 BibTeX
+%\begin{thebibliography}{2}
+%
+%\bibitem{deng:01a}
+%{邓建松,彭冉冉,陈长松}.
+%\newblock {\em \LaTeXe{}科技排版指南}.
+%\newblock 科学出版社,书号:7-03-009239-2/TP.1516, 北京, 2001.
+%
+%\bibitem{wang:00a}
+%王磊.
+%\newblock {\em \LaTeXe{}插图指南}.
+%\newblock 2000.
+%\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 致谢，应放在《结论》之后
+\begin{acknowledgement}
+  首先感谢我的母亲韦春花对我的支持。其次感谢我的导师陈近南对我的精心指导和热心帮助。接下来，
+  感谢我的师兄茅十八和风际中，他们阅读了我的论文草稿并提出了很有价值的修改建议。
+
+  最后，感谢我亲爱的老婆们：双儿、苏荃、阿珂、沐剑屏、曾柔、建宁公主、方怡，感谢
+  你们在生活上对我无微不至的关怀和照顾。我爱你们！
+\end{acknowledgement}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

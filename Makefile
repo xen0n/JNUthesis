@@ -20,6 +20,7 @@ SAMPLE_MB=master-blind
 SAMPLE_MP=master-p
 SAMPLE_MPB=master-p-blind
 SAMPLE_B=bachelor
+SAMPLE_BD=bachelor-design
 SAMPLE_BR=bachelor-related
 SAMPLEBIB_D=$(SAMPLE_D).bib
 SAMPLEBIB_M=$(SAMPLE_M).bib
@@ -29,12 +30,13 @@ SAMPLEBIB_MPB=$(SAMPLE_M).bib
 SAMPLEBIB_B=$(SAMPLE_B).bib
 PREAMBLE_M=$(SAMPLE_M)-preamble
 CONTENTS_M=$(SAMPLE_M)-contents
+COMMON_B=$(SAMPLE_B)-common
 INSTITUTE_NAME=jnuname.eps
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
-.PHONY: all clean cls doc phd master masterblind masterpro masterproblind bachelor bachelorrelated
+.PHONY: all clean cls doc phd master masterblind masterpro masterproblind bachelor bachelordesign bachelorrelated
 
-all: bst cls doc phd master masterblind masterpro masterproblind bachelor bachelorrelated
+all: bst cls doc phd master masterblind masterpro masterproblind bachelor bachelordesign bachelorrelated
 
 ###### update bst file
 bst:  $(BST_FILE)
@@ -107,11 +109,20 @@ $(SAMPLE_MPB).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_MPB).tex $(PREA
 
 bachelor: $(SAMPLE_B).pdf
 
-$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(SAMPLEBIB_B)
+$(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(COMMON_B).tex $(SAMPLEBIB_B)
 	xelatex $(SAMPLE_B).tex
 	bibtex $(SAMPLE_B)
 	xelatex $(SAMPLE_B).tex
 	xelatex $(SAMPLE_B).tex
+
+
+bachelordesign: $(SAMPLE_BD).pdf
+
+$(SAMPLE_BD).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_BD).tex $(COMMON_B).tex $(SAMPLEBIB_B)
+	xelatex $(SAMPLE_BD).tex
+	bibtex $(SAMPLE_B)
+	xelatex $(SAMPLE_BD).tex
+	xelatex $(SAMPLE_BD).tex
 
 
 bachelorrelated: $(SAMPLE_BR).pdf

@@ -1342,6 +1342,7 @@
 \newif\ifjnut@phd\jnut@phdfalse
 \newif\ifjnut@master\jnut@masterfalse
 \newif\ifjnut@bachelor\jnut@bachelorfalse
+\newif\ifjnut@bachelordesign\jnut@bachelordesignfalse
 \newif\ifjnut@prodegree\jnut@prodegreefalse
 \newif\ifjnut@replaceperiod\jnut@replaceperiodfalse
 \newif\ifjnut@blindreview\jnut@blindreviewfalse
@@ -1369,6 +1370,11 @@
   \jnut@phdfalse
   \jnut@bachelorfalse}
 \DeclareOption{bachelor}{\jnut@bachelortrue
+  \jnut@bachelordesignfalse
+  \jnut@phdfalse
+  \jnut@masterfalse}
+\DeclareOption{bachelordesign}{\jnut@bachelortrue
+  \jnut@bachelordesigntrue
   \jnut@phdfalse
   \jnut@masterfalse}
 \DeclareOption{prodegree}{\jnut@prodegreetrue}
@@ -1851,6 +1857,7 @@ in\\
 \newcommand*{\jnut@cap@abstract}{中文摘要}
 \newcommand*{\jnut@cap@abstract@abstractname}{摘　要}
 \newcommand*{\jnut@cap@abstract@abstractname@bachelorhead}{摘要}
+\newcommand*{\jnut@cap@abstract@bachelordesign}{设计总说明}
 \newcommand*{\jnut@cap@abstract@keywordsname}{关键词}
 %    \end{macrocode}
 %
@@ -2851,7 +2858,11 @@ December\fi
 \jnut@headfoot@font%
 %% 先处理不规则页眉的情况
 \ifbool{bachelor@zhabstract}%
-{\jnut@cap@abstract@abstractname@bachelorhead}%
+{\ifjnut@bachelordesign%
+  \jnut@cap@abstract@bachelordesign%
+\else%
+  \jnut@cap@abstract@abstractname@bachelorhead%
+\fi}%
 {%
   \ifbool{bachelor@enabstract}%
   {\jnut@cap@abstract@en@abstractname@bachelorhead}%
@@ -3945,7 +3956,12 @@ December\fi
   \ifjnut@bachelor
     \pdfbookmark[0]{\jnut@cap@abstract}{abstract}
     \begin{center}
-      {\bf\ifjnut@bachelor\songti\else\heiti\fi\zihao{3}\jnut@cap@abstract@abstractname}
+      {\bf\ifjnut@bachelor\songti\else\heiti\fi\zihao{3}%
+      \ifjnut@bachelordesign%
+        \jnut@cap@abstract@bachelordesign%
+      \else%
+        \jnut@cap@abstract@abstractname%
+    \fi}
     \end{center}
   \else
     \nchapter{\jnut@cap@abstract@abstractname}
