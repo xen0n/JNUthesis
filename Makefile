@@ -10,7 +10,7 @@
 ###############################################################################
 
 PACKAGE=jnuthesis
-BST_FILE=gbt7714-2005.bst
+BST_FILE=gbt7714-2005-jnu.bst
 BST_URL=https://raw.githubusercontent.com/Haixing-Hu/GBT7714-2005-BibTeX-Style/master/gbt7714-2005.bst
 SOURCES=$(PACKAGE).dtx $(PACKAGE).ins
 CLS=$(PACKAGE).cls $(PACKAGE).cfg dtx-style.sty dtklogos.sty
