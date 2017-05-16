@@ -2194,14 +2194,18 @@ December\fi
 \fi
 %    \end{macrocode}
 %
-% 接下来定义文档使用的中文字体：
+% 接下来定义文档使用的中文字体。
+%
+% 江南大学不准用宋体以及Times New Roman以外的任何其他字体撰写论文，
+% 当然也包括黑体。
+% 有些文科学院似乎允许使用少量楷体表示引文，
+% 所以这里姑且保留了楷体作为意大利体的替代字体。
 %    \begin{macrocode}
 \setCJKfamilyfont{song}{\jnut@zhfn@songti}
 \setCJKfamilyfont{hei}{\jnut@zhfn@heiti}
 \setCJKfamilyfont{kai}{\jnut@zhfn@kaishu}
 \setCJKfamilyfont{fangsong}{\jnut@zhfn@fangsong}
-\setCJKmainfont[BoldFont={\jnut@zhfn@heiti},%
-                ItalicFont={\jnut@zhfn@kaishu}]%
+\setCJKmainfont[ItalicFont={\jnut@zhfn@kaishu}]%
                {\jnut@zhfn@songti}
 \setCJKsansfont{\jnut@zhfn@heiti}
 \setCJKmonofont{\jnut@zhfn@fangsong}
