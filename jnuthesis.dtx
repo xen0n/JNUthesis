@@ -3952,8 +3952,9 @@ December\fi
 % \end{macro}
 %
 % \begin{environment}{abstract}
-% 定义中文摘要环境。该环境自动生成江南大学中文摘要页。注意我们使用了前面修改过的
-% \cs{cleardoublepage}命令来插入无页眉页脚的空白页。
+% 定义中文摘要环境。该环境自动生成江南大学中文摘要页。
+% 无论是学士还是硕博学位论文貌似都不要在中文摘要页与英文摘要页之间加入空白页，
+% 因此没有能够用到\cs{cleardoublepage}命令。
 %    \begin{macrocode}
 \newenvironment{abstract}{%
   \jnut@state@zhabstract
@@ -3968,14 +3969,19 @@ December\fi
     \fi}
     \end{center}
   \else
+    \if@twoside%
+      \@twosidefalse%
+    \fi%
     \nchapter{\jnut@cap@abstract@abstractname}
   \fi%
   \normalsize\par%
 }{%
-  \ifjnut@bachelor%
   \clearpage%
-  \else%
-  \cleardoublepage%
+  %% 明明接下来也要保持 twoside 关闭，但省略这里的切换会导致谜之失效，见下
+  \ifjnut@bachelor\else%
+    \if@twoside%
+      \@twosidetrue%
+    \fi%
   \fi%
 }
 %    \end{macrocode}
@@ -4023,11 +4029,21 @@ December\fi
       {\bf\zihao{3}\jnut@cap@abstract@en@abstractname}
     \end{center}
   \else
+    %% 明明中文摘要跟英文摘要之间没有空白页，但 twoside 还是要重新打开关闭一次
+    \if@twoside%
+      \@twosidefalse%
+    \fi%
     \nchapter{\jnut@cap@abstract@en@abstractname}
   \fi%
   \normalsize\par%
 }{%
-  \cleardoublepage
+  %% 硕博论文的目录和正文第一页都要开始于奇数页，因此这里要暂时打开 twoside
+  \ifjnut@bachelor\else%
+    \if@twoside%
+      \@twosidetrue%
+    \fi%
+  \fi%
+  \cleardoublepage%
 }
 %    \end{macrocode}
 % \end{environment}
