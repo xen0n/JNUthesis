@@ -3192,6 +3192,15 @@ December\fi
      {\def\@noitemerr
        {\@latex@warning{Empty `thebibliography' environment}}%
       \endlist}
+%% bibitem 之间不要多空一行。因为上面重新定义了thebibliography环境，
+%% \setlength{\bibsep}{0pt}的方法无效了。
+%% http://www.tex.ac.uk/FAQ-compactbib.html
+\let\jnut@origbibliography\thebibliography
+\renewcommand{\thebibliography}[1]{%
+  \jnut@origbibliography{#1}%
+  \setlength{\itemsep}{0pt plus 0.3ex}%
+  \setlength{\parskip}{0pt}%
+}
 %    \end{macrocode}
 % \end{environment}
 %
