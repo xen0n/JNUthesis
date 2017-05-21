@@ -2147,6 +2147,18 @@ December\fi
 \fi
 %    \end{macrocode}
 %
+% \subsection{垂直均匀分布}
+%
+% 江南大学有些时候极其重视段落、标题之间的垂直间距。很不幸这有时会与|book|类
+% 的默认设置\cs{\flushbottom}相冲突，表现为相邻的偶数页与奇数页内容总高度
+% 相差较大时，为使左右两页的高度相同，较矮的一页段落会被拉开很多，视觉上造成一种
+% 该处段落垂直间距设置错误的感觉。Microsoft Word的默认行为与\cs{\raggedbottom}
+% 相同，因此我们覆盖掉\LaTeX{}的默认设置。
+%
+%    \begin{macrocode}
+\raggedbottom
+%    \end{macrocode}
+%
 % \subsection{字体设置}
 %
 % 首先根据文档选项选择正确的中文字体名称。
