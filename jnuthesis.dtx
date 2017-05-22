@@ -2648,9 +2648,9 @@ December\fi
 % 学士学位论文：
 %
 % \begin{description}
-% \item[零级节标题] 命令为\cs{chapter}，格式为三号加粗宋体，居中排列，段前空-2.5ex，段后空0ex；
-% \item[一级节标题] 命令为\cs{section}，格式为四号加粗宋体，左排列，段前空0ex，段后空1ex；
-% \item[二级节标题] 命令为\cs{subsection}，格式为小四号加粗宋体，左排列，段前空0ex，段后空1ex；
+% \item[零级节标题] 命令为\cs{chapter}，格式为三号加粗宋体，居中排列，段前空-6ex，段后空0ex；
+% \item[一级节标题] 命令为\cs{section}，格式为四号加粗宋体，左排列，段前空0ex，段后空0ex；
+% \item[二级节标题] 命令为\cs{subsection}，格式为小四号加粗宋体，左排列，段前空0ex，段后空0ex；
 % \end{description}
 %
 % 使用|titlesec|宏包提供的\cs{titleformat}和\cs{titlespacing}命令可以方便地设置标题
@@ -2663,7 +2663,7 @@ December\fi
             {\chaptertitlename}{0.5em}{}
 \titlespacing{\chapter}
              {0pt}
-             {*-2.5}
+             {*-6}
              {*0}
 \titleformat{\section}[hang]
             {\zihao{4}\songti\bfseries}
@@ -2671,14 +2671,14 @@ December\fi
 \titlespacing{\section}
              {0pt}
              {*0}
-             {*1}
+             {*0}
 \titleformat{\subsection}[hang]
             {\zihao{-4}\songti\bfseries}
             {\thesubsection}{0.5em}{}
 \titlespacing{\subsection}
              {0pt}
              {*0}
-             {*1}
+             {*0}
 \else
 %% 硕士学位
 \titleformat{\chapter}[hang]
