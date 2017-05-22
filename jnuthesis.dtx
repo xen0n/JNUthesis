@@ -3389,6 +3389,7 @@ December\fi
 % 定义封面中用到的生成下划线的宏。
 %
 % 学士学位论文封面的标题行前面2个半角空格，信息行前面7个半角空格。
+% 但目前看来标题前面的空格要求并不是十分严格，那么就可以暂时去掉。
 %    \begin{macrocode}
 \newcommand{\jnut@underline}[2][\textwidth]%
            {\CJKunderline{\makebox[#1]{#2}}}
@@ -3396,7 +3397,7 @@ December\fi
 \newcommand{\jnut@ljustunderline}[3]%
            {\CJKunderline{\hbox to #1{\hspace{#2}#3\hfill}}}
 \newcommand{\jnut@titleunderline}[2][\textwidth]%
-           {\jnut@ljustunderline{#1}{1em}{#2}}
+           {\jnut@ljustunderline{#1}{0em}{#2}}
 \newcommand{\jnut@infounderline}[2][\textwidth]%
            {\jnut@ljustunderline{#1}{3.5em}{#2}}
 
