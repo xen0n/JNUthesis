@@ -3076,9 +3076,18 @@ December\fi
 \renewcommand*{\l@chapter}[2]{%
   \ifnum \c@tocdepth >\m@ne
     \addpenalty{-\@highpenalty}%
-    \setlength\@tempdima{4.0em}%
     \begingroup
       \ifjnut@bachelor\zihao{4}\fi
+
+      %% 设置左边距
+      %% FIXME: 要优雅
+      \ifjnut@bachelor%
+        \settowidth\@tempdima{第~1~章}%
+      \else%
+        \settowidth\@tempdima{第一章}%
+      \fi%
+      \advance\@tempdima 0.5em%
+
       \parindent \z@ \rightskip \@pnumwidth
       \parfillskip -\@pnumwidth
       \leavevmode
