@@ -2100,15 +2100,20 @@ December\fi
 % 为处理学士学位论文中不规则的页眉设置，需要跟踪当前页面所处的具体环境。
 % 目录页的页眉设置是特殊的，直接在生成目录页时覆盖掉默认页眉即可，因此此处
 % 不设置相应状态flag。
+%
+% 以及，参考文献页面附近的|mainmatter|判定存在未知问题，因此自行跟踪|mainmatter|
+% 状态。
 %    \begin{macrocode}
 \newbool{bachelor@zhabstract}
 \newbool{bachelor@enabstract}
 \newbool{jnut@toc}
+\newbool{jnut@main}
 \newbool{jnut@appendix}
 \newcommand*{\jnut@state@reset}{%
   \boolfalse{bachelor@zhabstract}%
   \boolfalse{bachelor@enabstract}%
   \boolfalse{jnut@toc}%
+  \boolfalse{jnut@main}%
   \boolfalse{jnut@appendix}%
 }
 \newcommand*{\jnut@state@zhabstract}{%
@@ -2126,6 +2131,10 @@ December\fi
 \newcommand*{\jnut@state@toc}{%
   \jnut@state@reset%
   \booltrue{jnut@toc}%
+}
+\newcommand*{\jnut@state@main}{%
+  \jnut@state@reset%
+  \booltrue{jnut@main}%
 }
 \newcommand*{\jnut@state@appendix}{%
   \jnut@state@reset%
@@ -2890,16 +2899,13 @@ December\fi
         \isodd{\value{page}}}%
             {%
               \ifjnut@bachelor%
-                %% TODO: 下面的 mainmatter 判定有坑
-                \if@mainmatter%
-                  \jnut@value@titlea\jnut@value@titleb%
-                \else%
-                  \leftmark%
-                \fi%
+                \ifbool{jnut@main}%
+                {\jnut@value@titlea\jnut@value@titleb}%
+                {\leftmark}%
               \else%
                 \leftmark%
               \fi}%
-            {\if@mainmatter\jnut@value@institute\jnut@cap@cover@thesis\else\leftmark\fi}%
+            {\ifbool{jnut@main}{\jnut@value@institute\jnut@cap@cover@thesis}{\leftmark}}%
     }}}%
 }
 %    \end{macrocode}
@@ -2934,7 +2940,7 @@ December\fi
 \let\jnut@origmainmatter\mainmatter
 \def\mainmatter{%
   \jnut@origmainmatter%
-  \jnut@state@reset%
+  \jnut@state@main%
   \setnonempty%
   \ifjnut@bachelor%
   \else%
