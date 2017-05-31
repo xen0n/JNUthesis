@@ -333,8 +333,8 @@
 %     |gbt7714-2005.bst|          & 符合国标\std{GB/T 7714-2005}的参考文献样式文件\\
 %     |gbt7714-2005-jnu.bst|      & 同上，但针对江南大学格式要求做了少量修改\\
 %     |dtx-style.sty|             & 用户手册样式文件\\
-%     |jnulogo.eps|               & 江南大学校徽图片\\
 %     |jnuname.eps|               & 江南大学校名图片\\
+%     |jnuname.pdf|               & 江南大学校名图片\\
 %     \hline
 %     |sample.tex|                & 示例文档，亦可作为学位论文的基本模板 \\
 %     |sample.bib|                & 示例文档的参考文献数据库 \\
@@ -398,7 +398,7 @@
 % \begin{itemize}
 % \item 模板源文件：|jnuthesis.ins|和|jnuthesis.dtx|
 % \item 参考文献样式：|gbt7714-2005-jnu.bst|
-% \item 江南大学校徽和校名图片：|jnulogo.eps|和|jnuname.eps|
+% \item 江南大学校名图片：|jnuname.eps|和|jnuname.pdf|
 % \item 示例文档：|sample.tex|、|sample.bib|和|figure|目录
 % \end{itemize}
 %
@@ -429,8 +429,8 @@
 % # 复制jnuthesis文档类文件
 % $ cp jnuthesis.cls ${TEXMFLOCAL}/tex/latex/jnuthesis/
 % $ cp jnuthesis.cfg ${TEXMFLOCAL}/tex/latex/jnuthesis/
-% $ cp jnulogo.eps  ${TEXMFLOCAL}/tex/latex/jnuthesis/
 % $ cp jnuname.eps  ${TEXMFLOCAL}/tex/latex/jnuthesis/
+% $ cp jnuname.pdf  ${TEXMFLOCAL}/tex/latex/jnuthesis/
 % # 复制jnuthesis文档类的源码，此过程可选
 % $ cp jnuthesis.ins ${TEXMFLOCAL}/tex/latex/jnuthesis/
 % $ cp jnuthesis.dtx ${TEXMFLOCAL}/tex/latex/jnuthesis/
@@ -1893,8 +1893,7 @@ in\\
 %
 % 定义学位颁发机构的校徽和校名图片文件名：
 %    \begin{macrocode}
-\newcommand*{\jnut@cap@institute@logo}{jnulogo.eps}
-\newcommand*{\jnut@cap@institute@name}{jnuname.eps}
+\newcommand*{\jnut@cap@institute@name}{jnuname}
 %    \end{macrocode}
 %
 % \subsection{字段默认值定义}

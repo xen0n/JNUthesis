@@ -31,7 +31,7 @@ SAMPLEBIB_B=$(SAMPLE_B).bib
 PREAMBLE_M=$(SAMPLE_M)-preamble
 CONTENTS_M=$(SAMPLE_M)-contents
 COMMON_B=$(SAMPLE_B)-common
-INSTITUTE_NAME=jnuname.eps
+INSTITUTE_NAME=jnuname.eps jnuname.pdf
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
 .PHONY: all clean cls doc phd master masterblind masterpro masterproblind bachelor bachelordesign bachelorrelated
