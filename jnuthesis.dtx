@@ -1798,9 +1798,9 @@
 \newcommand*{\jnut@cap@cover@prodegree@fullday}{全日制专业学位}
 \newcommand*{\jnut@cap@cover@prodegree@maybe}{\ifjnut@prodegree\jnut@cap@cover@prodegree@fullday\fi}
 \newcommand*{\jnut@cap@cover@thesis}{\jnut@cap@cover@prodegree@maybe{\jnut@value@degree}学位论文}
-\newcommand*{\jnut@cap@cover@bachelorthesis}{本科生毕业设计（论文）}
-\newcommand*{\jnut@cap@cover@bachelorthesis@related}{相关资料}
-\newcommand*{\jnut@cap@cover@bachelorthesis@translation@a}{毕业设计（论文）}
+\newcommand*{\jnut@cap@cover@bachelorthesis@normal}{本科生毕业设计（论文）}
+\newcommand*{\jnut@cap@cover@bachelorthesis@related}{毕业设计（论文）}
+\newcommand*{\jnut@cap@cover@bachelorthesis@related@b}{相关资料}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@b}{外文资料翻译}
 \newcommand*{\jnut@cap@cover@bachelorthesis@translation@c}{及原文}
 \newcommand*{\jnut@cap@cover@masterthesis@blindreview}{{\jnut@cap@cover@thesis}抽检封面}
@@ -3683,8 +3683,10 @@ December\fi
         \bf\songti\zihao{-0}
 
         \IfEqCase{#1}{%
-          {translation}{\jnut@cap@cover@bachelorthesis@translation@a}%
-        }[\jnut@cap@cover@bachelorthesis]
+          {normal}{\jnut@cap@cover@bachelorthesis@normal}%
+          {related}{\jnut@cap@cover@bachelorthesis@related}%
+          {translation}{\jnut@cap@cover@bachelorthesis@related}%
+        }[\jnut@cap@cover@bachelorthesis@normal]
       \endgroup
 
       \IfEqCase{#1}{%
@@ -3712,7 +3714,7 @@ December\fi
           \vskip 5mm%
           \begingroup%
             \renewcommand{\CJKglue}{\hskip 1.058334mm}%
-            \textbf{\songti\zihao{1}\jnut@cap@cover@bachelorthesis@related}%
+            \textbf{\songti\zihao{1}\jnut@cap@cover@bachelorthesis@related@b}%
           \endgroup%
           \vskip 10mm%
 
