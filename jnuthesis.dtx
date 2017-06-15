@@ -1450,6 +1450,11 @@
 \DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
 %    \end{macrocode}
 %
+% 使用|eso-pic|宏包支持插入整张图片作为页面背景，用于插入已扫描的独创性声明页。
+%    \begin{macrocode}
+\RequirePackage{eso-pic}
+%    \end{macrocode}
+%
 % |caption2|宏包已经不再推荐使用，改用新的|caption|宏包处理浮动图形和表格的标题
 % 样式。
 %    \begin{macrocode}
@@ -1664,10 +1669,11 @@
 %</cls>
 %    \end{macrocode}
 %
-% |etoolbox|、|xstring|宏包提供了一些工具宏。
+% |etoolbox|、|xstring|、|xparse|宏包提供了一些工具宏。
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
 \RequirePackage{xstring}
+\RequirePackage{xparse}
 %    \end{macrocode}
 %
 % \subsection{字符串常量定义}
@@ -3930,7 +3936,6 @@ December\fi
   \end{center}
 
   \vskip 2em
-
   本人声明所呈交的学位论文是本人在导师指导下进行的研究工作及取得的研究成果。
   尽我所知，除了文中特别加以标注和致谢的地方外，论文中不包含其他人已经发表或撰写过的研究成果，
   也不包含本人为获得江南大学或其它教育机构的学位或证书而使用过的材料。
@@ -3971,8 +3976,21 @@ December\fi
   \egroup
   \cleardoublepage
 }
-\newcommand*{\makeoriginalitypage}{%
-  \ifjnut@blindreview\else\jnut@covertable@originalitypage\fi%
+\newcommand*{\jnut@covertable@originalitypage@scanned}[1]{%
+  %% https://tex.stackexchange.com/a/36887
+  \null%
+  \thispagestyle{empty}%
+  %% https://tex.stackexchange.com/a/167741
+  \AddToShipoutPictureBG*{\includegraphics[width=\paperwidth,height=\paperheight]{#1}}%
+  \cleardoublepage%
+}
+\DeclareDocumentCommand\makeoriginalitypage{ g }{%
+  \ifjnut@blindreview%
+  \else%
+    \IfNoValueTF {#1}
+    {\jnut@covertable@originalitypage}
+    {\jnut@covertable@originalitypage@scanned{#1}}%
+  \fi%
 }
 %    \end{macrocode}
 % \end{macro}
