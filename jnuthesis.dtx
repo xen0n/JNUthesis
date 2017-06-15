@@ -1669,10 +1669,11 @@
 %</cls>
 %    \end{macrocode}
 %
-% |etoolbox|、|xstring|、|xparse|宏包提供了一些工具宏。
+% |etoolbox|、|xstring|、|xifthen|、|xparse|宏包提供了一些工具宏。
 %    \begin{macrocode}
 \RequirePackage{etoolbox}
 \RequirePackage{xstring}
+\RequirePackage{xifthen}
 \RequirePackage{xparse}
 %    \end{macrocode}
 %
@@ -3977,12 +3978,17 @@ December\fi
   \cleardoublepage
 }
 \newcommand*{\jnut@covertable@originalitypage@scanned}[1]{%
-  %% https://tex.stackexchange.com/a/36887
-  \null%
-  \thispagestyle{empty}%
-  %% https://tex.stackexchange.com/a/167741
-  \AddToShipoutPictureBG*{\includegraphics[width=\paperwidth,height=\paperheight]{#1}}%
-  \cleardoublepage%
+  %% 支持 \cs{\makeoriginalitypage{}} 这种形式，回落到模板页
+  \ifthenelse{\isempty{#1}}%
+  {\jnut@covertable@originalitypage}%
+  {%
+    %% https://tex.stackexchange.com/a/36887
+    \null%
+    \thispagestyle{empty}%
+    %% https://tex.stackexchange.com/a/167741
+    \AddToShipoutPictureBG*{\includegraphics[width=\paperwidth,height=\paperheight]{#1}}%
+    \cleardoublepage%
+  }%
 }
 \DeclareDocumentCommand\makeoriginalitypage{ g }{%
   \ifjnut@blindreview%
