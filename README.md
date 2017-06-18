@@ -82,13 +82,19 @@
 
 以下环境测试支持：
 
-* Linux，TeXLive 2016，Windows 字体与 Adobe 字体
-* macOS，MacTeX，Windows 字体与 Adobe 字体
+* 操作系统
+	- Linux
+	- macOS
+	- Windows
+* TeX 发行版
+	- TeXLive
+* 字体选项
+	- `adobefonts`
 
 以下环境存在已知问题：
 
-* Windows/Linux，TeXLive 2016，Windows 字体：PDF 内文字复制粘贴乱码
-* macOS，MacTeX BasicTeX：校名 logo 缺失。请使用完整 MacTeX 安装
+* TeXLive 2016，`winfonts` 选项：PDF 内文字复制粘贴乱码
+* （或已修复）macOS，MacTeX BasicTeX：校名 logo 缺失。请使用完整 MacTeX 安装
 
 
 ## TODO
