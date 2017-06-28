@@ -23,6 +23,7 @@
 		- 学位论文：`bachelor` 选项
 		- 毕业设计：`bachelordesign` 选项，除“摘要”变为“设计总说明”之外与 `bachelor` 完全相同
 		- 相关资料，外文资料翻译：详见 [`bachelor-related.tex`](./bachelor-related.tex)
+		- 本科课程设计：`bachelorcoursework`选项，详见 [`bachelor-coursework.tex`](./bachelor-coursework.tex)
 * 使用XeLaTeX作为排版引擎，论文源码需要使用UTF-8编码；
 * 自动生成中文封面、中文摘要页、英文摘要页、独创性声明页等必需页面；
 * 支持硕博学位论文终稿提交前替换独创性声明页，具体方法见下；
