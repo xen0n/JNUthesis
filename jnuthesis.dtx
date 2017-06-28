@@ -2863,7 +2863,8 @@ December\fi
 %    \item 令偶数页的页眉如下：
 %      \begin{itemize}
 %      \item 若当前不位于|mainmatter|中，则显示当前节（section）的标题；
-%      \item 若当前位于|mainmatter|中，则显示“江南大学XX学位论文”。
+%      \item 若当前位于|mainmatter|中，则显示“江南大学XX学位论文”；
+%            对本科课程设计，使用“江南大学《课程名称》课程设计”代替。
 %      \end{itemize}
 %    \item 令奇数页的页眉如下：
 %      \begin{itemize}
@@ -2922,7 +2923,14 @@ December\fi
               \else%
                 \leftmark%
               \fi}%
-            {\ifbool{jnut@main}{\jnut@value@institute\jnut@cap@cover@thesis}{\leftmark}}%
+            {\ifbool{jnut@main}{%
+              \ifjnut@bachelorcoursework%
+                \jnut@value@institute%
+                \jnut@cap@cover@bachelorthesis@coursework@a%
+                \jnut@cap@cover@bachelorthesis@coursework@b%
+              \else%
+                \jnut@value@institute\jnut@cap@cover@thesis%
+              \fi}{\leftmark}}%
     }}}%
 }
 %    \end{macrocode}
