@@ -507,7 +507,7 @@
 %     \midrule
 %     \textbf{宋体} & {Adobe Song Std}  & {Source Han Serif CN} & {SimSun} & {AR PL SungtiL GB} &  {STSong} \\
 %     \textbf{黑体} & {Adobe Heiti Std} & {Source Han Sans CN}  & {SimHei} & {WenQuanYi Zen Hei Mono} &  {STHeiti} \\
-%     \textbf{楷书} & {Adobe Kaiti Std} & {Adobe Kaiti Std}     & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
+%     \textbf{楷书} & {Adobe Kaiti Std} & {AR PL UKai CN}     & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
 %     \textbf{仿宋体} & {Adobe Fangsong Std} & {Adobe Fangsong Std} & {FangSong} & {STFangSong} & {STFangSong} \\
 %     \bottomrule
 %     \end{tabular}
@@ -2127,11 +2127,11 @@ December\fi
 \newcommand*{\jnut@zhfn@heiti@source}{Source Han Sans CN}
 %    \end{macrocode}
 %
-% 定义楷体与仿宋的字体名称。思源系列字体暂未支持楷体与仿宋，此处使用系出同门的
-% 相应Adobe字体替代。
+% 定义楷体与仿宋的字体名称。思源系列字体暂未支持楷体与仿宋，此处楷体使用Arphic字体，
+% 仿宋则由系出同门的相应Adobe字体替代。
 %
 %    \begin{macrocode}
-\newcommand*{\jnut@zhfn@kaishu@source}{\jnut@zhfn@kaishu@adobe}
+\newcommand*{\jnut@zhfn@kaishu@source}{AR PL UKai CN}
 \newcommand*{\jnut@zhfn@fangsong@source}{\jnut@zhfn@fangsong@adobe}
 %    \end{macrocode}
 %
