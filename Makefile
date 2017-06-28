@@ -20,6 +20,7 @@ SAMPLE_MB=master-blind
 SAMPLE_MP=master-p
 SAMPLE_MPB=master-p-blind
 SAMPLE_B=bachelor
+SAMPLE_BC=bachelor-coursework
 SAMPLE_BD=bachelor-design
 SAMPLE_BR=bachelor-related
 SAMPLEBIB_D=$(SAMPLE_D).bib
@@ -34,9 +35,9 @@ COMMON_B=$(SAMPLE_B)-common
 INSTITUTE_NAME=jnuname.eps jnuname.pdf
 TEXMFLOCAL=$(shell get_texmf_dir.sh)
 
-.PHONY: all clean cls doc phd master masterblind masterpro masterproblind bachelor bachelordesign bachelorrelated
+.PHONY: all clean cls doc phd master masterblind masterpro masterproblind bachelor bachelorcoursework bachelordesign bachelorrelated
 
-all: bst cls doc phd master masterblind masterpro masterproblind bachelor bachelordesign bachelorrelated
+all: bst cls doc phd master masterblind masterpro masterproblind bachelor bachelorcoursework bachelordesign bachelorrelated
 
 ###### update bst file
 bst:  $(BST_FILE)
@@ -114,6 +115,15 @@ $(SAMPLE_B).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_B).tex $(COMMON_B
 	bibtex $(SAMPLE_B)
 	xelatex $(SAMPLE_B).tex
 	xelatex $(SAMPLE_B).tex
+
+
+bachelorcoursework: $(SAMPLE_BC).pdf
+
+$(SAMPLE_BC).pdf: $(CLS) $(INSTITUTE_NAME) $(BST_FILE) $(SAMPLE_BC).tex $(COMMON_B).tex $(SAMPLEBIB_B)
+	xelatex $(SAMPLE_BC).tex
+	bibtex $(SAMPLE_B)
+	xelatex $(SAMPLE_BC).tex
+	xelatex $(SAMPLE_BC).tex
 
 
 bachelordesign: $(SAMPLE_BD).pdf
