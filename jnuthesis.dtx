@@ -480,10 +480,11 @@
 %
 % 本文档类提供了一些选项以方便使用：
 % \begin{description}
-% \item[winfonts, linuxfonts, macfonts, adobefonts] |winfonts|选项使得文档使
+% \item[winfonts, linuxfonts, macfonts, adobefonts, sourcefonts] |winfonts|选项使得文档使
 %   用Windows系统提供的字体；|linuxfonts|选项使得文档使用Linux系统提供的字
 %   体；|macfonts|选项使得文档使用Mac系统提供的字体；|adobefonts|选项使得文档使
-%   用Adobe提供的OTF中文字体，一般来说OTF字体的显示效果要优于ttf字体。
+%   用Adobe提供的OTF中文字体；|sourcefonts|选项使得文档使用思源系列字体与Adobe的
+%   楷体与仿宋字体，一般来说OTF字体的显示效果要优于ttf字体。
 %   默认选项是|adobefonts|。
 % \begin{example}
 % \documentclass[winfonts]{jnuthesis}
@@ -500,14 +501,14 @@
 %   \end{center}
 %   \begin{table}
 %     \centering\noindent
-%     \begin{tabular}[t]{ccccc}
+%     \begin{tabular}[t]{cccccc}
 %     \toprule
-%           & \textbf{adobefonts} &  \textbf{winfonts} & \textbf{linuxfonts} & \textbf{macfonts} \\
+%           & \textbf{adobefonts} & \textbf{sourcefonts} & \textbf{winfonts} & \textbf{linuxfonts} & \textbf{macfonts} \\
 %     \midrule
-%     \textbf{宋体} & {Adobe Song Std}  & {SimSun} & {AR PL SungtiL GB} &  {STSong} \\
-%     \textbf{黑体} & {Adobe Heiti Std} & {SimHei} & {WenQuanYi Zen Hei Mono} &  {STHeiti} \\
-%     \textbf{楷书} & {Adobe Kaiti Std} & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
-%     \textbf{仿宋体} & {Adobe Fangsong Std} & {FangSong} & {STFangSong} & {STFangSong} \\
+%     \textbf{宋体} & {Adobe Song Std}  & {Source Han Serif CN} & {SimSun} & {AR PL SungtiL GB} &  {STSong} \\
+%     \textbf{黑体} & {Adobe Heiti Std} & {Source Han Sans CN}  & {SimHei} & {WenQuanYi Zen Hei Mono} &  {STHeiti} \\
+%     \textbf{楷书} & {Adobe Kaiti Std} & {AR PL UKai CN}     & {KaiTi}  & {AR PL KaitiM GB} & {STKaiti} \\
+%     \textbf{仿宋体} & {Adobe Fangsong Std} & {Adobe Fangsong Std} & {FangSong} & {STFangSong} & {STFangSong} \\
 %     \bottomrule
 %     \end{tabular}
 %     \caption{默认配置下不同字体选项所使用的实际字体名称}
@@ -1335,6 +1336,7 @@
 %    \begin{macrocode}
 %<*cls>
 \newif\ifjnut@adobefonts\jnut@adobefontstrue
+\newif\ifjnut@sourcefonts\jnut@sourcefontsfalse
 \newif\ifjnut@winfonts\jnut@winfontsfalse
 \newif\ifjnut@linuxfonts\jnut@linuxfontsfalse
 \newif\ifjnut@macfonts\jnut@macfontsfalse
@@ -1348,19 +1350,28 @@
 \newif\ifjnut@replaceperiod\jnut@replaceperiodfalse
 \newif\ifjnut@blindreview\jnut@blindreviewfalse
 \DeclareOption{adobefonts}{\jnut@adobefontstrue
+  \jnut@sourcefontsfalse
+  \jnut@winfontsfalse
+  \jnut@linuxfontsfalse
+  \jnut@macfontsfalse}
+\DeclareOption{sourcefonts}{\jnut@sourcefontstrue
+  \jnut@adobefontsfalse
   \jnut@winfontsfalse
   \jnut@linuxfontsfalse
   \jnut@macfontsfalse}
 \DeclareOption{winfonts}{\jnut@winfontstrue
   \jnut@adobefontsfalse
+  \jnut@sourcefontsfalse
   \jnut@linuxfontsfalse
   \jnut@macfontsfalse}
 \DeclareOption{linuxfonts}{\jnut@linuxfontstrue
   \jnut@adobefontsfalse
+  \jnut@sourcefontsfalse
   \jnut@winfontsfalse
   \jnut@macfontsfalse}
 \DeclareOption{macfonts}{\jnut@macfontstrue
   \jnut@adobefontsfalse
+  \jnut@sourcefontsfalse
   \jnut@winfontsfalse
   \jnut@linuxfontsfalse}
 \DeclareOption{nobackinfo}{\jnut@backinfofalse}
@@ -1568,15 +1579,19 @@
 % \begin{note}
 %   因为我们将使用黑体作为粗体，使用楷体作为斜体，因此载入|xeCJK|宏包时不需要开启
 %   |BoldFont|选项和|SlantFont|；否则的话，|xeCJK|会自动生成宋体的粗体和斜体，而那会
-%   非常难看。然而江南大学的格式要求在很多地方使用了粗体宋体，我们只得将|AutoFakeBold|
-%   打开。
+%   非常难看。然而江南大学的格式要求在很多地方使用了粗体宋体，我们只得对|sourcefonts|
+%   之外的中文字体设置，将|AutoFakeBold|打开。
 % \end{note}
 % \begin{note}
 % 由于TeX Live升级到2014版后，直接用|xeCJK|的|CJKnumber|选项会出现bug，我们需单独导入
 % |CJKnumb|宏包；但|xeCJK|的|CJKnumber|选项依然需要，否则在Tex Live 2012下编译会报错。
 % \end{note}
 %    \begin{macrocode}
+\ifjnut@sourcefonts
+\RequirePackage[CJKnumber,CJKchecksingle]{xeCJK}
+\else
 \RequirePackage[CJKnumber,CJKchecksingle,AutoFakeBold=true]{xeCJK}
+\fi
 \RequirePackage{CJKnumb}
 %    \end{macrocode}
 %
@@ -2101,6 +2116,31 @@ December\fi
 \newcommand*{\jnut@enfn@main@adobe}{Times New Roman}
 \newcommand*{\jnut@enfn@sans@adobe}{Arial}
 \newcommand*{\jnut@enfn@mono@adobe}{Courier New}
+%    \end{macrocode}
+%
+% 定义思源（Source Han）系列字体的名称。目前该系列已经推出思源宋体、思源黑体
+% 两款字体。我们选择其中的简体中文（中国大陆）版本；使用Super OTC版本经测试
+% 会出现PDF中文字无法正常选择的问题，似乎为\XeTeX{}的bug，故暂时不采用。
+%
+%    \begin{macrocode}
+\newcommand*{\jnut@zhfn@songti@source}{Source Han Serif CN}
+\newcommand*{\jnut@zhfn@heiti@source}{Source Han Sans CN}
+%    \end{macrocode}
+%
+% 定义楷体与仿宋的字体名称。思源系列字体暂未支持楷体与仿宋，此处楷体使用Arphic字体，
+% 仿宋则由系出同门的相应Adobe字体替代。
+%
+%    \begin{macrocode}
+\newcommand*{\jnut@zhfn@kaishu@source}{AR PL UKai CN}
+\newcommand*{\jnut@zhfn@fangsong@source}{\jnut@zhfn@fangsong@adobe}
+%    \end{macrocode}
+%
+% 定义英文字体的名称。默认与Adobe字体所用英文字体一致。
+%
+%    \begin{macrocode}
+\newcommand*{\jnut@enfn@main@source}{\jnut@enfn@main@adobe}
+\newcommand*{\jnut@enfn@sans@source}{\jnut@enfn@sans@adobe}
+\newcommand*{\jnut@enfn@mono@source}{\jnut@enfn@mono@adobe}
 %</cfg>
 %    \end{macrocode}
 %
@@ -2225,7 +2265,17 @@ December\fi
           \newcommand*{\jnut@enfn@sans}{\jnut@enfn@sans@mac}
           \newcommand*{\jnut@enfn@mono}{\jnut@enfn@mono@mac}
        \else
-         \ClassError{jnuthesis}{No fonts was selected.}{}
+        \ifjnut@sourcefonts
+          \newcommand*{\jnut@zhfn@songti}{\jnut@zhfn@songti@source}
+          \newcommand*{\jnut@zhfn@heiti}{\jnut@zhfn@heiti@source}
+          \newcommand*{\jnut@zhfn@kaishu}{\jnut@zhfn@kaishu@source}
+          \newcommand*{\jnut@zhfn@fangsong}{\jnut@zhfn@fangsong@source}
+          \newcommand*{\jnut@enfn@main}{\jnut@enfn@main@source}
+          \newcommand*{\jnut@enfn@sans}{\jnut@enfn@sans@source}
+          \newcommand*{\jnut@enfn@mono}{\jnut@enfn@mono@source}
+        \else
+          \ClassError{jnuthesis}{No fonts was selected.}{}
+        \fi
        \fi
     \fi
   \fi
@@ -2238,15 +2288,22 @@ December\fi
 % 当然也包括黑体。
 % 有些文科学院似乎允许使用少量楷体表示引文，
 % 所以这里姑且保留了楷体作为意大利体的替代字体。
+%
+% 另外，江南大学规定，“文字采用中文简体；除艺术、古籍等个别经研究生院特许的
+% 专业研究外，不得采用繁体字”，故此处默认打开OpenType字体的简体中文支持。
+% 实际上，虽然由于我们使用中国大陆地区Subset OTF的原因，不明确指定简体中文字形
+% 也可得到正确渲染结果；但万一使用了Super OTF，此处的语言指定就不可省略了。
+% 其次，具体的字体文件不支持语言选项的后果无非是控制台打印一条警告并自动回落至
+% 默认语言，完全可以接受。
 %    \begin{macrocode}
-\setCJKfamilyfont{song}{\jnut@zhfn@songti}
-\setCJKfamilyfont{hei}{\jnut@zhfn@heiti}
-\setCJKfamilyfont{kai}{\jnut@zhfn@kaishu}
-\setCJKfamilyfont{fangsong}{\jnut@zhfn@fangsong}
-\setCJKmainfont[ItalicFont={\jnut@zhfn@kaishu}]%
+\setCJKfamilyfont{song}[Language=Chinese Simplified]{\jnut@zhfn@songti}
+\setCJKfamilyfont{hei}[Language=Chinese Simplified]{\jnut@zhfn@heiti}
+\setCJKfamilyfont{kai}[Language=Chinese Simplified, AutoFakeBold=1.5]{\jnut@zhfn@kaishu}
+\setCJKfamilyfont{fangsong}[Language=Chinese Simplified, AutoFakeBold=1.5]{\jnut@zhfn@fangsong}
+\setCJKmainfont[ItalicFont={\jnut@zhfn@kaishu}, Language=Chinese Simplified]%
                {\jnut@zhfn@songti}
-\setCJKsansfont{\jnut@zhfn@heiti}
-\setCJKmonofont{\jnut@zhfn@songti}  %% fangsong 理工科不让用
+\setCJKsansfont[Language=Chinese Simplified]{\jnut@zhfn@heiti}
+\setCJKmonofont[Language=Chinese Simplified]{\jnut@zhfn@songti}  %% fangsong 理工科不让用
 %    \end{macrocode}
 %
 % 定义文档使用的英文字体。
